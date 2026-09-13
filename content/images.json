@@ -1,0 +1,194 @@
+{
+ "about/headshot": {
+  "w": 2986,
+  "h": 3082
+ },
+ "bridge1400/hero": {
+  "w": 5504,
+  "h": 2752
+ },
+ "bridge1400/site": {
+  "w": 2086,
+  "h": 2174
+ },
+ "professional-work/wecon-northdale": {
+  "w": 4000,
+  "h": 6921
+ },
+ "professional-work/shafique-residence-2": {
+  "w": 4000,
+  "h": 5657
+ },
+ "professional-work/wecon-south-lawn": {
+  "w": 4000,
+  "h": 6000
+ },
+ "professional-work/wecon-southdale": {
+  "w": 3750,
+  "h": 6000
+ },
+ "professional-work/rayan-house": {
+  "w": 4000,
+  "h": 7112
+ },
+ "professional-work/islami-bank-apt": {
+  "w": 5542,
+  "h": 9851
+ },
+ "professional-work/wecon-haqs-bay": {
+  "w": 4000,
+  "h": 5344
+ },
+ "professional-work/wecon-mehedibag": {
+  "w": 2500,
+  "h": 4864
+ },
+ "professional-work/konar-bari": {
+  "w": 7680,
+  "h": 4320
+ },
+ "professional-work/harun-vandar-mosque": {
+  "w": 3400,
+  "h": 2378
+ },
+ "professional-work/almas-shimul-office": {
+  "w": 2284,
+  "h": 1098
+ },
+ "professional-work/shafi-motors-office": {
+  "w": 2400,
+  "h": 1350
+ },
+ "professional-work/tower-c-night": {
+  "w": 2800,
+  "h": 4500
+ },
+ "professional-work/tower-c8": {
+  "w": 3800,
+  "h": 6500
+ },
+ "professional-work/tower-a10": {
+  "w": 4000,
+  "h": 6000
+ },
+ "professional-work/commercial-d5c": {
+  "w": 4000,
+  "h": 2828
+ },
+ "professional-work/residence-000": {
+  "w": 3840,
+  "h": 2160
+ },
+ "professional-work/residence-20220622": {
+  "w": 3000,
+  "h": 2098
+ },
+ "professional-work/residence-20230805": {
+  "w": 5000,
+  "h": 1800
+ },
+ "professional-work/building-a": {
+  "w": 3840,
+  "h": 2160
+ },
+ "solaris/hero": {
+  "w": 5107,
+  "h": 2553
+ },
+ "solaris/exterior-day": {
+  "w": 2735,
+  "h": 2735
+ },
+ "solaris/retail-corridor": {
+  "w": 3840,
+  "h": 2381
+ },
+ "forestreat/hero": {
+  "w": 5504,
+  "h": 2752
+ },
+ "forestreat/entry": {
+  "w": 2560,
+  "h": 378
+ },
+ "bussin-blocks/hero": {
+  "w": 3840,
+  "h": 1920
+ },
+ "bussin-blocks/silo-boulevard": {
+  "w": 3840,
+  "h": 2160
+ },
+ "bussin-blocks/idaho-road-entry": {
+  "w": 3840,
+  "h": 2160
+ },
+ "bussin-blocks/waiting-hall": {
+  "w": 3840,
+  "h": 2160
+ },
+ "bussin-blocks/boarding-zone": {
+  "w": 3840,
+  "h": 2160
+ },
+ "solaris/context": {
+  "w": 3200,
+  "h": 1600
+ },
+ "solaris/site": {
+  "w": 3200,
+  "h": 1600
+ },
+ "solaris/axon": {
+  "w": 3200,
+  "h": 1600
+ },
+ "solaris/wall-sections": {
+  "w": 3200,
+  "h": 1600
+ },
+ "forestreat/concept": {
+  "w": 3200,
+  "h": 1600
+ },
+ "forestreat/form": {
+  "w": 3200,
+  "h": 1600
+ },
+ "forestreat/plans": {
+  "w": 3200,
+  "h": 1600
+ },
+ "forestreat/section": {
+  "w": 3200,
+  "h": 1600
+ },
+ "bussin-blocks/concept": {
+  "w": 3200,
+  "h": 1600
+ },
+ "bussin-blocks/masterplan": {
+  "w": 3200,
+  "h": 1600
+ },
+ "bussin-blocks/cote": {
+  "w": 3200,
+  "h": 1600
+ },
+ "bridge1400/massing": {
+  "w": 3200,
+  "h": 1600
+ },
+ "bridge1400/plans": {
+  "w": 3200,
+  "h": 1600
+ },
+ "bridge1400/section-aa": {
+  "w": 3200,
+  "h": 1600
+ },
+ "bridge1400/section-bb": {
+  "w": 3200,
+  "h": 1600
+ }
+}

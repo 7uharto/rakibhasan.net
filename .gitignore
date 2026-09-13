@@ -1,0 +1,8 @@
+# private files: never publish
+Documents/
+.claude/settings.local.json
+__pycache__/
+*.pyc
+Thumbs.db
+desktop.ini
+.DS_Store

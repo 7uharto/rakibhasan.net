@@ -1,0 +1,49 @@
+{
+  "name": "Md. Rakib Hasan",
+  "title": "Architectural Designer",
+  "tagline": "Facade design, construction administration and five years of international practice. M.Arch, Washington State University. Assoc. AIA.",
+  "location": "Seattle, WA",
+  "email": "rakibhasan.wsu@gmail.com",
+  "linkedin": "https://www.linkedin.com/in/rakibwsu",
+  "vimeo": "https://vimeo.com/showcase/10005099",
+  "domain": "https://rakibhasan.net",
+  "resume": "assets/Md-Rakib-Hasan-Resume.pdf",
+  "bio": [
+    "I am an Architectural Designer based in Seattle and an Associate Member of the AIA. Before graduate school I spent five years in practice in Bangladesh, leading facade and envelope design on 20 projects, about 150,000 sq ft, with 12 built or under construction.",
+    "I completed my M.Arch at Washington State University in 2026, where I also taught Digital Representation as a Graduate Teaching Assistant. In summer 2026 I interned at The Miller Hull Partnership in Seattle.",
+    "Earlier, as a construction project manager, I ran a news studio fit-out on site: coordinating trades, controlling materials and defending quantities in client audits. That experience shapes how I design today, with an eye on how buildings actually get built."
+  ],
+  "education": [
+    ["Master of Architecture", "Washington State University", "2026"],
+    ["Bachelor of Architecture", "Khulna University, Bangladesh", "2018"]
+  ],
+  "experience": [
+    ["Architectural Intern", "The Miller Hull Partnership, Seattle", "2026"],
+    ["Graduate Teaching Assistant", "WSU School of Design + Construction", "2024 to 2026"],
+    ["Architectural Designer", "P2P, Chattogram", "2020 to 2024"],
+    ["Junior Designer and Presentation Specialist", "HATIL Project Solution, Dhaka", "2019 to 2020"],
+    ["Construction Project Manager", "Axis Development Ltd., Dhaka", "2019"]
+  ],
+  "awards": [
+    ["Edward Allen Student Award", "Building Technology Educators' Society", "2026"],
+    ["NEWH Northwest Scholarship", "NEWH Northwest", "2025"],
+    ["Michael Mace Scholarship", "Page Southerland Page Foundation", "2024, 2025"],
+    ["R.H. Logan Fund Scholarship", "", "2025"],
+    ["Excellent Design Submission", "Post Falls Silo Competition", "2025"],
+    ["Best Architect, Design Excellence", "P2P, Bangladesh", "2024"],
+    ["Runner-Up of 28 entries (team)", "Golpahar Temple Complex Competition, IAB", "2022"]
+  ],
+  "certifications": [
+    ["Associate Member", "The American Institute of Architects", "2026"],
+    ["OSHA 30-Hour Construction Safety", "HSI", "2026"],
+    ["Procore Certified: BIM Manager", "Procore Technologies", "2026"],
+    ["Procore Certified: Architect", "Procore Technologies", "2026"],
+    ["Associate Member (AH-411)", "Institute of Architects Bangladesh", "2020"]
+  ],
+  "skills": [
+    ["Modeling and BIM", "Revit, Rhino, Grasshopper, SketchUp, 3ds Max"],
+    ["Drafting and graphics", "AutoCAD, Adobe Creative Suite"],
+    ["Performance", "ClimateStudio, Sefaira"],
+    ["Rendering and film", "D5 Render, Lumion, DaVinci Resolve, After Effects"]
+  ]
+}

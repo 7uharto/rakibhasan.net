@@ -1,0 +1,161 @@
+[
+  {
+    "slug": "bridge1400",
+    "title": "Bridge1400",
+    "subtitle": "Connecting waterfront culture to urban density",
+    "type": "Mixed-use hotel",
+    "location": "Seattle, WA",
+    "year": "2025",
+    "context": "Graduate studio, WSU",
+    "role": "Sole designer",
+    "team": "",
+    "tools": "Revit, D5 Render, AutoCAD, Photoshop, Illustrator, Google Earth Studio",
+    "hero": "hero",
+    "intro": [
+      "Bridge1400 sits on the threshold between Seattle's mercantile downtown and its waterfront. Instead of smoothing over that break, the project makes it spatial: a tall void cuts through the podium as a civic canyon linking Alaskan Way to Western Avenue.",
+      "A grand stair works as both passage and pause, and a slow ramp climbs past planted terraces with filtered views of Elliott Bay. Above the four-level retail and lobby podium, a mass timber hotel tower frames the water to the northwest and the city to the southeast."
+    ],
+    "facts": [["Levels", "13"], ["Structure", "Mass timber tower over podium"], ["Program", "Retail, hotel lobby, restaurants, pool, 9 guest-room levels"]],
+    "sections": [
+      {"heading": "Site", "text": "Between Pike Place Market and the waterfront promenade, the site takes its cues from both: vertical density to the east, openness and movement to the west.", "images": [["site", "Site context: downtown Seattle and Elliott Bay"]]},
+      {"heading": "Form", "text": "Eight moves shape the block: a full zoning envelope, a daylight cut along Alaskan Way, an interlocking sloped tower, podium voids for entry and egress, a central atrium and the experiential ramp from Level 4 to Level 5.", "images": [["massing", "Massing sequence and waterfront-to-city diagram"]]},
+      {"heading": "Plans", "text": "Retail activates the first two levels. The hotel lobby, restaurants and an infinity pool fill the podium, and guest rooms stack above with terraces and a sky lounge.", "images": [["plans", "Floor plans, Levels 1 to 13"]]},
+      {"heading": "Sections", "text": "Double-height retail glazing, a restaurant stair through a central void, and the pool-to-bar ramp are read together in section. Rooftop and facade PV, greywater reuse and rainwater harvesting are sized in the performance study.", "images": [["section-aa", "Section AA"], ["section-bb", "Section BB with energy, water and carbon study"]]}
+    ]
+  },
+  {
+    "slug": "professional-work",
+    "title": "Professional Work",
+    "subtitle": "Facade design at Plan to Perfection, Bangladesh",
+    "type": "Residential, commercial, healthcare, interiors",
+    "location": "Chattogram, Bangladesh",
+    "year": "2020 to 2024",
+    "context": "Plan to Perfection (P2P)",
+    "role": "Facade design and 3D visualization",
+    "team": "",
+    "tools": "AutoCAD, SketchUp, 3ds Max, D5 Render, Lumion, Photoshop",
+    "hero": "wecon-northdale",
+    "intro": [
+      "For four years at Plan to Perfection I led facade and envelope design on residential towers, private homes, commercial buildings and a healthcare high-rise, many of them for developer WECON. Across 20 projects, about 150,000 sq ft, 12 are built or under construction.",
+      "I also produced the firm's visualization and cinematic animations, and received the firm's Best Architect award for design excellence in 2024."
+    ],
+    "facts": [["Projects", "20"], ["Area", "About 150,000 sq ft"], ["Built or under construction", "12"]],
+    "gallery": [
+      ["wecon-haqs-bay", "P2P Healthcare PLC", "Healthcare high-rise", "https://p2phc.health/home"],
+      ["wecon-northdale", "WECON Northdale", "Residential high-rise"],
+      ["shafique-residence-2", "Shafique's Residence-2", "Residential high-rise"],
+      ["wecon-south-lawn", "WECON South Lawn", "Residential high-rise"],
+      ["wecon-southdale", "WECON Southdale", "Residential high-rise"],
+      ["rayan-house", "Rayan House", "Residential high-rise"],
+      ["islami-bank-apt", "Islami Bank Apartments", "Residential high-rise"],
+      ["wecon-mehedibag", "WECON Mehedibag", ""],
+      ["konar-bari", "Kona'r Bari", "Single-family residence"],
+      ["harun-vandar-mosque", "Harun Vandar Mosque", "Religious complex and community center"],
+      ["tower-c-night", "", ""],
+      ["tower-c8", "", ""],
+      ["tower-a10", "", ""],
+      ["commercial-d5c", "", ""],
+      ["residence-000", "", ""],
+      ["residence-20220622", "", ""],
+      ["residence-20230805", "", ""],
+      ["building-a", "", ""],
+      ["almas-shimul-office", "Almas Shimul's Office", "Office interior"],
+      ["shafi-motors-office", "Shafi Motors Office", "Office interior"]
+    ],
+    "table": [
+      ["P2P Healthcare PLC", "Healthcare high-rise", "4,300 sq ft site"],
+      ["WECON Northdale", "Residential high-rise", "3,672 sq ft site"],
+      ["WECON Summer Breeze", "Residential high-rise", "5,594 sq ft site"],
+      ["Kona'r Bari", "Single-family residence", "5,838 sq ft site"],
+      ["CMP Convention Center", "Convention center", "33,840 sq ft site"],
+      ["Almas Shimul's Residence", "Single-family residence", "6,362 sq ft site"],
+      ["Shafique's Residence-2", "Residential high-rise", "3,601 sq ft site"],
+      ["Shamima's Residence (Noakhali)", "Single-family residence", "3,676 sq ft site"],
+      ["Shafi Motors Office", "Office interior", "4,134 sq ft"],
+      ["Metroglam Mall (Raozan)", "Strip mall", "About 14,690 sq ft site"],
+      ["WECON Southdale", "Residential high-rise", "3,664 sq ft site"],
+      ["WECON Chowdhury Arcade (Cumilla)", "Commercial high-rise", "14,400 sq ft site"],
+      ["WECON South Lawn", "Residential high-rise", "7,018 sq ft site"],
+      ["MP Sony Residence", "Residence renovation", "3,676 sq ft site"],
+      ["Rayan House", "Residential high-rise", "5,906 sq ft site"],
+      ["Almas Shimul's Office", "Office interior", "429 sq ft"],
+      ["Islami Bank Apartments", "Residential high-rise", "3,545 sq ft site"],
+      ["Harun Vandar Mosque", "Religious complex", "17,280 sq ft site"],
+      ["Hill View Residence", "Residential high-rise", "3,463 sq ft site"],
+      ["WECON Momtaz Manor", "Residential high-rise", "4,500 sq ft site"]
+    ],
+    "sections": []
+  },
+  {
+    "slug": "solaris",
+    "title": "Solaris",
+    "subtitle": "Fueled by daylight: the fatigue-free workplace",
+    "type": "Mixed-use office",
+    "location": "South Lake Union, Seattle, WA",
+    "year": "2025",
+    "context": "Graduate studio, WSU",
+    "role": "Project lead designer in a five-person studio firm",
+    "team": "Anthony Browning (principal), Isaiah Corp (project manager), Paul Golke and Liam Mitchell (designers)",
+    "tools": "Revit, Rhino, D5 Render, AutoCAD, Photoshop, Illustrator",
+    "hero": "hero",
+    "intro": [
+      "Solaris turns a South Lake Union parking lot at 701 9th Ave N into a daylight-driven office and retail building. Work-related fatigue is widespread among US office workers, so the design treats daylight as the main tool for a healthier workplace.",
+      "Two light cuts pull morning and north light deep into the floor plates. Common brick ties the building to the neighborhood's historic fabric, and a base of translucent Kalwall panels turns the retail level into a glowing lantern at night."
+    ],
+    "facts": [["Levels", "7 + roof"], ["Program", "Retail, rentable office, rooftop hospitality"], ["Framework", "Living Building Challenge: Place, Health + Happiness, Beauty"]],
+    "sections": [
+      {"heading": "Context", "text": "From maritime industry to today's tech and life-science district, South Lake Union's history shapes the building's material choice and its public ground floor.", "images": [["context", "Neighborhood history and Living Building Challenge petals"], ["site", "Site in South Lake Union"]]},
+      {"heading": "Form and materials", "text": "The upper mass spans the full site while the base pulls in to meet the street. A light tunnel on the east and a void on the north bring daylight in, and the core rises to a rooftop bar.", "images": [["axon", "Massing steps, material axonometric and stacked levels"]]},
+      {"heading": "Envelope detail", "text": "Wall sections resolve the brick veneer with relieving angles and brick ties, rigid and batt insulation, the Kalwall base and a walkable pedestal roof.", "images": [["wall-sections", "Wall section details"]]},
+      {"heading": "Views", "text": "", "images": [["exterior-day", "Exterior facade"], ["retail-corridor", "Interior retail corridor with Kalwall daylight"]]}
+    ]
+  },
+  {
+    "slug": "forestreat",
+    "title": "Forestreat",
+    "subtitle": "Relaxation and well-being through nature",
+    "type": "Healthcare clinic",
+    "location": "Ridgefield, WA",
+    "year": "2024",
+    "context": "Graduate healthcare studio, WSU",
+    "role": "Co-designer. Site plan, the central courtyard void and rainwater reservoir concept, and all D5 renders",
+    "team": "Maxwell T. Kyle (co-designer), Emily Dutton (interior designer)",
+    "tools": "Revit, D5 Render, AutoCAD, Photoshop, Illustrator",
+    "hero": "hero",
+    "intro": [
+      "Forestreat draws on shinrin-yoku, the Japanese practice of forest bathing, to design an integrated primary care and behavioral health clinic. Trees soothe and restore, and here they also help remove the stigma of the healthcare setting.",
+      "A circular plan wraps a central courtyard. Radial services create gathering points for patients and community, and a canopy collects rainwater and channels it through a void to a reservoir below."
+    ],
+    "facts": [["Program", "Primary care, behavioral health, community spaces"], ["Plan", "Radial, around a central courtyard"], ["Water", "Canopy rainwater collection to reservoir"]],
+    "sections": [
+      {"heading": "Concept", "text": "Leaves, branches, trunk and roots become a framework for the building's goals: well-being, equitable community, resources, change and integration.", "images": [["concept", "Concept analysis and site SWOT"]]},
+      {"heading": "Form", "text": "A south-facing bar for daylight is curved into an organic form, opened by a central courtyard and an inviting void at the entry, then shaded by the rain-collecting canopy.", "images": [["form", "Sketches, conceptual plan, section and form steps"]]},
+      {"heading": "Plan and site", "text": "", "images": [["plans", "Floor plan, site plan and entry view"]]},
+      {"heading": "Section", "text": "Rainwater runs from the canopy through the courtyard void to a reservoir at the staff parking level.", "images": [["section", "Transverse section"], ["entry", "View from entry"]]}
+    ]
+  },
+  {
+    "slug": "bussin-blocks",
+    "title": "The Bussin Blocks",
+    "subtitle": "Connecting city and neighborhood through a loop walk",
+    "type": "Adaptive reuse and urban design",
+    "location": "Post Falls, ID",
+    "year": "2025",
+    "context": "Graduate studio, WSU",
+    "role": "Co-designer. Shared project concept and block-by-block design; form generation diagrams, AIA COTE Top Ten diagram and all D5 renders",
+    "team": "Maxwell T. Kyle (co-designer: site, demographic and history studies, housing and transportation user requirements, spatial program, regulatory review, Tally and scale estimates)",
+    "tools": "Revit, Rhino, D5 Render, AutoCAD, SketchUp, Photoshop, Illustrator, Tally, C.Scale",
+    "hero": "hero",
+    "intro": [
+      "The Bussin Blocks redevelop a 19-acre brownfield, a former veneer mill, into Post Falls' first walkable downtown. Surrounding streets extend into the site and set a block size small enough for real porosity.",
+      "A walking loop ties four nodes together: the preserved mill silo, the Centennial Trail, the neighborhood edge and a city gateway. Housing, a transit center in the reused mill structure, a museum, a hotel and a seasonal ice rink line the route."
+    ],
+    "facts": [["Site", "19 acres"], ["Strategy", "Adaptive reuse of mill structures"], ["Framework", "AIA COTE Top Ten"]],
+    "sections": [
+      {"heading": "Concept", "text": "Four nodes create the loop journey. Six steps take the site from reused structures and a continued street grid to courtyard blocks with heights tuned to orientation.", "images": [["concept", "Nodes and form generation"]]},
+      {"heading": "Masterplan", "text": "", "images": [["masterplan", "Masterplan axonometric"]]},
+      {"heading": "Sustainability", "text": "The mixed-use apartments are tested against the AIA COTE Top Ten: PV-ready roofs, rainwater collection, heat recovery DOAS, VRF heat pumps and rooftop beehives.", "images": [["cote", "AIA COTE Top Ten measures"]]},
+      {"heading": "Views", "text": "", "images": [["silo-boulevard", "The Silo Boulevard"], ["idaho-road-entry", "Idaho Road entry"], ["boarding-zone", "Transit center boarding zone in the reused mill frame"], ["waiting-hall", "Transit center waiting hall"]]}
+    ]
+  }
+]
