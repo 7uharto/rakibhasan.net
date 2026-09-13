@@ -17,6 +17,8 @@ PDF = r"P:\01. Portfolio\2602 Portfolio\260226 Portfolio.pdf"
 OUT = os.path.join(ROOT, "docs", "assets", "img")
 MANIFEST = os.path.join(ROOT, "content", "images.json")
 WIDTHS = (1200, 2400)
+# transparent images to trim to their visible pixels (headshot circle has empty margins)
+CROP_TO_CONTENT = {"Headshot.psd"}
 
 # project -> list of (output name, source). Source is a Links filename or "pdf:<page>".
 IMAGES = {
@@ -98,6 +100,8 @@ def load(src, doc):
     im = Image.open(os.path.join(LINKS, src))
     if im.mode in ("RGBA", "LA", "P"):
         im = im.convert("RGBA")
+        if src in CROP_TO_CONTENT:
+            return im.crop(im.split()[-1].getbbox())  # keep transparency, no white fill
         bg = Image.new("RGB", im.size, "white")
         bg.paste(im, mask=im.split()[-1])
         return bg

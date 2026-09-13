@@ -137,7 +137,7 @@ td { padding: .7rem .75rem .7rem 0; border-bottom: 1px solid var(--line); }
 /* About */
 .about { max-width: var(--max); margin: 0 auto; padding: clamp(3rem, 10vw, 8rem) var(--pad) 4rem; display: grid; gap: clamp(2rem, 6vw, 5rem); align-items: start; }
 @media (min-width: 900px) { .about { grid-template-columns: 1fr 1.6fr; } }
-.about-photo img { border-radius: 50%; width: min(100%, 420px); aspect-ratio: 1; object-fit: cover; }
+.about-photo img { width: min(100%, 420px); height: auto; }
 .about-text h1 { font-size: clamp(2.6rem, 6vw, 5rem); margin-bottom: 2rem; }
 .about-text p { font-size: 1.15rem; max-width: 56ch; }
 .cv { max-width: var(--max); margin: 0 auto; padding: 0 var(--pad) clamp(4rem, 10vw, 8rem); display: grid; gap: 3rem; }

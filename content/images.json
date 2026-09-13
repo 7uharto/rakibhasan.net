@@ -1,8 +1,4 @@
 {
- "about/headshot": {
-  "w": 2986,
-  "h": 3082
- },
  "bridge1400/hero": {
   "w": 5504,
   "h": 2752
@@ -190,5 +186,9 @@
  "bridge1400/section-bb": {
   "w": 3200,
   "h": 1600
+ },
+ "about/headshot": {
+  "w": 1908,
+  "h": 2179
  }
 }
