@@ -6,8 +6,9 @@ Re-running skips images that already exist.
 """
 import json
 import os
+import numpy as np
 import pymupdf
-from PIL import Image
+from PIL import Image, ImageFilter
 
 Image.MAX_IMAGE_PIXELS = None
 
@@ -83,6 +84,31 @@ IMAGES = {
 }
 
 
+def decontaminate(im, radius=12):
+    """Remove the white halo on cut-out edges (e.g. hair).
+
+    Semi-transparent edge pixels still carry the old white background color.
+    Replace their color with the average of nearby fully opaque pixels.
+    """
+    rgba = np.asarray(im, dtype=np.float32)
+    alpha = rgba[..., 3]
+    solid = (alpha >= 250).astype(np.float32)
+
+    def blur(channel):  # channel values 0-255; PIL blurs only 8-bit images
+        img = Image.fromarray(np.clip(channel, 0, 255).astype(np.uint8), "L")
+        return np.asarray(img.filter(ImageFilter.GaussianBlur(radius)), dtype=np.float32)
+
+    weight = blur(solid * 255) / 255 + 1e-4
+    out = rgba.copy()
+    edge = (alpha > 0) & (alpha < 250)
+    for c in range(3):
+        spread = blur(rgba[..., c] * solid) / weight
+        out[..., c][edge] = spread[edge]
+    # thin, faint fringe pixels add haze; fade them out
+    out[..., 3] = np.where(alpha < 40, 0, alpha)
+    return Image.fromarray(np.clip(out, 0, 255).astype(np.uint8), "RGBA")
+
+
 def load(src, doc):
     if src.startswith("pdf:"):
         page = doc[int(src[4:]) - 1]
@@ -101,6 +127,7 @@ def load(src, doc):
     if im.mode in ("RGBA", "LA", "P"):
         im = im.convert("RGBA")
         if src in CROP_TO_CONTENT:
+            im = decontaminate(im)
             return im.crop(im.split()[-1].getbbox())  # keep transparency, no white fill
         bg = Image.new("RGB", im.size, "white")
         bg.paste(im, mask=im.split()[-1])
