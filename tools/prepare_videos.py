@@ -8,7 +8,7 @@ Output: docs/assets/video/<slug>.jpg   (poster frame shown before play, publishe
 The videos themselves are NOT re-encoded: Vimeo's 1080p downloads are already ~5 Mbps
 H.264 with the index at the start (streams immediately). A CRF 23 re-encode tested on
 2026-09-13 saved only 30% at SSIM 0.98. The files are hosted in the pCloud Public Folder
-as rakibhasan.net/videos/<slug>.mp4 (see VIDEO_BASE in content/site.json).
+as rakibhasan.net/videos-original/<slug>.mp4 (see video_base in content/site.json).
 """
 import json
 import os
