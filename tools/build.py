@@ -17,6 +17,7 @@ C = lambda n: json.load(open(os.path.join(ROOT, "content", n), encoding="utf-8-s
 site = C("site.json")
 projects = C("projects.json")
 sizes = C("images.json")
+videos = C("videos.json") if os.path.exists(os.path.join(ROOT, "content", "videos.json")) else {}
 FONTS = ("https://fonts.googleapis.com/css2?family=Inter+Tight:wght@300;400;500;600"
          "&family=Instrument+Serif:ital@0;1&display=swap")
 
@@ -88,7 +89,7 @@ def page(title, desc, base, body, path="", image=None):
   <p class="foot-big">Let's talk.<br><a href="mailto:{site['email']}">{e(site['email'])}</a></p>
   <ul>
     <li><a href="{site['linkedin']}" target="_blank" rel="noopener">LinkedIn</a></li>
-    <li><a href="{site['vimeo']}" target="_blank" rel="noopener">Animations on Vimeo</a></li>
+    <li><a href="{base}work/professional-work/#films">Animations</a></li>
     <li><a href="{base}{site['resume']}" target="_blank" rel="noopener">Resume (PDF)</a></li>
   </ul>
   <p class="small">&copy; 2026 {e(site['name'])}. {e(site['title'])}, {e(site['location'])}.</p>
@@ -151,6 +152,19 @@ def project(i, p):
         text = f"<p>{e(s['text'])}</p>" if s["text"] else ""
         parts.append(f'<section class="chapter reveal"><div class="chapter-text"><h2>{e(s["heading"])}</h2>{text}</div>'
                      f'<div class="chapter-figs">{figs}</div></section>')
+    if p.get("videos"):
+        films = []
+        for key, title, desc in p["videos"]:
+            v = videos.get(key, {"width": 1920, "height": 1080, "duration": 0})
+            mins, secs = divmod(int(v["duration"]), 60)
+            films.append(
+                f'<figure class="film"><video controls playsinline preload="none" '
+                f'poster="{base}assets/video/{key}.jpg" width="{v["width"]}" height="{v["height"]}">'
+                f'<source src="{site["video_base"]}{key}.mp4" type="video/mp4"></video>'
+                f"<figcaption><strong>{e(title)}</strong>{e(desc)} &middot; {mins}:{secs:02d}</figcaption></figure>")
+        parts.append(f'<section class="films reveal" id="films"><h2>Films</h2>'
+                     f'<p class="films-note">Cinematic animations I produced at P2P.</p>'
+                     f'<div class="film-grid">{"".join(films)}</div></section>')
     if p.get("gallery"):
         def tile(n, t, d, url=""):
             name = f'<a href="{e(url)}" target="_blank" rel="noopener">{e(t)} &#8599;</a>' if url else e(t)

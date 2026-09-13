@@ -1,5 +1,9 @@
 # private files: never publish
 Documents/
+# original full-size videos (only compressed web copies in docs/ get published)
+videos-original/
+# compressed web copies are hosted in the pCloud Public Folder, not in the repo
+videos-web/
 .claude/settings.local.json
 __pycache__/
 *.pyc

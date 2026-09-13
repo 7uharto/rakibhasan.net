@@ -116,6 +116,15 @@ figure { margin: 0; }
 figcaption { font-size: .85rem; color: var(--ink-2); margin-top: .6rem; }
 .zoom img { cursor: zoom-in; border-radius: 4px; background: #fff; }
 
+/* Films: self-hosted animations, poster frame until play */
+.films { max-width: var(--max); margin: 0 auto; padding: 0 var(--pad) clamp(3.5rem, 8vw, 6rem); scroll-margin-top: 5rem; }
+.films h2 { font-size: clamp(1.6rem, 3vw, 2.4rem); border-top: 1px solid var(--line); padding-top: 1.25rem; margin-bottom: .75rem; }
+.films-note { color: var(--ink-2); margin: 0 0 2rem; }
+.film-grid { display: grid; gap: 2.5rem 1.5rem; grid-template-columns: 1fr; }
+@media (min-width: 900px) { .film-grid { grid-template-columns: repeat(2, 1fr); } }
+.film video { display: block; width: 100%; height: auto; aspect-ratio: 16 / 9; background: #000; border-radius: 4px; object-fit: cover; }
+.film figcaption strong { display: block; color: var(--ink); font-weight: 500; font-size: 1.05rem; }
+
 .gallery { max-width: var(--max); margin: 0 auto; padding: 0 var(--pad) clamp(3.5rem, 8vw, 6rem); }
 .gallery h2, .table-wrap h2 { font-size: clamp(1.6rem, 3vw, 2.4rem); border-top: 1px solid var(--line); padding-top: 1.25rem; margin-bottom: 2rem; }
 .masonry { columns: 2 220px; column-gap: 1.25rem; }

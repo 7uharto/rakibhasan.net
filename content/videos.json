@@ -1,0 +1,26 @@
+{
+ "p2p-healthcare": {
+  "duration": 182,
+  "width": 1920,
+  "height": 1080,
+  "mb": 123.0
+ },
+ "wecon-chowdhury-arcade": {
+  "duration": 344,
+  "width": 1920,
+  "height": 1080,
+  "mb": 216.5
+ },
+ "wecon-rainforest": {
+  "duration": 291,
+  "width": 1920,
+  "height": 1080,
+  "mb": 206.7
+ },
+ "wecon-shukrana": {
+  "duration": 120,
+  "width": 1920,
+  "height": 1080,
+  "mb": 82.6
+ }
+}
