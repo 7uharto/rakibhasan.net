@@ -147,6 +147,9 @@ td { padding: .7rem .75rem .7rem 0; border-bottom: 1px solid var(--line); }
 .cv li { display: grid; grid-template-columns: 1.3fr 1.3fr .7fr; gap: 1rem; padding: .75rem 0; border-bottom: 1px solid var(--line); font-size: .95rem; }
 .cv li span:not(:first-child) { color: var(--ink-2); }
 .cv li span:last-child { text-align: right; }
+/* Tools: category + tool list only, no organization or year column */
+.cv-tools li { grid-template-columns: 1fr 2.3fr; }
+.cv-tools li span:last-child { text-align: left; }
 
 /* Footer */
 .foot { max-width: var(--max); margin: 0 auto; padding: clamp(4rem, 10vw, 8rem) var(--pad) 2rem; border-top: 1px solid var(--line); }

@@ -172,7 +172,7 @@ def about():
   <div class="cv-block reveal"><h2>Education</h2><ul>{rows(site['education'])}</ul></div>
   <div class="cv-block reveal"><h2>Awards</h2><ul>{rows(site['awards'])}</ul></div>
   <div class="cv-block reveal"><h2>Certifications</h2><ul>{rows(site['certifications'])}</ul></div>
-  <div class="cv-block reveal"><h2>Tools</h2><ul>{rows(site['skills'])}</ul></div>
+  <div class="cv-block cv-tools reveal"><h2>Tools</h2><ul>{rows(site['skills'])}</ul></div>
 </section>"""
     write("about/index.html", page(f"About | {site['name']}", " ".join(site["bio"][:1]), base, body, "about/"))
 
