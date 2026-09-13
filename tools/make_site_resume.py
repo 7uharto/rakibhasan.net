@@ -18,6 +18,7 @@ OUT = os.path.join(ROOT, "docs", "assets", "Md-Rakib-Hasan-Resume.pdf")
 CHROME = r"C:\Program Files\Google\Chrome\Application\chrome.exe"
 OLD_EMAIL = "rakibhasan.wsu@gmail.com"
 NEW_EMAIL = "rakib@rakibhasan.net"
+KEEP_LINKS = ("mailto:", "https://www.linkedin.com/", "https://vimeo.com/")
 
 
 def site_html(html):
@@ -39,6 +40,11 @@ def main():
                         f"--print-to-pdf={raw}", "file:///" + page.replace("\\", "/")],
                        check=True, capture_output=True, timeout=120)
         with pymupdf.open(raw) as doc:  # close before the temp folder is deleted
+            # match the email-safe resume: keep only contact links, drop company URLs
+            for page in doc:
+                for link in page.get_links():
+                    if link.get("uri") and not link["uri"].startswith(KEEP_LINKS):
+                        page.delete_link(link)
             doc.set_metadata({"title": "Md. Rakib Hasan - Resume", "author": "Md. Rakib Hasan"})
             doc.save(OUT, garbage=4, deflate=True)
     out = pymupdf.open(OUT)
