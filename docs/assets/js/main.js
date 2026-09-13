@@ -30,6 +30,35 @@
     else addEventListener("load", jump);
   }
 
+  // Background highlight reel: 720p on small screens, none for reduced motion,
+  // paused while scrolled out of view, with a pause/play button.
+  document.querySelectorAll(".reel-video").forEach(function (video) {
+    var hero = video.closest(".reel-hero");
+    var btn = hero && hero.querySelector(".reel-toggle");
+    var reduce = matchMedia("(prefers-reduced-motion: reduce)").matches;
+    var saveData = navigator.connection && navigator.connection.saveData;
+    if (reduce || saveData) { hero.classList.add("no-motion"); return; }  // poster stays as a still image
+    video.src = innerWidth <= 900 ? video.dataset.srcSm : video.dataset.srcLg;
+    video.preload = "auto";
+    var userPaused = false;
+    var play = function () { var p = video.play(); if (p && p.catch) p.catch(function () {}); };
+    if (btn) btn.addEventListener("click", function () {
+      userPaused = !userPaused;
+      if (userPaused) video.pause(); else play();
+      btn.setAttribute("aria-pressed", String(userPaused));
+      btn.setAttribute("aria-label", userPaused ? "Play background video" : "Pause background video");
+    });
+    if ("IntersectionObserver" in window) {
+      new IntersectionObserver(function (entries) {
+        entries.forEach(function (en) {
+          if (en.isIntersecting && !userPaused) play(); else video.pause();
+        });
+      }, { threshold: 0.15 }).observe(hero);
+    } else {
+      play();
+    }
+  });
+
   var bar = document.querySelector(".bar");
   addEventListener("scroll", function () {
     bar.classList.toggle("scrolled", scrollY > 8);

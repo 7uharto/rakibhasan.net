@@ -30,11 +30,11 @@ def img(project, name, alt, base, cls="", sizes_attr="100vw", eager=False):
             f'sizes="{sizes_attr}" width="{s["w"]}" height="{s["h"]}" alt="{e(alt)}" {load} decoding="async">')
 
 
-def og_image(project, name):
+def og_image(project, name, src=None):
     """Share-preview image for LinkedIn and other link cards: 1200x627 JPG (1.91:1)."""
     rel = f"assets/og/{project}.jpg"
     out = os.path.join(SITE, rel)
-    src = os.path.join(SITE, "assets", "img", project, f"{name}-2400.webp")
+    src = src or os.path.join(SITE, "assets", "img", project, f"{name}-2400.webp")
     if not os.path.exists(out) or os.path.getmtime(out) < os.path.getmtime(src):
         os.makedirs(os.path.dirname(out), exist_ok=True)
         im = Image.open(src).convert("RGB")
@@ -49,7 +49,7 @@ def og_image(project, name):
 def page(title, desc, base, body, path="", image=None):
     image = image or og_image(projects[0]["slug"], projects[0]["hero"])
     nav = "".join(
-        f'<a href="{base}{href}">{label}</a>' for href, label in (("#work", "Work"), ("work/professional-work/#films", "Films"), ("about/", "About"))
+        f'<a href="{base}{href}">{label}</a>' for href, label in (("#work", "Work"), ("films/", "Films"), ("about/", "About"))
     ).replace(f'href="{base}#work"', f'href="{base}index.html#work"')
     return f"""<!doctype html>
 <html lang="en">
@@ -89,7 +89,7 @@ def page(title, desc, base, body, path="", image=None):
   <p class="foot-big">Let's talk.<br><a href="mailto:{site['email']}">{e(site['email'])}</a></p>
   <ul>
     <li><a href="{site['linkedin']}" target="_blank" rel="noopener">LinkedIn</a></li>
-    <li><a href="{base}work/professional-work/#films">Animations</a></li>
+    <li><a href="{base}films/">Films</a></li>
     <li><a href="{base}{site['resume']}" target="_blank" rel="noopener">Resume (PDF)</a></li>
   </ul>
   <p class="small">&copy; 2026 {e(site['name'])}. {e(site['title'])}, {e(site['location'])}.</p>
@@ -109,6 +109,50 @@ def write(rel, html):
     print("wrote", rel)
 
 
+def reel(base):
+    """Silent looping highlight reel. main.js picks 720p or 1080p and skips it for reduced motion."""
+    v = f"{base}assets/video/"
+    return (f'<div class="reel"><video class="reel-video" muted loop playsinline preload="none" aria-hidden="true" '
+            f'poster="{v}reel-poster.jpg" data-src-sm="{v}reel-720.mp4" data-src-lg="{v}reel-1080.mp4"></video>'
+            f'<button class="reel-toggle" type="button" aria-label="Pause background video" aria-pressed="false">'
+            f'<span class="i-pause"></span></button></div>')
+
+
+def film_grid(base):
+    """The four full-length films (streamed from pCloud), with facade poster frames."""
+    items = []
+    for key, title, desc in next(p for p in projects if p.get("videos"))["videos"]:
+        v = videos.get(key, {"width": 1920, "height": 1080, "duration": 0})
+        mins, secs = divmod(int(v["duration"]), 60)
+        items.append(
+            f'<figure class="film"><video controls playsinline preload="none" '
+            f'poster="{base}assets/video/{key}.jpg" width="{v["width"]}" height="{v["height"]}">'
+            f'<source src="{site["video_base"]}{key}.mp4" type="video/mp4"></video>'
+            f"<figcaption><strong>{e(title)}</strong>{e(desc)} &middot; {mins}:{secs:02d}</figcaption></figure>")
+    return f'<div class="film-grid">{"".join(items)}</div>'
+
+
+def films():
+    base = "../"
+    body = f"""<section class="reel-hero films-hero">
+  {reel(base)}
+  <div class="reel-inner">
+    <p class="eyebrow">Architectural animation</p>
+    <h1>Films</h1>
+    <p class="lede">Cinematic walkthroughs I produced for residential, commercial and healthcare high-rises at P2P, Bangladesh.</p>
+  </div>
+</section>
+<section class="films reveal" id="films">
+  <h2>Full films</h2>
+  <p class="films-note">Press play to watch each project in full, with sound.</p>
+  {film_grid(base)}
+</section>"""
+    poster = os.path.join(SITE, "assets", "video", "reel-poster.jpg")
+    write("films/index.html", page(f"Films | {site['name']}",
+                                   "Cinematic architectural animations of high-rise projects by Md. Rakib Hasan.",
+                                   base, body, "films/", og_image("films", "reel", poster)))
+
+
 def home():
     rows = []
     for i, p in enumerate(projects, 1):
@@ -122,11 +166,14 @@ def home():
     </div>
   </a>
 </li>""")
-    body = f"""<section class="intro">
-  <p class="eyebrow">{e(site['title'])} &middot; {e(site['location'])}</p>
-  <h1>Buildings shaped by <em>light</em>, envelope and the details that get them built.</h1>
-  <p class="lede">{e(site['tagline'])}</p>
-  <p class="cta"><a class="btn" href="#work">View work</a><a class="link" href="about/">About me</a></p>
+    body = f"""<section class="reel-hero intro">
+  {reel('')}
+  <div class="reel-inner">
+    <p class="eyebrow">{e(site['title'])} &middot; {e(site['location'])}</p>
+    <h1>Buildings shaped by <em>light</em>, envelope and the details that get them built.</h1>
+    <p class="lede">{e(site['tagline'])}</p>
+    <p class="cta"><a class="btn" href="#work">View work</a><a class="link" href="films/">Watch films</a></p>
+  </div>
 </section>
 <section class="work" id="work">
   <div class="section-head"><h2>Selected work</h2><span>{len(projects)} projects</span></div>
@@ -153,18 +200,11 @@ def project(i, p):
         parts.append(f'<section class="chapter reveal"><div class="chapter-text"><h2>{e(s["heading"])}</h2>{text}</div>'
                      f'<div class="chapter-figs">{figs}</div></section>')
     if p.get("videos"):
-        films = []
-        for key, title, desc in p["videos"]:
-            v = videos.get(key, {"width": 1920, "height": 1080, "duration": 0})
-            mins, secs = divmod(int(v["duration"]), 60)
-            films.append(
-                f'<figure class="film"><video controls playsinline preload="none" '
-                f'poster="{base}assets/video/{key}.jpg" width="{v["width"]}" height="{v["height"]}">'
-                f'<source src="{site["video_base"]}{key}.mp4" type="video/mp4"></video>'
-                f"<figcaption><strong>{e(title)}</strong>{e(desc)} &middot; {mins}:{secs:02d}</figcaption></figure>")
-        parts.append(f'<section class="films reveal" id="films"><h2>Films</h2>'
-                     f'<p class="films-note">Cinematic animations I produced at P2P.</p>'
-                     f'<div class="film-grid">{"".join(films)}</div></section>')
+        # full players live on the Films page; here, a link card to it
+        parts.append(f'<section class="films-teaser reveal" id="films"><a href="{base}films/">'
+                     f'<img src="{base}assets/video/reel-poster.jpg" alt="Still from the P2P animation reel" loading="lazy" width="1920" height="1080">'
+                     f'<span class="films-teaser-text"><span class="eyebrow">{len(p["videos"])} films</span>'
+                     f'<strong>Watch the animations I produced at P2P &rarr;</strong></span></a></section>')
     if p.get("gallery"):
         def tile(n, t, d, url=""):
             name = f'<a href="{e(url)}" target="_blank" rel="noopener">{e(t)} &#8599;</a>' if url else e(t)
@@ -223,5 +263,6 @@ if __name__ == "__main__":
     home()
     for i, p in enumerate(projects, 1):
         project(i, p)
+    films()
     about()
     open(os.path.join(SITE, "CNAME"), "w").write("rakibhasan.net\n")
