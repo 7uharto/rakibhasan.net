@@ -156,7 +156,7 @@ def project(i, p):
 def about():
     base = "../"
     rows = lambda items: "".join(
-        "<li>" + "".join(f"<span>{e(c)}</span>" for c in r if c) + "</li>" for r in items)
+        "<li>" + "".join(f"<span>{e(c)}</span>" for c in r) + "</li>" for r in items)  # keep empty cells so columns line up
     body = f"""<section class="about">
   <div class="about-photo reveal">{img('about', 'headshot', site['name'], base, sizes_attr='(min-width: 900px) 30vw, 60vw', eager=True)}</div>
   <div class="about-text">
