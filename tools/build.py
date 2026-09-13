@@ -8,6 +8,8 @@ import json
 import os
 from html import escape as e
 
+from PIL import Image
+
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SITE = os.path.join(ROOT, "docs")  # GitHub Pages publishes this folder
 C = lambda n: json.load(open(os.path.join(ROOT, "content", n), encoding="utf-8-sig"))
@@ -27,7 +29,24 @@ def img(project, name, alt, base, cls="", sizes_attr="100vw", eager=False):
             f'sizes="{sizes_attr}" width="{s["w"]}" height="{s["h"]}" alt="{e(alt)}" {load} decoding="async">')
 
 
-def page(title, desc, base, body, path=""):
+def og_image(project, name):
+    """Share-preview image for LinkedIn and other link cards: 1200x627 JPG (1.91:1)."""
+    rel = f"assets/og/{project}.jpg"
+    out = os.path.join(SITE, rel)
+    src = os.path.join(SITE, "assets", "img", project, f"{name}-2400.webp")
+    if not os.path.exists(out) or os.path.getmtime(out) < os.path.getmtime(src):
+        os.makedirs(os.path.dirname(out), exist_ok=True)
+        im = Image.open(src).convert("RGB")
+        w, h = 1200, 627
+        scale = max(w / im.width, h / im.height)
+        im = im.resize((round(im.width * scale), round(im.height * scale)), Image.LANCZOS)
+        left, top = (im.width - w) // 2, (im.height - h) // 2
+        im.crop((left, top, left + w, top + h)).save(out, "JPEG", quality=85, optimize=True, progressive=True)
+    return f"{site['domain']}/{rel}"
+
+
+def page(title, desc, base, body, path="", image=None):
+    image = image or og_image(projects[0]["slug"], projects[0]["hero"])
     nav = "".join(
         f'<a href="{base}{href}">{label}</a>' for href, label in (("#work", "Work"), ("about/", "About"))
     ).replace(f'href="{base}#work"', f'href="{base}index.html#work"')
@@ -42,6 +61,14 @@ def page(title, desc, base, body, path=""):
 <meta property="og:title" content="{e(title)}">
 <meta property="og:description" content="{e(desc)}">
 <meta property="og:type" content="website">
+<meta property="og:url" content="{site['domain']}/{path}">
+<meta property="og:site_name" content="{e(site['name'])}">
+<meta property="og:image" content="{image}">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="627">
+<meta property="og:image:alt" content="{e(title)}">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="author" content="{e(site['name'])}">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%23161513'/%3E%3Ctext x='16' y='22' font-family='Arial' font-size='14' font-weight='700' fill='%23f4f2ee' text-anchor='middle'%3ERH%3C/text%3E%3C/svg%3E">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -150,7 +177,8 @@ def project(i, p):
   <a class="next" href="{base}work/{nxt['slug']}/"><span>Next project</span><strong>{e(nxt['title'])}</strong></a>
 </article>"""
     desc = f"{p['title']}: {p['subtitle']}. {p['type']}, {p['location']}."
-    write(f"work/{slug}/index.html", page(f"{p['title']} | {site['name']}", desc, base, body, f"work/{slug}/"))
+    write(f"work/{slug}/index.html", page(f"{p['title']} | {site['name']}", desc, base, body, f"work/{slug}/",
+                                          og_image(slug, p["hero"])))
 
 
 def about():
