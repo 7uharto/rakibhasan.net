@@ -16,6 +16,20 @@
     try { localStorage.setItem("theme", next); } catch (e) {}
   });
 
+  // Arriving from another page with a #section link (e.g. Films in the menu):
+  // jump there once the page is laid out, instead of relying on smooth scroll.
+  if (location.hash.length > 1) {
+    var jump = function () {
+      var target = document.getElementById(location.hash.slice(1));
+      if (!target) return;
+      root.style.scrollBehavior = "auto";
+      target.scrollIntoView({ block: "start" });
+      root.style.scrollBehavior = "";
+    };
+    if (document.readyState === "complete") jump();
+    else addEventListener("load", jump);
+  }
+
   var bar = document.querySelector(".bar");
   addEventListener("scroll", function () {
     bar.classList.toggle("scrolled", scrollY > 8);

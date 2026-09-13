@@ -49,7 +49,7 @@ def og_image(project, name):
 def page(title, desc, base, body, path="", image=None):
     image = image or og_image(projects[0]["slug"], projects[0]["hero"])
     nav = "".join(
-        f'<a href="{base}{href}">{label}</a>' for href, label in (("#work", "Work"), ("about/", "About"))
+        f'<a href="{base}{href}">{label}</a>' for href, label in (("#work", "Work"), ("work/professional-work/#films", "Films"), ("about/", "About"))
     ).replace(f'href="{base}#work"', f'href="{base}index.html#work"')
     return f"""<!doctype html>
 <html lang="en">
