@@ -6,6 +6,7 @@ Edit text in content/site.json and content/projects.json, then re-run.
 """
 import json
 import os
+import re
 from html import escape as e
 
 from PIL import Image
@@ -116,7 +117,19 @@ def reel(base):
             f'poster="{v}reel-poster.jpg" data-src-sm="{v}reel-720.mp4" data-src-lg="{v}reel-1080.mp4"></video>'
             f'<button class="reel-toggle" type="button" aria-label="Pause background video" aria-pressed="false">'
             f'<span class="i-pause"></span></button></div>'
-            f'<p class="reel-credit">{e(site["reel_credit"])}</p>')
+            f'<p class="reel-credit">{credit_html()}</p>')
+
+
+def credit_html():
+    """Reel credit with the company names after "Courtesy of" linked to their websites."""
+    text = site["reel_credit"]
+    head, sep, tail = text.partition("Courtesy of ")
+    tail = e(tail)
+    for name, url in site.get("credit_links", {}).items():
+        link = f'<a href="{e(url)}" target="_blank" rel="noopener">{e(name)}</a>'
+        tail = re.sub(rf"\b{re.escape(e(name))}\b", link, tail, count=1)
+    # one inner span so the flex box treats the sentence as a single run of text
+    return f"<span>{e(head)}{e(sep)}{tail}</span>"
 
 
 def film_grid(base):
