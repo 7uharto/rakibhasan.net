@@ -148,7 +148,6 @@ figcaption { font-size: .85rem; color: var(--ink-2); margin-top: .6rem; }
   font-size: 10px; font-weight: 500; line-height: 1.3; letter-spacing: .03em;
   color: rgba(244,242,238,.85); text-shadow: 0 1px 6px rgba(0,0,0,.55); -webkit-text-size-adjust: 100%; text-size-adjust: 100%; }
 .reel-hero.no-motion .reel-credit { right: var(--pad); }
-.film-credit { display: block; margin-top: .15rem; font-size: .8rem; color: var(--ink-2); }
 @media (max-width: 700px) {
   /* keep the buttons clear of the credit + pause row */
   .reel-inner { padding-bottom: 5.75rem; }

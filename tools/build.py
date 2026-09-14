@@ -122,15 +122,14 @@ def reel(base):
 def film_grid(base):
     """The four full-length films (streamed from pCloud), with facade poster frames."""
     items = []
-    for key, title, desc, client in next(p for p in projects if p.get("videos"))["videos"]:
+    for key, title, desc in next(p for p in projects if p.get("videos"))["videos"]:
         v = videos.get(key, {"width": 1920, "height": 1080, "duration": 0})
         mins, secs = divmod(int(v["duration"]), 60)
         items.append(
             f'<figure class="film"><video controls playsinline preload="none" '
             f'poster="{base}assets/video/{key}.jpg" width="{v["width"]}" height="{v["height"]}">'
             f'<source src="{site["video_base"]}{key}.mp4" type="video/mp4"></video>'
-            f"<figcaption><strong>{e(title)}</strong>{e(desc)} &middot; {mins}:{secs:02d}"
-            f'<span class="film-credit">Client: {e(client)} &middot; Animation: P2P</span></figcaption></figure>')
+            f"<figcaption><strong>{e(title)}</strong>{e(desc)} &middot; {mins}:{secs:02d}</figcaption></figure>")
     return f'<div class="film-grid">{"".join(items)}</div>'
 
 

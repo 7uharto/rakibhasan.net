@@ -41,10 +41,10 @@
     ],
     "facts": [["Projects", "20"], ["Area", "About 150,000 sq ft"], ["Built or under construction", "12"]],
     "videos": [
-      ["p2p-healthcare", "P2P Healthcare PLC", "Healthcare high-rise, Chattogram", "P2P"],
-      ["wecon-shukrana", "WECON Shukrana", "Residential high-rise, Chattogram", "WECON Properties"],
-      ["wecon-rainforest", "WECON Rainforest", "Residential high-rise, Chattogram", "WECON Properties"],
-      ["wecon-chowdhury-arcade", "WECON Chowdhury Arcade", "Commercial high-rise, Cumilla", "WECON Properties"]
+      ["p2p-healthcare", "P2P Healthcare PLC", "Healthcare high-rise, Chattogram"],
+      ["wecon-shukrana", "WECON Shukrana", "Residential high-rise, Chattogram"],
+      ["wecon-rainforest", "WECON Rainforest", "Residential high-rise, Chattogram"],
+      ["wecon-chowdhury-arcade", "WECON Chowdhury Arcade", "Commercial high-rise, Cumilla"]
     ],
     "gallery": [
       ["wecon-haqs-bay", "P2P Healthcare PLC", "Healthcare high-rise", "https://p2phc.health/home"],
