@@ -571,6 +571,24 @@ td { padding: .7rem .75rem .7rem 0; border-bottom: 1px solid var(--line); }
 .lightbox .next-level { left: auto; right: clamp(.25rem, 2vw, 1.5rem); }
 .lightbox .prev-level:hover { transform: translateX(-3px); }
 .lightbox .next-level:hover { transform: translateX(3px); }
+/* plan zoom: bottom bar with level buttons centred and the level title + north sign at the right edge */
+.lightbox.plan { padding-bottom: calc(var(--bar-h, 5rem) + 1.5rem); }
+.lightbox.plan img { max-height: calc(100vh - var(--bar-h, 5rem) - 3rem); }
+.lightbox-bar { position: fixed; left: 0; right: 0; bottom: 0; z-index: 2; display: grid; grid-template-columns: 1fr auto 1fr; align-items: center;
+  gap: 1rem; padding: .9rem clamp(1rem, 3vw, 2rem); background: color-mix(in srgb, var(--bg) 88%, transparent);
+  backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); border-top: 1px solid var(--line); cursor: default; }
+.lightbox-bar[hidden] { display: none; }
+.lightbox-levels { display: flex; flex-wrap: wrap; justify-content: center; gap: .4rem; }
+.lightbox .lightbox-levels button { position: static; font: inherit; font-size: .9rem; line-height: 1.2; min-width: 2.75rem; padding: .45rem .8rem;
+  border: 1px solid var(--line); border-radius: 999px; background: none; color: var(--ink); cursor: pointer; transition: background .2s, color .2s, border-color .2s; }
+.lightbox .lightbox-levels button:hover { border-color: var(--ink); }
+.lightbox .lightbox-levels button[aria-pressed="true"] { background: var(--ink); color: var(--bg); border-color: var(--ink); }
+.lightbox-title { margin: 0; justify-self: end; color: var(--ink); font-weight: 500; font-size: 1.15rem; white-space: nowrap; }
+@media (max-width: 700px) {
+  .lightbox-bar { grid-template-columns: 1fr; justify-items: center; gap: .5rem; }
+  .lightbox-bar > span { display: none; }
+  .lightbox-title { justify-self: center; order: -1; }
+}
 .lightbox.full img { max-width: none; max-height: none; width: 220%; }
 .lightbox button { position: fixed; top: 1rem; right: 1.25rem; background: none; border: 0; color: #fff; font-size: 2.5rem; cursor: pointer; line-height: 1; }
 

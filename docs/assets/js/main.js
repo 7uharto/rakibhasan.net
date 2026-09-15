@@ -178,6 +178,12 @@
     navPrev.className = "lightbox-nav prev-level"; navNext.className = "lightbox-nav next-level";
     navPrev.innerHTML = chevron("M11 1 1 12l10 11"); navNext.innerHTML = chevron("M1 1l10 11L1 23");
     box.appendChild(navPrev); box.appendChild(navNext);
+    // bottom bar while a plan is zoomed: level buttons (centre) and the level title with its north sign (right)
+    var lbBar = document.createElement("div");
+    lbBar.className = "lightbox-bar"; lbBar.hidden = true;
+    lbBar.innerHTML = '<span></span><div class="lightbox-levels" role="group" aria-label="Level"></div><p class="lightbox-title"></p>';
+    lbBar.addEventListener("click", function (ev) { ev.stopPropagation(); });
+    box.appendChild(lbBar);
   }
   function open(im) {
     big.src = (im.currentSrc || im.src).replace("-1200.webp", "-2400.webp");  // currentSrc is empty until a lazy image has loaded
@@ -190,6 +196,20 @@
     planViewer = viewer;
     planIndex = viewer ? Array.prototype.indexOf.call(viewer.querySelectorAll(".plan-panel"), im.closest(".plan-panel")) : -1;
     var count = viewer ? viewer.querySelectorAll(".plan-panel").length : 0;
+    box.classList.toggle("plan", !!viewer);
+    lbBar.hidden = !viewer;
+    if (viewer) {
+      var levels = lbBar.querySelector(".lightbox-levels");
+      levels.innerHTML = "";
+      viewer.querySelectorAll(".plan-tabs label").forEach(function (lab, i) {
+        var b = document.createElement("button");
+        b.type = "button"; b.textContent = lab.textContent;
+        b.setAttribute("aria-pressed", String(i === planIndex));
+        b.addEventListener("click", function () { goPlan(i); });
+        levels.appendChild(b);
+      });
+      lbBar.querySelector(".lightbox-title").innerHTML = im.closest(".plan-panel").querySelector("figcaption strong").innerHTML;
+    }
     navPrev.hidden = !viewer || planIndex <= 0;
     navNext.hidden = !viewer || planIndex >= count - 1;
     if (viewer) {
@@ -199,10 +219,12 @@
     }
     box.hidden = false;
     document.body.style.overflow = "hidden";
+    if (viewer) box.style.setProperty("--bar-h", lbBar.offsetHeight + "px");  // plan is sized to stay clear of the bar
   }
-  function stepPlan(step) {  // switch the page's level too, so closing the zoom lands on the same plan
+  function stepPlan(step) { goPlan(planIndex + step); }
+  function goPlan(j) {  // switch the page's level too, so closing the zoom lands on the same plan
     if (!planViewer) return;
-    var radios = planViewer.querySelectorAll(".plan-radio"), j = planIndex + step;
+    var radios = planViewer.querySelectorAll(".plan-radio");
     if (j < 0 || j >= radios.length) return;
     radios[j].checked = true;
     box.classList.remove("full");
