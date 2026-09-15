@@ -59,6 +59,34 @@
     }
   });
 
+  // Hero parallax (project pages, home and Films reel headers): the picture scrolls at 40% of the page speed while the
+  // title drifts up and fades. The picture only moves down by less than the page has scrolled, so its gap stays above
+  // the screen. Buildings are never scaled or cropped for it.
+  if (!matchMedia("(prefers-reduced-motion: reduce)").matches) {
+    var heroes = [];
+    document.querySelectorAll(".project-hero, .reel-hero").forEach(function (box) {
+      heroes.push({ box: box, media: box.querySelector(".hero-img, .reel"), text: box.querySelector(".hero-title, .reel-inner") });
+    });
+    var ticking = false;
+    var parallax = function () {
+      ticking = false;
+      heroes.forEach(function (h) {
+        var top = h.box.offsetTop, hgt = h.box.offsetHeight;
+        var y = Math.min(Math.max(scrollY - top, 0), hgt);  // how far this hero has scrolled past the top
+        if (h.media) h.media.style.transform = "translate3d(0," + (y * 0.4).toFixed(1) + "px,0)";
+        if (h.text) {
+          h.text.style.transform = "translate3d(0," + (y * -0.15).toFixed(1) + "px,0)";
+          h.text.style.opacity = Math.max(0, 1 - y / (hgt * 0.7)).toFixed(3);
+        }
+      });
+    };
+    if (heroes.length) {
+      addEventListener("scroll", function () { if (!ticking) { ticking = true; requestAnimationFrame(parallax); } }, { passive: true });
+      addEventListener("resize", parallax);
+      parallax();
+    }
+  }
+
   // Concept-diagram clips (BRIDGE1400): stills for reduced motion, otherwise play only while on screen.
   document.querySelectorAll(".concept-clip video").forEach(function (video) {
     if (matchMedia("(prefers-reduced-motion: reduce)").matches) { video.removeAttribute("autoplay"); video.pause(); return; }
