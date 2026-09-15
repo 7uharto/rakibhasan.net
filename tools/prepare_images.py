@@ -22,6 +22,10 @@ WIDTHS = (1200, 2400)
 CROP_TO_CONTENT = {"Headshot.psd", "site-transparent.png"}
 # hair-edge halo cleanup only: it recolours semi-transparent pixels, which would darken soft fades (site map)
 DECONTAMINATE = {"Headshot.psd"}
+# hand sketches on white paper: brightness becomes transparency, so only the ink is kept (works on dark pages too)
+SKETCHES = os.path.join(ROOT, "docs", "assets", "img", "bridge1400", "Original", "Conceptual Sketch")
+INK_TO_ALPHA = {"Conceptual Section_1.png", "sec_1.png", "sec_2.png", "plan_1.png", "plan_2.png", "plan_3.png",
+                "elevation_1.png"}
 
 # project -> list of (output name, source). Source is a Links filename or "pdf:<page>".
 IMAGES = {
@@ -29,7 +33,13 @@ IMAGES = {
     "bridge1400": [
         ("hero", "F2.jpg"),
         ("site", os.path.join(ROOT, "docs", "assets", "img", "bridge1400", "Original", "Site", "site-transparent.png")),
-        ("massing", "pdf:5"),
+        ("sketch-section-1", os.path.join(SKETCHES, "sec_1.png")),
+        ("sketch-section-2", os.path.join(SKETCHES, "sec_2.png")),
+        ("sketch-plan-1", os.path.join(SKETCHES, "plan_1.png")),
+        ("sketch-plan-2", os.path.join(SKETCHES, "plan_2.png")),
+        ("sketch-plan-3", os.path.join(SKETCHES, "plan_3.png")),
+        ("sketch-elevation", os.path.join(SKETCHES, "elevation_1.png")),
+        ("concept-section", os.path.join(SKETCHES, "Conceptual Section_1.png")),
         ("plans", "pdf:6"),
         ("section-aa", "pdf:7"),
         ("section-bb", "pdf:8"),
@@ -125,6 +135,12 @@ def load(src, doc):
         zoom = 3200 / page.rect.width
         pix = page.get_pixmap(matrix=pymupdf.Matrix(zoom, zoom))
         return Image.frombytes("RGB", (pix.width, pix.height), pix.samples)
+    if os.path.basename(src) in INK_TO_ALPHA:
+        gray = Image.open(src).convert("L")  # white paper -> 0 alpha, black ink -> full alpha
+        alpha = Image.eval(gray, lambda v: 0 if v > 245 else min(255, round((255 - v) * 1.15)))
+        im = Image.new("RGBA", gray.size, (22, 21, 19, 255))  # --ink colour; dark mode inverts it in CSS
+        im.putalpha(alpha)
+        return im.crop(alpha.getbbox())
     im = Image.open(src if os.path.isabs(src) else os.path.join(LINKS, src))  # absolute = file outside Links
     if im.mode in ("RGBA", "LA", "P"):
         im = im.convert("RGBA")

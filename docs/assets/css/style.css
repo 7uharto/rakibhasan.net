@@ -202,6 +202,41 @@ figcaption { font-size: .85rem; color: var(--ink-2); margin-top: .6rem; }
     margin-right: .5rem; border-radius: 50%; background: var(--ink); color: var(--bg); font-size: .72rem; font-weight: 600; }
 }
 
+/* Hand sketches: ink-only transparent images; dark mode turns the ink light */
+.sketch img { display: block; width: 100%; height: auto; }
+:root[data-theme="dark"] .sketch img { filter: invert(1); }
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) .sketch img { filter: invert(1); } }
+/* width:100% + minmax(0,1fr): as grid items these lists would otherwise shrink to their content (see .callout-map) */
+.sketch-grid { width: 100%; display: grid; gap: 2.5rem 2rem; grid-template-columns: repeat(2, minmax(0, 1fr)); align-items: end; }
+@media (min-width: 900px) { .sketch-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
+.sketch-grid img { max-height: 340px; object-fit: contain; }
+
+/* Waterfront-to-city diagram: concept section sketch between live-text zone cards */
+.zones { width: 100%; }
+.zone-row { display: grid; gap: 1.75rem 3rem; }
+@media (min-width: 760px) {
+  .zone-row { grid-template-columns: 1fr 1fr; }
+  .zone-row .zone:nth-child(2) { text-align: right; }
+  .zone-row .zone:nth-child(2) p { margin-left: auto; }
+}
+.zone h3 { font-size: 1.35rem; font-weight: 500; letter-spacing: -0.01em; margin: 0 0 .4rem; }
+.zone p { margin: 0; color: var(--ink-2); max-width: 46ch; }
+.zone p.zone-tag { display: inline-block; margin: 0 0 .75rem; padding: .3rem .65rem; border: 1px solid var(--ink);
+  font-size: .72rem; letter-spacing: .12em; text-transform: uppercase; color: var(--ink); }
+.zone-art { margin: 2.25rem 0 .5rem; }
+.zone-axis { display: flex; justify-content: space-between; align-items: baseline; gap: 1rem; margin-bottom: 2.25rem;
+  border-top: 1px solid var(--line); padding-top: .6rem; font-size: .78rem; letter-spacing: .08em; text-transform: uppercase; color: var(--ink-2); }
+.zone-axis strong { font-weight: 500; color: var(--ink); text-align: center; }
+
+/* Massing steps: inline SVGs follow the text colour, pastel fills kept */
+.steps { width: 100%; list-style: none; padding: 0; margin: 0; display: grid; gap: 2.75rem 1.5rem; grid-template-columns: repeat(2, minmax(0, 1fr)); }
+@media (min-width: 900px) { .steps { grid-template-columns: repeat(4, minmax(0, 1fr)); } }
+.step-art { color: var(--ink); aspect-ratio: 171 / 153; margin-bottom: 1rem; }
+.step-art svg { display: block; width: 100%; height: 100%; fill: currentColor; overflow: visible; }
+.step .step-n { margin: 0; font-size: .72rem; letter-spacing: .12em; text-transform: uppercase; color: var(--accent); }
+.step h3 { font-size: 1.05rem; font-weight: 500; line-height: 1.25; margin: .2rem 0 .35rem; }
+.step p:last-child { margin: 0; font-size: .9rem; line-height: 1.5; color: var(--ink-2); }
+
 .gallery { max-width: var(--max); margin: 0 auto; padding: 0 var(--pad) clamp(3.5rem, 8vw, 6rem); }
 .gallery h2, .table-wrap h2 { font-size: clamp(1.6rem, 3vw, 2.4rem); border-top: 1px solid var(--line); padding-top: 1.25rem; margin-bottom: 2rem; }
 .masonry { columns: 2 220px; column-gap: 1.25rem; }

@@ -24,7 +24,38 @@
           {"label": "Site", "note": "Western Ave and Union St", "x": 54.6, "y": 43.6},
           {"label": "Alaskan Way", "note": "Waterfront boulevard", "x": 70.0, "y": 75.5}
         ]}},
-      {"heading": "Form", "text": "Eight moves shape the block: a full zoning envelope, a daylight cut along Alaskan Way, an interlocking sloped tower, podium voids for entry and egress, a central atrium and the experiential ramp from Level 4 to Level 5.", "images": [["massing", "Massing sequence and waterfront-to-city diagram"]]},
+      {"heading": "Sketches", "text": "Hand sketches in section, plan and elevation explored how the floor plates stack, shift and turn toward the water.", "images": [],
+        "sketches": [
+          ["sketch-section-1", "Section study"],
+          ["sketch-section-2", "Section study"],
+          ["sketch-plan-1", "Plan study 1"],
+          ["sketch-plan-2", "Plan study 2"],
+          ["sketch-plan-3", "Plan study 3"],
+          ["sketch-elevation", "Elevation study"]
+        ]},
+      {"heading": "Waterfront to city", "text": "The site sits between two cultures: the open, moving waterfront to the west and the dense commercial city to the east. The building steps up between them.", "images": [],
+        "zones": {
+          "image": ["concept-section", "Concept section: from the waterfront up to downtown"],
+          "ends": ["Waterfront", "Downtown"],
+          "middle": "Spatial and experiential continuity",
+          "cards": [
+            {"tag": "Western edge · Tourism", "title": "Waterfront culture", "text": "Ferries, piers, seafood markets and public promenades give the waterfront a culture of openness and flow. The building's glass and timber echo its marine and industrial traditions."},
+            {"tag": "Eastern zone · Commercial", "title": "Urban density", "text": "Downtown's verticality and program intensity shape the eastern edge: functions stack vertically, while back-of-house services and circulation stay discreet."},
+            {"title": "Hotel spaces", "text": "The tower is a retreat above the city with panoramic views of Elliott Bay. Its mass timber structure brings warmth and quiet to the rooms."},
+            {"title": "Retail spaces", "text": "At street level, transparent frontage, varied tenant spaces and several entries make the podium the building's public interface."}
+          ]
+        }},
+      {"heading": "Form", "text": "Eight moves take the block from a full zoning envelope to the final form.", "images": [],
+        "steps": [
+          ["massing-1.svg", "Initial massing", "A full-site envelope at a uniform 12 stories uses the whole allowable zoning volume."],
+          ["massing-2.svg", "Daylight optimization", "A major cut along Alaskan Way reduces bulk and leaves a long tower parallel to Western Avenue, opening daylight to neighbors."],
+          ["massing-3.svg", "Voiding for interlocking", "A deeper cut at the lower southeast corner, facing Union Street, makes room for a second tower mass."],
+          ["massing-4.svg", "Secondary tower", "A smaller, sloped volume interlocks with the main tower, adding tension and a dual massing language."],
+          ["massing-5.svg", "Podium", "A 4-level base holds retail and the hotel lobby. A tall void at the corner draws pedestrians in."],
+          ["massing-6.svg", "Access carve-outs", "Cuts at the southeast corner for egress stairs and at the southwest edge for direct retail and restaurant access."],
+          ["massing-7.svg", "Central atrium", "A mid-block cut brings light into the podium core, and a cut on the east face opens a retail entry toward Alaskan Way."],
+          ["massing-8.svg", "Experiential ramp", "A gently sloped internal ramp links Level 4 and Level 5 as a promenade with waterfront views."]
+        ]},
       {"heading": "Mass timber", "text": "Above the four-level podium, the hotel tower is built in mass timber. Exposed wood gives the guest rooms warmth and quiet, carries the project's biophilic approach, and echoes the timber and glass of the working waterfront. Timber also stores carbon instead of emitting it, which the design study estimates below.", "stats": [["~0.9 t", "CO2 stored per m3 of CLT"], ["7.5 ft3", "Structural timber per ft2 of floor"], ["~5,000 US tons", "CO2 stored in the tower (estimate)"]], "note": "CLT storage rate from WoodWorks and the U.S. Forest Service, as cited in the design study."},
       {"heading": "Plans", "text": "Retail activates the first two levels. The hotel lobby, restaurants and an infinity pool fill the podium, and guest rooms stack above with terraces and a sky lounge.", "images": [["plans", "Floor plans, Levels 1 to 13"]]},
       {"heading": "Sections", "text": "Double-height retail glazing, a restaurant stair through a central void, and the pool-to-bar ramp are read together in section. Rooftop and facade PV, greywater reuse and rainwater harvesting are sized in the performance study.", "images": [["section-aa", "Section AA"], ["section-bb", "Section BB with energy, water and carbon study"]]}

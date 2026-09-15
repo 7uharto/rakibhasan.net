@@ -190,5 +190,33 @@
  "bridge1400/site": {
   "w": 1752,
   "h": 1830
+ },
+ "bridge1400/sketch-section-1": {
+  "w": 894,
+  "h": 476
+ },
+ "bridge1400/sketch-section-2": {
+  "w": 831,
+  "h": 365
+ },
+ "bridge1400/sketch-plan-1": {
+  "w": 1480,
+  "h": 1720
+ },
+ "bridge1400/sketch-plan-2": {
+  "w": 1367,
+  "h": 1518
+ },
+ "bridge1400/sketch-plan-3": {
+  "w": 1367,
+  "h": 1519
+ },
+ "bridge1400/sketch-elevation": {
+  "w": 773,
+  "h": 549
+ },
+ "bridge1400/concept-section": {
+  "w": 1550,
+  "h": 638
  }
 }

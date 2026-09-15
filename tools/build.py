@@ -231,6 +231,37 @@ def callout_figure(project, name, cap, base, items):
             f"<figcaption>{e(cap)}</figcaption></figure>")
 
 
+def sketch_grid(project, items, base):
+    """Transparent hand sketches (ink only) in a grid."""
+    tiles = "".join(f'<figure class="sketch zoom">{img(project, n, cap, base, sizes_attr="(min-width: 900px) 33vw, 50vw")}'
+                    f"<figcaption>{e(cap)}</figcaption></figure>" for n, cap in items)
+    return f'<div class="sketch-grid">{tiles}</div>'
+
+
+def zones_figure(project, z, base):
+    """Concept section sketch between live-text zone cards (two above, two below)."""
+    def card(c):
+        tag = f'<p class="zone-tag">{e(c["tag"])}</p>' if c.get("tag") else ""
+        return f'<div class="zone">{tag}<h3>{e(c["title"])}</h3><p>{e(c["text"])}</p></div>'
+    n, cap = z["image"]
+    west, east = z["ends"]
+    return (f'<figure class="zones"><div class="zone-row">{"".join(map(card, z["cards"][:2]))}</div>'
+            f'<div class="sketch zone-art">{img(project, n, cap, base, sizes_attr="(min-width: 1400px) 1400px, 100vw")}</div>'
+            f'<div class="zone-axis"><span>&larr; {e(west)}</span><strong>{e(z["middle"])}</strong><span>{e(east)} &rarr;</span></div>'
+            f'<div class="zone-row">{"".join(map(card, z["cards"][2:]))}</div>'
+            f"<figcaption>{e(cap)}</figcaption></figure>")
+
+
+def steps_list(project, items):
+    """Massing steps: cleaned inline SVGs (content/svg/<project>/) with live step titles and text."""
+    lis = []
+    for i, (fname, title, text) in enumerate(items, 1):
+        svg = open(os.path.join(ROOT, "content", "svg", project, fname), encoding="utf-8").read()
+        lis.append(f'<li class="step"><div class="step-art">{svg}</div>'
+                   f'<p class="step-n">Step {i}</p><h3>{e(title)}</h3><p>{e(text)}</p></li>')
+    return f'<ol class="steps">{"".join(lis)}</ol>'
+
+
 def project(i, p):
     base = "../../"
     slug = p["slug"]
@@ -245,6 +276,12 @@ def project(i, p):
             callout_figure(slug, n, cap, base, callouts[n]) if n in callouts else
             f'<figure class="zoom">{img(slug, n, cap, base, sizes_attr="(min-width: 1400px) 1400px, 100vw")}'
             f"<figcaption>{e(cap)}</figcaption></figure>" for n, cap in s.get("images", []))
+        if s.get("sketches"):
+            figs += sketch_grid(slug, s["sketches"], base)
+        if s.get("zones"):
+            figs += zones_figure(slug, s["zones"], base)
+        if s.get("steps"):
+            figs += steps_list(slug, s["steps"])
         text = f"<p>{e(s['text'])}</p>" if s["text"] else ""
         if s.get("stats"):
             text += '<div class="facts">' + "".join(
