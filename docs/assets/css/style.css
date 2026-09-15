@@ -259,24 +259,23 @@ figcaption { font-size: .85rem; color: var(--ink-2); margin-top: .6rem; }
 /* dark mode: dark linework would vanish, so flip tones; the hue turn keeps the planting green */
 :root[data-theme="dark"] .plan-sheet img { filter: invert(1) hue-rotate(180deg); }
 @media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) .plan-sheet img { filter: invert(1) hue-rotate(180deg); } }
-.plan-sheet img { display: block; width: 100%; height: auto; max-height: 65vh; object-fit: contain; }
+.plan-sheet img { display: block; width: auto; max-width: 100%; height: auto; max-height: 65vh; }
 .plan-panel figcaption { margin-top: 1rem; }
 /* north sign as the first character of the level title, sized to the letters; light lines in dark mode */
 .plan-north { display: inline-block; height: .95em; width: auto; margin-right: .3em; vertical-align: -.08em; }
 :root[data-theme="dark"] .plan-north { filter: invert(1); }
 @media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) .plan-north { filter: invert(1); } }
 /* previous / next arrows beside the plan */
-.plan-stage { position: relative; }
-.plan-arrow { position: absolute; top: 50%; z-index: 2; width: 3rem; height: 3rem; margin-top: -1.5rem; border-radius: 50%; cursor: pointer;
-  display: grid; place-items: center; font-size: 1.25rem; color: var(--ink); border: 1px solid var(--line);
-  background: color-mix(in srgb, var(--bg) 80%, transparent); backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px);
-  transition: background .2s, color .2s, border-color .2s, transform .2s; }
-.plan-arrow:hover { background: var(--ink); color: var(--bg); border-color: var(--ink); }
-.plan-arrow.plan-prev { left: .25rem; }
-.plan-arrow.plan-next { right: .25rem; }
-.plan-arrow.plan-prev:hover { transform: translateX(-2px); }
-.plan-arrow.plan-next:hover { transform: translateX(2px); }
-@media (max-width: 600px) { .plan-arrow { width: 2.4rem; height: 2.4rem; margin-top: -1.2rem; font-size: 1rem; } }
+/* arrow | plan | arrow in one row: the arrows sit just outside the drawing with a fixed gap, never on top of it */
+.plan-stage { display: flex; align-items: center; justify-content: center; gap: clamp(.5rem, 2vw, 1.5rem); }
+.plan-stage .plan-sheet { flex: 0 1 auto; min-width: 0; padding: 0; }
+.plan-arrow { flex: none; width: 2rem; height: 3rem; cursor: pointer;
+  display: grid; place-items: center; color: var(--ink-2); opacity: .75; transition: color .2s, opacity .2s, transform .2s; }
+.plan-arrow svg { width: .75rem; height: 1.5rem; fill: none; stroke: currentColor; stroke-width: 1.5; stroke-linecap: round; stroke-linejoin: round; overflow: visible; }
+.plan-arrow:hover { color: var(--ink); opacity: 1; }
+.plan-gap { cursor: default; }
+.plan-arrow.plan-prev:hover { transform: translateX(-3px); }
+.plan-arrow.plan-next:hover { transform: translateX(3px); }
 .plan-panel figcaption strong { display: block; color: var(--ink); font-weight: 500; font-size: 1.15rem; margin-bottom: .5rem; }
 .plan-panel ul { list-style: none; padding: 0; margin: 0; display: flex; flex-wrap: wrap; gap: .4rem .5rem; }
 .plan-panel li { font-size: .88rem; color: var(--ink-2); background: var(--bg-2); border-radius: 999px; padding: .25rem .7rem; }

@@ -422,10 +422,12 @@ def plan_viewer(project, plans, base):
     def arrow(i, step):  # previous / next level: a label for that level's radio, so it works without JS
         j = i + step
         if not 0 <= j < len(plans):
-            return ""
-        cls, glyph, word = ("plan-prev", "&larr;", "Previous") if step < 0 else ("plan-next", "&rarr;", "Next")  # not .next: the next-project link owns it
+            return '<span class="plan-arrow plan-gap" aria-hidden="true"></span>'  # keeps the plan centred on first/last level
+        cls, word = ("plan-prev", "Previous") if step < 0 else ("plan-next", "Next")  # not .next: the next-project link owns it
+        # thin tall chevron, gallery style; points left for previous, right for next
+        path = "M11 1 1 12l10 11" if step < 0 else "M1 1l10 11L1 23"
         return (f'<label class="plan-arrow {cls}" for="{group}-{j}" aria-label="{word} level: {e(plans[j][1])}">'
-                f'<span aria-hidden="true">{glyph}</span></label>')
+                f'<svg viewBox="0 0 12 24" aria-hidden="true"><path d="{path}"/></svg></label>')
 
     panels = "".join(
         f'<figure class="plan-panel"><div class="plan-stage">{arrow(i, -1)}'
