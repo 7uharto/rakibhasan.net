@@ -169,21 +169,58 @@
   var box = document.querySelector(".lightbox");
   var big = box && box.querySelector("img");
   function close() { box.hidden = true; box.classList.remove("full"); document.body.style.overflow = ""; }
+  var planViewer = null, planIndex = -1;  // set while a floor plan is zoomed, for the previous / next arrows
+  var chevron = function (d) { return '<svg viewBox="0 0 12 24" aria-hidden="true"><path d="' + d + '"/></svg>'; };
+  var navPrev, navNext;
+  if (box) {
+    navPrev = document.createElement("button"); navNext = document.createElement("button");
+    navPrev.type = navNext.type = "button";
+    navPrev.className = "lightbox-nav prev-level"; navNext.className = "lightbox-nav next-level";
+    navPrev.innerHTML = chevron("M11 1 1 12l10 11"); navNext.innerHTML = chevron("M1 1l10 11L1 23");
+    box.appendChild(navPrev); box.appendChild(navNext);
+  }
+  function open(im) {
+    big.src = (im.currentSrc || im.src).replace("-1200.webp", "-2400.webp");  // currentSrc is empty until a lazy image has loaded
+    // see-through drawings (plans, sketches, sections) zoom on the page colour with the same dark-mode filter as on the page
+    var drawing = !!im.closest(".plan-sheet, .sketch, .callout-map");
+    box.classList.toggle("drawing", drawing);
+    big.style.filter = drawing ? getComputedStyle(im).filter : "";
+    big.alt = im.alt;
+    var viewer = im.closest(".plan-viewer");
+    planViewer = viewer;
+    planIndex = viewer ? Array.prototype.indexOf.call(viewer.querySelectorAll(".plan-panel"), im.closest(".plan-panel")) : -1;
+    var count = viewer ? viewer.querySelectorAll(".plan-panel").length : 0;
+    navPrev.hidden = !viewer || planIndex <= 0;
+    navNext.hidden = !viewer || planIndex >= count - 1;
+    if (viewer) {
+      var labels = viewer.querySelectorAll(".plan-panel figcaption strong");
+      if (!navPrev.hidden) navPrev.setAttribute("aria-label", "Previous level: " + labels[planIndex - 1].textContent);
+      if (!navNext.hidden) navNext.setAttribute("aria-label", "Next level: " + labels[planIndex + 1].textContent);
+    }
+    box.hidden = false;
+    document.body.style.overflow = "hidden";
+  }
+  function stepPlan(step) {  // switch the page's level too, so closing the zoom lands on the same plan
+    if (!planViewer) return;
+    var radios = planViewer.querySelectorAll(".plan-radio"), j = planIndex + step;
+    if (j < 0 || j >= radios.length) return;
+    radios[j].checked = true;
+    box.classList.remove("full");
+    open(planViewer.querySelectorAll(".plan-panel")[j].querySelector(".plan-sheet img"));
+  }
   document.querySelectorAll(".zoom img").forEach(function (im) {
-    im.addEventListener("click", function () {
-      big.src = (im.currentSrc || im.src).replace("-1200.webp", "-2400.webp");  // currentSrc is empty until a lazy image has loaded
-      // see-through drawings (plans, sketches, sections) zoom on the page colour with the same dark-mode filter as on the page
-      var drawing = !!im.closest(".plan-sheet, .sketch, .callout-map");
-      box.classList.toggle("drawing", drawing);
-      big.style.filter = drawing ? getComputedStyle(im).filter : "";
-      big.alt = im.alt;
-      box.hidden = false;
-      document.body.style.overflow = "hidden";
-    });
+    im.addEventListener("click", function () { open(im); });
   });
   if (box) {
     big.addEventListener("click", function (ev) { ev.stopPropagation(); box.classList.toggle("full"); });
+    navPrev.addEventListener("click", function (ev) { ev.stopPropagation(); stepPlan(-1); });
+    navNext.addEventListener("click", function (ev) { ev.stopPropagation(); stepPlan(1); });
     box.addEventListener("click", close);
-    addEventListener("keydown", function (ev) { if (ev.key === "Escape" && !box.hidden) close(); });
+    addEventListener("keydown", function (ev) {
+      if (box.hidden) return;
+      if (ev.key === "Escape") close();
+      else if (ev.key === "ArrowLeft") stepPlan(-1);
+      else if (ev.key === "ArrowRight") stepPlan(1);
+    });
   }
 })();
