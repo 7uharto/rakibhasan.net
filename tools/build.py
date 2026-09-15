@@ -372,8 +372,8 @@ def concept_figure(project, z, base, card):
     v = f"{base}assets/video/{project}"
     c = z["cards"]  # waterfront culture, urban density, hotel spaces, retail spaces
 
-    def clip(side, alt):
-        return (f'<div class="concept-clip {side}"><video muted loop playsinline autoplay preload="metadata" '
+    def clip(side, alt, y):  # y: the band's height on the sketch row, so the clip centres on its capsule
+        return (f'<div class="concept-clip {side}" style="--y:{y:.2f}%"><video muted loop playsinline autoplay preload="metadata" '
                 f'poster="{v}-{side}-poster.jpg" aria-label="{e(alt)}"><source src="{v}-{side}.mp4" type="video/mp4"></video></div>')
 
     def band(side, label, y):
@@ -386,7 +386,7 @@ def concept_figure(project, z, base, card):
              f'<span class="concept-stair" aria-hidden="true"></span>'
              f'<span class="concept-end west" aria-hidden="true"></span><span class="concept-end east" aria-hidden="true"></span></div>')
     return (f'<figure class="concept">'
-            f'{clip("west", z["clips"][0])}'
+            f'{clip("west", z["clips"][0], wy)}'
             f'<div class="concept-card w-top">{card(c[0])}</div>'
             f'{band("west", z["bands"][0], wy)}'
             f'<div class="concept-card w-bottom">{card(c[2])}</div>'
@@ -394,7 +394,7 @@ def concept_figure(project, z, base, card):
             f'<div class="concept-card e-top">{card(c[1])}</div>'
             f'{band("east", z["bands"][1], ey)}'
             f'<div class="concept-card e-bottom">{card(c[3])}</div>'
-            f'{clip("east", z["clips"][1])}'
+            f'{clip("east", z["clips"][1], ey)}'
             f'<figcaption>{e(z["image"][1])}</figcaption></figure>')
 
 

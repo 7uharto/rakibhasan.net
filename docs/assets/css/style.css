@@ -345,7 +345,9 @@ figcaption { font-size: .85rem; color: var(--ink-2); margin-top: .6rem; }
 @media (min-width: 1000px) {
   .concept { grid-template-columns: minmax(0, 11fr) minmax(0, 21fr) minmax(0, 36fr) minmax(0, 21fr) minmax(0, 11fr);
     grid-template-rows: auto auto auto auto; column-gap: 0; row-gap: 1.75rem; align-items: start; }
-  .concept-clip { width: 100%; grid-row: 1 / 4; align-self: center; }
+  /* clip centred on its capsule: same row and --y as the band, video overflows the row above and below */
+  .concept-clip { width: 100%; grid-row: 2; align-self: stretch; position: relative; }
+  .concept-clip video { position: absolute; left: 0; top: var(--y); transform: translateY(-50%); }
   .concept-clip.west { grid-column: 1; }
   .concept-clip.east { grid-column: 5; }
   .concept-card { padding: 0 1.5rem; }
