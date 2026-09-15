@@ -24,6 +24,8 @@ CROP_TO_CONTENT = {"Headshot.psd", "site-transparent.png"}
 DECONTAMINATE = {"Headshot.psd"}
 # hand sketches on white paper: brightness becomes transparency, so only the ink is kept (works on dark pages too)
 SKETCHES = os.path.join(ROOT, "docs", "assets", "img", "bridge1400", "Original", "Conceptual Sketch")
+# floor plans rendered from SVG by tools/render_plans.py (white background, common crop)
+PLANS = os.path.join(ROOT, "docs", "assets", "img", "bridge1400", "Original", "Plans", "render")
 INK_TO_ALPHA = {"Conceptual Section_1.png", "sec_1.png", "sec_2.png", "plan_1.png", "plan_2.png", "plan_3.png",
                 "elevation_1.png"}
 
@@ -40,7 +42,7 @@ IMAGES = {
         ("sketch-plan-3", os.path.join(SKETCHES, "plan_3.png")),
         ("sketch-elevation", os.path.join(SKETCHES, "elevation_1.png")),
         ("concept-section", os.path.join(SKETCHES, "Conceptual Section_1.png")),
-        ("plans", "pdf:6"),
+        *[(f"plan-level-{lv}", os.path.join(PLANS, f"level-{lv}.png")) for lv in ("1", "2", "3", "4", "5", "6-9", "10", "12-13")],
         ("section-aa", "pdf:7"),
         ("section-bb", "pdf:8"),
     ],

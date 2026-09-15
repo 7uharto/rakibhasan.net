@@ -262,6 +262,25 @@ def steps_list(project, items):
     return f'<ol class="steps">{"".join(lis)}</ol>'
 
 
+def plan_viewer(project, plans, base):
+    """Floor plans, one level at a time. No JavaScript: radio inputs + labels switch the panels (CSS nth-of-type).
+
+    plans: [[image name, level label, [program items]]]. Phones get the same tabs as wrapping chips.
+    """
+    group = f"plans-{project}"
+    inputs = "".join(f'<input class="plan-radio" type="radio" name="{group}" id="{group}-{i}"{" checked" if i == 0 else ""}>'
+                     for i in range(len(plans)))
+    tabs = "".join(f'<label for="{group}-{i}">{e(label.replace("Levels ", "").replace("Level ", "").replace(" to ", "–").replace(" and ", "–"))}</label>'
+                   for i, (_, label, _) in enumerate(plans))
+    panels = "".join(
+        f'<figure class="plan-panel"><div class="plan-sheet zoom">'
+        f'{img(project, n, f"{label} floor plan", base, sizes_attr="(min-width: 1100px) 1000px, 100vw")}</div>'
+        f'<figcaption><strong>{e(label)}</strong><ul>{"".join(f"<li>{e(x)}</li>" for x in items)}</ul></figcaption></figure>'
+        for n, label, items in plans)
+    return (f'<div class="plan-viewer">{inputs}<div class="plan-tabs"><span>Level</span>{tabs}</div>'
+            f'<div class="plan-panels">{panels}</div></div>')
+
+
 def project(i, p):
     base = "../../"
     slug = p["slug"]
@@ -282,6 +301,8 @@ def project(i, p):
             figs += zones_figure(slug, s["zones"], base)
         if s.get("steps"):
             figs += steps_list(slug, s["steps"])
+        if s.get("plans"):
+            figs += plan_viewer(slug, s["plans"], base)
         text = f"<p>{e(s['text'])}</p>" if s["text"] else ""
         if s.get("stats"):
             text += '<div class="facts">' + "".join(

@@ -47,7 +47,7 @@
         }},
       {"heading": "Form", "text": "Eight moves take the block from a full zoning envelope to the final form.", "images": [],
         "steps": [
-          ["massing-1.svg", "Initial massing", "A full-site envelope at a uniform 12 stories uses the whole allowable zoning volume."],
+          ["massing-1.svg", "Initial massing", "A full-site envelope at a uniform 13 stories uses the whole allowable zoning volume."],
           ["massing-2.svg", "Daylight optimization", "A major cut along Alaskan Way reduces bulk and leaves a long tower parallel to Western Avenue, opening daylight to neighbors."],
           ["massing-3.svg", "Voiding for interlocking", "A deeper cut at the lower southeast corner, facing Union Street, makes room for a second tower mass."],
           ["massing-4.svg", "Secondary tower", "A smaller, sloped volume interlocks with the main tower, adding tension and a dual massing language."],
@@ -57,7 +57,17 @@
           ["massing-8.svg", "Experiential ramp", "A gently sloped internal ramp links Level 4 and Level 5 as a promenade with waterfront views."]
         ]},
       {"heading": "Mass timber", "text": "Above the four-level podium, the hotel tower is built in mass timber. Exposed wood gives the guest rooms warmth and quiet, carries the project's biophilic approach, and echoes the timber and glass of the working waterfront. Timber also stores carbon instead of emitting it, which the design study estimates below.", "stats": [["~0.9 t", "CO2 stored per m3 of CLT"], ["7.5 ft3", "Structural timber per ft2 of floor"], ["~5,000 US tons", "CO2 stored in the tower (estimate)"]], "note": "CLT storage rate from WoodWorks and the U.S. Forest Service, as cited in the design study."},
-      {"heading": "Plans", "text": "Retail activates the first two levels. The hotel lobby, restaurants and an infinity pool fill the podium, and guest rooms stack above with terraces and a sky lounge.", "images": [["plans", "Floor plans, Levels 1 to 13"]]},
+      {"heading": "Plans", "text": "Retail activates the first two levels. The hotel lobby, restaurants and an infinity pool fill the podium, and guest rooms stack above with terraces and a sky lounge.", "images": [],
+        "plans": [
+          ["plan-level-1", "Level 1", ["Retail shops", "Service area"]],
+          ["plan-level-2", "Level 2", ["Retail shops", "Service area"]],
+          ["plan-level-3", "Level 3", ["Hotel lobby", "Service area", "Restaurant", "Cafe"]],
+          ["plan-level-4", "Level 4", ["Fitness zone", "Service area", "Restaurant", "Cafe", "Infinity pool area"]],
+          ["plan-level-5", "Level 5", ["Guest rooms", "Hotel service", "Lounge"]],
+          ["plan-level-6-9", "Levels 6 to 9", ["Guest rooms", "Hotel service", "Green terrace"]],
+          ["plan-level-10", "Level 10", ["Guest rooms", "Hotel service", "Green terrace BBQ"]],
+          ["plan-level-12-13", "Levels 12 and 13", ["Guest rooms", "Hotel service", "Lounge"]]
+        ]},
       {"heading": "Sections", "text": "Double-height retail glazing, a restaurant stair through a central void, and the pool-to-bar ramp are read together in section. Rooftop and facade PV, greywater reuse and rainwater harvesting are sized in the performance study.", "images": [["section-aa", "Section AA"], ["section-bb", "Section BB with energy, water and carbon study"]]}
     ]
   },
