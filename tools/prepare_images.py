@@ -20,6 +20,8 @@ MANIFEST = os.path.join(ROOT, "content", "images.json")
 WIDTHS = (1200, 2400)
 # transparent images to trim to their visible pixels (headshot circle has empty margins)
 CROP_TO_CONTENT = {"Headshot.psd", "site-transparent.png"}
+# hair-edge halo cleanup only: it recolours semi-transparent pixels, which would darken soft fades (site map)
+DECONTAMINATE = {"Headshot.psd"}
 
 # project -> list of (output name, source). Source is a Links filename or "pdf:<page>".
 IMAGES = {
@@ -127,7 +129,8 @@ def load(src, doc):
     if im.mode in ("RGBA", "LA", "P"):
         im = im.convert("RGBA")
         if os.path.basename(src) in CROP_TO_CONTENT:
-            im = decontaminate(im)
+            if os.path.basename(src) in DECONTAMINATE:
+                im = decontaminate(im)
             return im.crop(im.split()[-1].getbbox())  # keep transparency, no white fill
         bg = Image.new("RGB", im.size, "white")
         bg.paste(im, mask=im.split()[-1])

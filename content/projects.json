@@ -17,8 +17,15 @@
     ],
     "facts": [["Levels", "13"], ["Structure", "Mass timber tower over podium"], ["Program", "Retail, hotel lobby, restaurants, pool, 9 guest-room levels"]],
     "sections": [
-      {"heading": "Site", "text": "Between Pike Place Market and the waterfront promenade, the site takes its cues from both: vertical density to the east, openness and movement to the west.", "images": [["site", "Site context: downtown Seattle and Elliott Bay"]]},
+      {"heading": "Site", "text": "Between Pike Place Market and the waterfront promenade, the site takes its cues from both: vertical density to the east, openness and movement to the west.", "images": [["site", "Site context: downtown Seattle and Elliott Bay"]],
+        "callouts": {"site": [
+          {"label": "Overlook Walk", "note": "Market-to-waterfront link, opened 2024", "x": 28.1, "y": 28.9},
+          {"label": "Pike Place Market", "note": "Public market since 1907", "x": 38.7, "y": 10.0},
+          {"label": "Site", "note": "Western Ave and Union St", "x": 54.6, "y": 43.6},
+          {"label": "Alaskan Way", "note": "Waterfront boulevard", "x": 70.0, "y": 75.5}
+        ]}},
       {"heading": "Form", "text": "Eight moves shape the block: a full zoning envelope, a daylight cut along Alaskan Way, an interlocking sloped tower, podium voids for entry and egress, a central atrium and the experiential ramp from Level 4 to Level 5.", "images": [["massing", "Massing sequence and waterfront-to-city diagram"]]},
+      {"heading": "Mass timber", "text": "Above the four-level podium, the hotel tower is built in mass timber. Exposed wood gives the guest rooms warmth and quiet, carries the project's biophilic approach, and echoes the timber and glass of the working waterfront. Timber also stores carbon instead of emitting it, which the design study estimates below.", "stats": [["~0.9 t", "CO2 stored per m3 of CLT"], ["7.5 ft3", "Structural timber per ft2 of floor"], ["~5,000 US tons", "CO2 stored in the tower (estimate)"]], "note": "CLT storage rate from WoodWorks and the U.S. Forest Service, as cited in the design study."},
       {"heading": "Plans", "text": "Retail activates the first two levels. The hotel lobby, restaurants and an infinity pool fill the podium, and guest rooms stack above with terraces and a sky lounge.", "images": [["plans", "Floor plans, Levels 1 to 13"]]},
       {"heading": "Sections", "text": "Double-height retail glazing, a restaurant stair through a central void, and the pool-to-bar ramp are read together in section. Rooftop and facade PV, greywater reuse and rainwater harvesting are sized in the performance study.", "images": [["section-aa", "Section AA"], ["section-bb", "Section BB with energy, water and carbon study"]]}
     ]

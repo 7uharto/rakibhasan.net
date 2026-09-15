@@ -198,6 +198,39 @@ def home():
     write("index.html", page(f"{site['name']} | {site['title']}", site["tagline"], "", body))
 
 
+def callout_figure(project, name, cap, base, items):
+    """Map with coded callouts: label boxes in a band above the image, dotted elbow leaders, end dots.
+
+    items: [{"label", "note", "x", "y"}], x/y = target as % of the image.
+    Phones (CSS) hide the labels and leaders, number the dots and show a numbered list instead.
+    """
+    s = sizes.get(f"{project}/{name}", {"w": 1600, "h": 1600})
+    w, h = s["w"], s["h"]
+    band = round(w * 0.16)          # label band above the image, in image pixels
+    H = h + band                    # stage height
+    items = sorted(items, key=lambda c: c["x"])  # labels left-to-right in target order
+    label_bottom = band * 0.55
+    lines, dots, labels, legend = [], [], [], []
+    for i, c in enumerate(items):
+        lx = (i + 0.5) / len(items) * 100        # evenly spaced label centres (% width)
+        tx, ty = c["x"] / 100 * w, band + c["y"] / 100 * h
+        jog = band * (0.68 + 0.08 * i)           # staggered horizontal runs
+        lines.append(f'<path vector-effect="non-scaling-stroke" '
+                     f'd="M{lx / 100 * w:.1f},{label_bottom:.1f} V{jog:.1f} H{tx:.1f} V{ty:.1f}"/>')
+        dots.append(f'<span class="callout-dot" data-n="{i + 1}" style="left:{c["x"]:.2f}%;'
+                    f'--ty:{ty / H * 100:.2f}%;--ty-img:{c["y"]:.2f}%"></span>')
+        labels.append(f'<span class="callout-label" style="left:{lx:.2f}%;top:{label_bottom / H * 100:.2f}%">'
+                      f'<strong>{e(c["label"])}</strong><small>{e(c["note"])}</small></span>')
+        legend.append(f'<li><strong>{e(c["label"])}</strong> {e(c["note"])}</li>')
+    style = (f"--ar:{w}/{H};--ar-img:{w}/{h};--img-top:{band / H * 100:.2f}%;--img-h:{h / H * 100:.2f}%")
+    return (f'<figure class="callout-map"><div class="callout-stage" style="{style}">'
+            f'{img(project, name, cap, base, cls="callout-img", sizes_attr="(min-width: 960px) 900px, 100vw")}'
+            f'<svg class="callout-lines" viewBox="0 0 {w} {H}" preserveAspectRatio="none" aria-hidden="true">'
+            f'{"".join(lines)}</svg>{"".join(dots)}{"".join(labels)}</div>'
+            f'<ol class="callout-legend">{"".join(legend)}</ol>'
+            f"<figcaption>{e(cap)}</figcaption></figure>")
+
+
 def project(i, p):
     base = "../../"
     slug = p["slug"]
@@ -207,10 +240,17 @@ def project(i, p):
     facts = "".join(f'<div class="fact"><span>{e(k)}</span><strong>{e(v)}</strong></div>' for k, v in p.get("facts", []))
     parts = []
     for s in p.get("sections", []):
+        callouts = s.get("callouts", {})
         figs = "".join(
+            callout_figure(slug, n, cap, base, callouts[n]) if n in callouts else
             f'<figure class="zoom">{img(slug, n, cap, base, sizes_attr="(min-width: 1400px) 1400px, 100vw")}'
-            f"<figcaption>{e(cap)}</figcaption></figure>" for n, cap in s["images"])
+            f"<figcaption>{e(cap)}</figcaption></figure>" for n, cap in s.get("images", []))
         text = f"<p>{e(s['text'])}</p>" if s["text"] else ""
+        if s.get("stats"):
+            text += '<div class="facts">' + "".join(
+                f'<div class="fact"><span>{e(k)}</span><strong>{e(v)}</strong></div>' for v, k in s["stats"]) + "</div>"
+        if s.get("note"):
+            text += f'<p class="small">{e(s["note"])}</p>'
         parts.append(f'<section class="chapter reveal"><div class="chapter-text"><h2>{e(s["heading"])}</h2>{text}</div>'
                      f'<div class="chapter-figs">{figs}</div></section>')
     if p.get("videos"):
