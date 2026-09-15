@@ -171,7 +171,7 @@
   function close() { box.hidden = true; box.classList.remove("full"); document.body.style.overflow = ""; }
   document.querySelectorAll(".zoom img").forEach(function (im) {
     im.addEventListener("click", function () {
-      big.src = im.currentSrc.replace("-1200.webp", "-2400.webp");
+      big.src = (im.currentSrc || im.src).replace("-1200.webp", "-2400.webp");  // currentSrc is empty until a lazy image has loaded
       big.alt = im.alt;
       box.hidden = false;
       document.body.style.overflow = "hidden";
