@@ -363,7 +363,14 @@ figcaption { font-size: .85rem; color: var(--ink-2); margin-top: .6rem; }
 
 /* Massing steps: inline SVGs follow the text colour, pastel fills kept */
 .steps { width: 100%; list-style: none; padding: 0; margin: 0; display: grid; gap: 2.75rem 1.5rem; grid-template-columns: repeat(2, minmax(0, 1fr)); }
-@media (min-width: 900px) { .steps { grid-template-columns: repeat(4, minmax(0, 1fr)); } }
+/* one row of eight: wide screens fit all columns; narrower screens scroll the row sideways instead of stacking */
+.steps { grid-template-columns: none; grid-auto-flow: column; grid-auto-columns: minmax(150px, 1fr); gap: 1rem;
+  overflow-x: auto; scroll-snap-type: x proximity; padding-bottom: .5rem; }
+.step { scroll-snap-align: start; }
+@media (min-width: 1200px) { .steps { grid-auto-columns: minmax(0, 1fr); overflow-x: visible; } }
+.steps .step h3 { font-size: .92rem; }
+.steps .step p:last-child { font-size: .8rem; line-height: 1.45; }
+.steps .step-art { margin-bottom: .6rem; }
 .step-art { color: var(--ink); aspect-ratio: 171 / 153; margin-bottom: 1rem; }
 .step-art svg { display: block; width: 100%; height: 100%; fill: currentColor; overflow: visible; }
 .step .step-n { margin: 0; font-size: .72rem; letter-spacing: .12em; text-transform: uppercase; color: var(--accent); }
