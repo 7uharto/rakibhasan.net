@@ -68,7 +68,16 @@
           ["plan-level-10", "Level 10", ["Guest rooms", "Hotel service", "Green terrace BBQ"]],
           ["plan-level-12-13", "Levels 12 and 13", ["Guest rooms", "Hotel service", "Lounge"]]
         ]},
-      {"heading": "Sections", "text": "Double-height retail glazing, a restaurant stair through a central void, and the pool-to-bar ramp are read together in section. Rooftop and facade PV, greywater reuse and rainwater harvesting are sized in the performance study.", "images": [["section-aa", "Section AA"], ["section-bb", "Section BB with energy, water and carbon study"]]}
+      {"heading": "Sections", "text": "Double-height retail glazing, a restaurant stair through a central void, and the pool-to-bar ramp are read together in section. Rooftop and facade PV, greywater reuse and rainwater harvesting are sized in the performance study.", "images": [["section-aa", "Section AA"], ["section-bb", "Section BB with energy, water and carbon study"]],
+        "callouts": {"section-aa": {"sheet": true, "items": [
+          {"label": "Retail glazing", "note": "Double-height, dual-glazed storefront", "x": 3.97, "y": 61.7},
+          {"label": "Outdoor restaurant", "note": "Draws people in from Union St and Western Ave", "x": 8.25, "y": 50.8},
+          {"label": "Fitness center", "note": "Daylight and open views", "x": 20.2, "y": 32.2},
+          {"label": "Elevator pit", "note": "8 ft deep for mechanical clearance", "x": 44.5, "y": 84.8},
+          {"label": "Restaurant stair", "note": "Rises through a central void", "x": 70.4, "y": 44.5},
+          {"label": "Pool-to-bar ramp", "note": "Links the Level 4 pool and Level 5 bar", "x": 73.4, "y": 32.5},
+          {"label": "Cafe kitchen", "note": "Back-of-house beside the cafe", "x": 88.8, "y": 51.3}
+        ]}}}
     ]
   },
   {

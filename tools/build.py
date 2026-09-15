@@ -204,6 +204,9 @@ def callout_figure(project, name, cap, base, items):
     items: [{"label", "note", "x", "y"}], x/y = target as % of the image.
     Phones (CSS) hide the labels and leaders, number the dots and show a numbered list instead.
     """
+    # items may be a list, or {"items": [...], "sheet": true} for opaque drawings: the stage gets a white sheet + light ink
+    sheet = isinstance(items, dict) and items.get("sheet")
+    items = items["items"] if isinstance(items, dict) else items
     s = sizes.get(f"{project}/{name}", {"w": 1600, "h": 1600})
     w, h = s["w"], s["h"]
     band = round(w * 0.16)          # label band above the image, in image pixels
@@ -222,8 +225,10 @@ def callout_figure(project, name, cap, base, items):
         labels.append(f'<span class="callout-label" style="left:{lx:.2f}%;top:{label_bottom / H * 100:.2f}%">'
                       f'<strong>{e(c["label"])}</strong><small>{e(c["note"])}</small></span>')
         legend.append(f'<li><strong>{e(c["label"])}</strong> {e(c["note"])}</li>')
-    style = (f"--ar:{w}/{H};--ar-img:{w}/{h};--img-top:{band / H * 100:.2f}%;--img-h:{h / H * 100:.2f}%")
-    return (f'<figure class="callout-map"><div class="callout-stage" style="{style}">'
+    style = (f"--ar:{w}/{H};--ar-img:{w}/{h};--img-top:{band / H * 100:.2f}%;--img-h:{h / H * 100:.2f}%;"
+             f"--label-w:{min(23, 92 / len(items)):.1f}%")
+    cls = "callout-map" + (" wide" if len(items) > 4 else "") + (" sheet" if sheet else "")
+    return (f'<figure class="{cls}"><div class="callout-stage" style="{style}">'
             f'{img(project, name, cap, base, cls="callout-img", sizes_attr="(min-width: 960px) 900px, 100vw")}'
             f'<svg class="callout-lines" viewBox="0 0 {w} {H}" preserveAspectRatio="none" aria-hidden="true">'
             f'{"".join(lines)}</svg>{"".join(dots)}{"".join(labels)}</div>'
