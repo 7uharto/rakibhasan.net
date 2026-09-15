@@ -287,6 +287,11 @@ figcaption { font-size: .85rem; color: var(--ink-2); margin-top: .6rem; }
 /* row 1: three plan studies; row 2: sections and elevation, drawn standing on one shared ground line (bottom-aligned) */
 @media (min-width: 600px) { .sketch-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
 .sketch-grid img { max-height: 280px; object-fit: contain; object-position: bottom; }
+/* grounded sketches: the box stops at the ground line (--g of the image height); the part below the ground overflows
+   into the caption gap, so the bottom-aligned row lines up the ground lines, not the image edges */
+.sketch-ground { position: relative; width: min(100%, 300px); margin: 0 auto; aspect-ratio: var(--ar); }
+.sketch-grid .sketch-ground img { position: absolute; left: 0; top: 0; width: 100%; height: calc(100% / var(--g)); max-height: none; }
+.sketch.grounded figcaption { margin-top: 3.25rem; }
 
 /* Waterfront-to-city diagram: concept section sketch between live-text zone cards */
 .zones { width: 100%; }

@@ -291,9 +291,20 @@ def callout_figure(project, name, cap, base, items):
 
 
 def sketch_grid(project, items, base):
-    """Transparent hand sketches (ink only) in a grid."""
-    tiles = "".join(f'<figure class="sketch zoom">{img(project, n, cap, base, sizes_attr="(min-width: 900px) 33vw, 50vw")}'
-                    f"<figcaption>{e(cap)}</figcaption></figure>" for n, cap in items)
+    """Transparent hand sketches (ink only) in a grid.
+
+    An optional third value is the ground line's height as a fraction of the image (centre of the thick bottom line).
+    Those sketches get a box that ends at the ground, so the bottom-aligned row puts every ground on one level;
+    whatever is drawn below the ground hangs out of the box.
+    """
+    tiles = []
+    for n, cap, *ground in items:
+        pic = img(project, n, cap, base, sizes_attr="(min-width: 900px) 33vw, 50vw")
+        if ground:
+            s = sizes.get(f"{project}/{n}", {"w": 1600, "h": 1000})
+            pic = f'<div class="sketch-ground" style="--ar:{s["w"]}/{s["h"] * ground[0]:.1f};--g:{ground[0]}">{pic}</div>'
+        tiles.append(f'<figure class="sketch zoom{" grounded" if ground else ""}">{pic}<figcaption>{e(cap)}</figcaption></figure>')
+    tiles = "".join(tiles)
     return f'<div class="sketch-grid">{tiles}</div>'
 
 

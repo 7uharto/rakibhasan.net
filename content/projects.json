@@ -29,9 +29,9 @@
           ["sketch-plan-1", "Plan study 1"],
           ["sketch-plan-2", "Plan study 2"],
           ["sketch-plan-3", "Plan study 3"],
-          ["sketch-section-1", "Section study"],
-          ["sketch-section-2", "Section study"],
-          ["sketch-elevation", "Elevation study"]
+          ["sketch-section-1", "Section study", 0.7994],
+          ["sketch-section-2", "Section study", 0.9479],
+          ["sketch-elevation", "Elevation study", 0.8843]
         ]},
       {"heading": "Waterfront to city", "text": "The site sits between two cultures: the open, moving waterfront to the west and the dense commercial city to the east. The building steps up between them.", "images": [],
         "zones": {
