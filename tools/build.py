@@ -385,7 +385,8 @@ def concept_figure(project, z, base, card):
              f'{img(project, "concept-rest", z["image"][1], base, sizes_attr="(min-width: 1100px) 560px, 100vw")}'
              f'<span class="concept-stair" aria-hidden="true"></span>'
              f'<span class="concept-end west" aria-hidden="true"></span><span class="concept-end east" aria-hidden="true"></span></div>')
-    return (f'<figure class="concept">'
+    # --wy/--ey (fractions) and --hr (sketch height / width) let CSS keep one card-to-capsule gap on all four cards
+    return (f'<figure class="concept" style="--wy:{wy / 100:.4f};--ey:{ey / 100:.4f};--hr:{s["h"] / s["w"]:.4f}">'
             f'{clip("west", z["clips"][0], wy)}'
             f'<div class="concept-card w-top">{card(c[0])}</div>'
             f'{band("west", z["bands"][0], wy)}'

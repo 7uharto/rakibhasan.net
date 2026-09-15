@@ -372,6 +372,12 @@ figcaption { font-size: .85rem; color: var(--ink-2); margin-top: .6rem; }
   .concept-clip.west { grid-column: 1; }
   .concept-clip.east { grid-column: 5; }
   .concept-card { padding: 0 1.5rem; }
+  /* Equal gaps: the sketch row is H = 36cqw x --hr tall (middle column is 36 of 100 fr, no column gap). Each capsule sits
+     at --y of H, so the cards shift by the difference from the Hotel spaces gap (west bottom), which stays as it is. */
+  .concept { container-type: inline-size; --H: calc(36cqw * var(--hr)); }
+  .w-top { transform: translateY(calc((2 * var(--wy) - 1) * var(--H))); }
+  .e-top { transform: translateY(calc((var(--ey) + var(--wy) - 1) * var(--H))); }
+  .e-bottom { transform: translateY(calc((var(--ey) - var(--wy)) * var(--H))); }
   .w-top, .e-top { grid-row: 1; align-self: end; }
   .w-bottom, .e-bottom { grid-row: 3; }
   .w-top, .w-bottom { grid-column: 2; text-align: right; }
