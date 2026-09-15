@@ -22,6 +22,8 @@ WIDTHS = (1200, 2400)
 CROP_TO_CONTENT = {"Headshot.psd", "site-transparent.png"}
 # hair-edge halo cleanup only: it recolours semi-transparent pixels, which would darken soft fades (site map)
 DECONTAMINATE = {"Headshot.psd"}
+# transparent exports that must stay see-through at their full size
+KEEP_ALPHA = {"section-aa v1.0.png"}
 # hand sketches on white paper: brightness becomes transparency, so only the ink is kept (works on dark pages too)
 SKETCHES = os.path.join(ROOT, "docs", "assets", "img", "bridge1400", "Original", "Conceptual Sketch")
 # floor plans rendered from SVG by tools/render_plans.py (white background, common crop)
@@ -160,6 +162,8 @@ def load(src, doc):
             if os.path.basename(src) in DECONTAMINATE:
                 im = decontaminate(im)
             return im.crop(im.split()[-1].getbbox())  # keep transparency, no white fill
+        if os.path.basename(src) in KEEP_ALPHA:
+            return im  # see-through drawing, uncropped (callout positions are % of this full image)
         bg = Image.new("RGB", im.size, "white")
         bg.paste(im, mask=im.split()[-1])
         return bg
