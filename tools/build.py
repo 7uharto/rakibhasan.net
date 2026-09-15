@@ -427,7 +427,9 @@ def plan_viewer(project, plans, base):
                 f'<span aria-hidden="true">{glyph}</span></label>')
 
     panels = "".join(
-        f'<figure class="plan-panel"><div class="plan-stage">{arrow(i, -1)}<div class="plan-sheet zoom">'
+        f'<figure class="plan-panel"><div class="plan-stage">{arrow(i, -1)}'
+        f'<img class="plan-north" src="{base}assets/img/{project}/north.png" width="243" height="253" alt="North arrow">'
+        f'<div class="plan-sheet zoom">'
         f'{img(project, n, f"{label} floor plan", base, sizes_attr="(min-width: 1100px) 1000px, 100vw")}</div>{arrow(i, 1)}</div>'
         f'<figcaption><strong>{e(label)}</strong><ul>{"".join(f"<li>{e(x)}</li>" for x in items)}</ul></figcaption></figure>'
         for i, (n, label, items) in enumerate(plans))
