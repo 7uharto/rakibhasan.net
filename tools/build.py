@@ -295,8 +295,10 @@ def project(i, p):
             callout_figure(slug, n, cap, base, callouts[n]) if n in callouts else
             f'<figure class="zoom">{img(slug, n, cap, base, sizes_attr="(min-width: 1400px) 1400px, 100vw")}'
             f"<figcaption>{e(cap)}</figcaption></figure>" for n, cap in s.get("images", []))
+        if s.get("pair"):  # two drawings side by side (one column on phones)
+            figs = f'<div class="fig-pair">{figs}</div>'
         if s.get("sketches"):
-            figs += sketch_grid(slug, s["sketches"], base)
+            figs +=sketch_grid(slug, s["sketches"], base)
         if s.get("zones"):
             figs += zones_figure(slug, s["zones"], base)
         if s.get("steps"):

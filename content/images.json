@@ -250,5 +250,13 @@
  "bridge1400/plan-level-12-13": {
   "w": 2244,
   "h": 2600
+ },
+ "bridge1400/structure-nw": {
+  "w": 2083,
+  "h": 2521
+ },
+ "bridge1400/structure-se": {
+  "w": 2089,
+  "h": 2633
  }
 }

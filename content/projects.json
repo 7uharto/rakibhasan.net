@@ -15,7 +15,7 @@
       "Bridge1400 sits on the threshold between Seattle's mercantile downtown and its waterfront. Instead of smoothing over that break, the project makes it spatial: a tall void cuts through the podium as a civic canyon linking Alaskan Way to Western Avenue.",
       "A grand stair works as both passage and pause, and a slow ramp climbs past planted terraces with filtered views of Elliott Bay. Above the four-level retail and lobby podium, a mass timber hotel tower frames the water to the northwest and the city to the southeast."
     ],
-    "facts": [["Levels", "13"], ["Structure", "Mass timber tower over podium"], ["Program", "Retail, hotel lobby, restaurants, pool, 9 guest-room levels"]],
+    "facts": [["Levels", "13"], ["Structure", "Glulam and CLT tower on a concrete podium"], ["Program", "Retail, hotel lobby, restaurants, pool, 9 guest-room levels"]],
     "sections": [
       {"heading": "Site", "text": "Between Pike Place Market and the waterfront promenade, the site takes its cues from both: vertical density to the east, openness and movement to the west.", "images": [["site", "Site context: downtown Seattle and Elliott Bay"]],
         "callouts": {"site": [
@@ -56,7 +56,7 @@
           ["massing-7.svg", "Central atrium", "A mid-block cut brings light into the podium core, and a cut on the east face opens a retail entry toward Alaskan Way."],
           ["massing-8.svg", "Experiential ramp", "A gently sloped internal ramp links Level 4 and Level 5 as a promenade with waterfront views."]
         ]},
-      {"heading": "Mass timber", "text": "Above the four-level podium, the hotel tower is built in mass timber. Exposed wood gives the guest rooms warmth and quiet, carries the project's biophilic approach, and echoes the timber and glass of the working waterfront. Timber also stores carbon instead of emitting it, which the design study estimates below.", "stats": [["~0.9 t", "CO2 stored per m3 of CLT"], ["7.5 ft3", "Structural timber per ft2 of floor"], ["~5,000 US tons", "CO2 stored in the tower (estimate)"]], "note": "CLT storage rate from WoodWorks and the U.S. Forest Service, as cited in the design study."},
+      {"heading": "Mass timber", "images": [["structure-nw", "Structural axonometric from the northwest"], ["structure-se", "Structural axonometric from the southeast"]], "pair": true, "text": "The four-level podium is concrete. Above it, the hotel tower is built in mass timber: glulam columns and beams carry CLT floors, arranged around concrete cores. Exposed wood gives the guest rooms warmth and quiet, carries the project's biophilic approach, and echoes the timber and glass of the working waterfront. Timber also stores carbon instead of emitting it, which the design study estimates below.", "stats": [["~0.9 t", "CO2 stored per m3 of CLT"], ["7.5 ft3", "Structural timber per ft2 of floor"], ["~5,000 US tons", "CO2 stored in the tower (estimate)"]], "note": "CLT storage rate from WoodWorks and the U.S. Forest Service, as cited in the design study."},
       {"heading": "Plans", "text": "Retail activates the first two levels. The hotel lobby, restaurants and an infinity pool fill the podium, and guest rooms stack above with terraces and a sky lounge.", "images": [],
         "plans": [
           ["plan-level-1", "Level 1", ["Retail shops", "Service area"]],

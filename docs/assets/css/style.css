@@ -202,6 +202,10 @@ figcaption { font-size: .85rem; color: var(--ink-2); margin-top: .6rem; }
     margin-right: .5rem; border-radius: 50%; background: var(--ink); color: var(--bg); font-size: .72rem; font-weight: 600; }
 }
 
+/* Two drawings side by side (BRIDGE1400 structural axons) */
+.fig-pair { width: 100%; display: grid; gap: 2rem; grid-template-columns: minmax(0, 1fr); }
+@media (min-width: 700px) { .fig-pair { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+
 /* Floor plans: level tabs (radio + label, no JS), one plan at a time on a white sheet, program list beside it */
 .plan-viewer { width: 100%; }
 .plan-radio { position: absolute; opacity: 0; pointer-events: none; }

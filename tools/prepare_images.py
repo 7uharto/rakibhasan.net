@@ -43,6 +43,8 @@ IMAGES = {
         ("sketch-elevation", os.path.join(SKETCHES, "elevation_1.png")),
         ("concept-section", os.path.join(SKETCHES, "Conceptual Section_1.png")),
         *[(f"plan-level-{lv}", os.path.join(PLANS, f"level-{lv}.png")) for lv in ("1", "2", "3", "4", "5", "6-9", "10", "12-13")],
+        ("structure-nw", os.path.join(ROOT, "docs", "assets", "img", "bridge1400", "Original", "Structural Axon", "Structural Axon NW.pdf")),
+        ("structure-se", os.path.join(ROOT, "docs", "assets", "img", "bridge1400", "Original", "Structural Axon", "Structural Axon SE.pdf")),
         ("section-aa", "pdf:7"),
         ("section-bb", "pdf:8"),
     ],
@@ -137,6 +139,13 @@ def load(src, doc):
         zoom = 3200 / page.rect.width
         pix = page.get_pixmap(matrix=pymupdf.Matrix(zoom, zoom))
         return Image.frombytes("RGB", (pix.width, pix.height), pix.samples)
+    if src.lower().endswith(".pdf"):  # single-drawing PDF export (Revit): render, trim the white margins
+        page = pymupdf.open(src)[0]
+        zoom = 2400 / page.rect.width
+        pix = page.get_pixmap(matrix=pymupdf.Matrix(zoom, zoom))
+        im = Image.frombytes("RGB", (pix.width, pix.height), pix.samples)
+        ink = im.convert("L").point(lambda v: 255 if v < 245 else 0).getbbox()
+        return im.crop((max(ink[0] - 40, 0), max(ink[1] - 40, 0), min(ink[2] + 40, im.width), min(ink[3] + 40, im.height)))
     if os.path.basename(src) in INK_TO_ALPHA:
         gray = Image.open(src).convert("L")  # white paper -> 0 alpha, black ink -> full alpha
         alpha = Image.eval(gray, lambda v: 0 if v > 245 else min(255, round((255 - v) * 1.15)))
