@@ -72,17 +72,17 @@
           ["plan-level-12-13", "Levels 12 and 13", ["Guest rooms", "Hotel service", "Lounge"]]
         ]},
       {"heading": "Sections", "text": "Double-height retail glazing, a restaurant stair through a central void, and the pool-to-bar ramp are read together in section.", "images": [["section-aa", "Section AA"]],
-        "callouts": {"section-aa": {"items": [
-          {"label": "Hotel rooms", "note": "Framed toward views, daylight and quiet", "x": 25.0, "y": 20.5},
-          {"label": "Drinks bar", "note": "Social anchor with water and city views", "x": 59.2, "y": 20.6},
-          {"label": "Retail street edge", "note": "Double-height storefronts draw people in", "x": 92.0, "y": 69.6},
-          {"label": "Retail glazing", "note": "Double-height, dual-glazed storefront", "x": 3.97, "y": 61.7},
-          {"label": "Outdoor restaurant", "note": "Draws people in from Union St and Western Ave", "x": 8.25, "y": 50.8},
-          {"label": "Fitness center", "note": "Daylight and open views", "x": 20.2, "y": 32.2},
-          {"label": "Elevator pit", "note": "8 ft deep for mechanical clearance", "x": 44.5, "y": 84.8},
-          {"label": "Restaurant stair", "note": "Rises through a central void", "x": 70.4, "y": 44.5},
-          {"label": "Pool-to-bar ramp", "note": "Links the Level 4 pool and Level 5 bar", "x": 73.4, "y": 32.5},
-          {"label": "Cafe kitchen", "note": "Back-of-house beside the cafe", "x": 88.8, "y": 51.3}
+        "callouts": {"section-aa": {"sides": [17.5, 82.5], "items": [
+          {"label": "Hotel rooms", "note": "Framed toward views, daylight and quiet", "x": 35.0, "y": 20.4},
+          {"label": "Drinks bar", "note": "Social anchor with water and city views", "x": 59.0, "y": 22.2},
+          {"label": "Retail street edge", "note": "Double-height storefronts draw people in", "x": 75.0, "y": 56.8},
+          {"label": "Retail glazing", "note": "Double-height, dual-glazed storefront", "x": 20.0, "y": 57.7},
+          {"label": "Outdoor restaurant", "note": "Draws people in from Union St and Western Ave", "x": 22.0, "y": 48.0},
+          {"label": "Fitness center", "note": "Daylight and open views", "x": 30.0, "y": 32.0},
+          {"label": "Elevator pit", "note": "8 ft deep for mechanical clearance", "x": 47.25, "y": 76.4},
+          {"label": "Restaurant stair", "note": "Rises through a central void", "x": 63.5, "y": 40.0},
+          {"label": "Pool-to-bar ramp", "note": "Links the Level 4 pool and Level 5 bar", "x": 62.5, "y": 32.9},
+          {"label": "Cafe kitchen", "note": "Back-of-house beside the cafe", "x": 77.0, "y": 46.2}
         ]}}},
       {"heading": "Performance", "text": "The design study sizes renewable energy and water systems for the building. Rooftop and facade PV cover part of the annual electricity use, and low-flow fixtures, greywater reuse and rainwater harvesting cut potable water demand.", "images": [],
         "stats": [["212 MWh (15%)", "Solar electricity per year, of 1,400 MWh used"], ["150 kW", "Rooftop and facade PV system"], ["~$23K per year", "Electricity cost saved by the PV"], ["$150K", "PV cost before incentives, about 6.5-year payback"], ["~$8K per year", "Water cost saved"], ["~$6.2M", "Social cost of the carbon stored in the CLT"], ["740K gal (33%)", "Water managed sustainably per year, of 2.3M gal used"], ["Up to 1.15M gal", "Saved by low-flow fixtures (30 to 50% of use)"], ["920K to 1.15M gal", "Recoverable greywater (40 to 50% of use)"], ["~237K gal", "Rainwater collected per year"], ["~33,000 t", "CO2 stored in the CLT structure"], ["~4,500 t", "CO2 emitted by a concrete (RCC) structure"], ["~7,200 cars", "Off the road for a year, equivalent carbon"]],

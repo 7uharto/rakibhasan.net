@@ -45,7 +45,7 @@ IMAGES = {
         *[(f"plan-level-{lv}", os.path.join(PLANS, f"level-{lv}.png")) for lv in ("1", "2", "3", "4", "5", "6-9", "10", "12-13")],
         ("structure-nw", os.path.join(ROOT, "docs", "assets", "img", "bridge1400", "Original", "Structural Axon", "Structural Axon NW.pdf")),
         ("structure-se", os.path.join(ROOT, "docs", "assets", "img", "bridge1400", "Original", "Structural Axon", "Structural Axon SE.pdf")),
-        ("section-aa", os.path.join(ROOT, "docs", "assets", "img", "bridge1400", "Original", "Sections", "section-aa.png")),
+        ("section-aa", os.path.join(ROOT, "docs", "assets", "img", "bridge1400", "Original", "Sections", "section-aa v1.0.png")),
         ("section-bb", os.path.join(ROOT, "docs", "assets", "img", "bridge1400", "Original", "Sections", "section-bb.png")),
         ("lobby-blowup", os.path.join(ROOT, "docs", "assets", "img", "bridge1400", "Original", "Sections", "lobby-blowup.png")),
     ],
