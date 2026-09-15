@@ -42,8 +42,8 @@
           "bands": [["Western edge", "Tourism"], ["Eastern zone", "Commercial"]],
           "clips": ["Western edge: the waterfront promenade", "Eastern zone: downtown towers"],
           "cards": [
-            {"tag": "Western edge · Tourism", "title": "Waterfront culture", "text": "Ferries, piers, seafood markets and public promenades give the waterfront a culture of openness and flow. The building's glass and timber echo its marine and industrial traditions."},
-            {"tag": "Eastern zone · Commercial", "title": "Urban density", "text": "Downtown's verticality and program intensity shape the eastern edge: functions stack vertically, while back-of-house services and circulation stay discreet."},
+            {"title": "Waterfront culture", "text": "Ferries, piers, seafood markets and public promenades give the waterfront a culture of openness and flow. The building's glass and timber echo its marine and industrial traditions."},
+            {"title": "Urban density", "text": "Downtown's verticality and program intensity shape the eastern edge: functions stack vertically, while back-of-house services and circulation stay discreet."},
             {"title": "Hotel spaces", "text": "The tower is a retreat above the city with panoramic views of Elliott Bay. Its mass timber structure brings warmth and quiet to the rooms."},
             {"title": "Retail spaces", "text": "At street level, transparent frontage, varied tenant spaces and several entries make the podium the building's public interface."}
           ]
@@ -71,7 +71,7 @@
           ["plan-level-10", "Level 10", ["Guest rooms", "Hotel service", "Green terrace BBQ"]],
           ["plan-level-12-13", "Levels 12 and 13", ["Guest rooms", "Hotel service", "Lounge"]]
         ]},
-      {"heading": "Sections", "text": "Double-height retail glazing, a restaurant stair through a central void, and the pool-to-bar ramp are read together in section. Section BB runs from the waterfront up through the tower, with a blow-up of the lobby's stair and dining levels.", "images": [["section-aa", "Section AA"], ["section-bb", "Section BB, from the waterfront to the tower"], ["lobby-blowup", "Lobby blow-up"]], "pair": 1,
+      {"heading": "Sections", "text": "Double-height retail glazing, a restaurant stair through a central void, and the pool-to-bar ramp are read together in section.", "images": [["section-aa", "Section AA"]],
         "callouts": {"section-aa": {"items": [
           {"label": "Hotel rooms", "note": "Framed toward views, daylight and quiet", "x": 25.0, "y": 20.5},
           {"label": "Drinks bar", "note": "Social anchor with water and city views", "x": 59.2, "y": 20.6},
@@ -83,9 +83,6 @@
           {"label": "Restaurant stair", "note": "Rises through a central void", "x": 70.4, "y": 44.5},
           {"label": "Pool-to-bar ramp", "note": "Links the Level 4 pool and Level 5 bar", "x": 73.4, "y": 32.5},
           {"label": "Cafe kitchen", "note": "Back-of-house beside the cafe", "x": 88.8, "y": 51.3}
-        ]},
-        "section-bb": {"sheet": true, "items": [
-          {"label": "Lobby blow-up", "note": "Shown in the detail drawing", "x": 64.1, "y": 52.8}
         ]}}},
       {"heading": "Performance", "text": "The design study sizes renewable energy and water systems for the building. Rooftop and facade PV cover part of the annual electricity use, and low-flow fixtures, greywater reuse and rainwater harvesting cut potable water demand.", "images": [],
         "stats": [["212 MWh (15%)", "Solar electricity per year, of 1,400 MWh used"], ["150 kW", "Rooftop and facade PV system"], ["~$23K per year", "Electricity cost saved by the PV"], ["$150K", "PV cost before incentives, about 6.5-year payback"], ["~$8K per year", "Water cost saved"], ["~$6.2M", "Social cost of the carbon stored in the CLT"], ["740K gal (33%)", "Water managed sustainably per year, of 2.3M gal used"], ["Up to 1.15M gal", "Saved by low-flow fixtures (30 to 50% of use)"], ["920K to 1.15M gal", "Recoverable greywater (40 to 50% of use)"], ["~237K gal", "Rainwater collected per year"], ["~33,000 t", "CO2 stored in the CLT structure"], ["~4,500 t", "CO2 emitted by a concrete (RCC) structure"], ["~7,200 cars", "Off the road for a year, equivalent carbon"]],
