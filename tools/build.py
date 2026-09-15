@@ -427,6 +427,114 @@ def plan_viewer(project, plans, base):
             f'<div class="plan-panels">{panels}</div></div>')
 
 
+def perf_dashboard(d):
+    """Performance dashboard: Energy / Water / Carbon tabs (radio + CSS, works without JS).
+
+    All values are computed here from the design-study inputs in content/projects.json, so the page reads correctly
+    with no JS. main.js adds count-up numbers, the grid-price slider and the water strategy buttons.
+    """
+    en, wa, ca = d["energy"], d["water"], d["carbon"]
+    pv_kwh = en["pv_kw"] * en["yield"]
+    share = pv_kwh / (en["use_mwh"] * 1000) * 100
+    save = pv_kwh * en["price"]
+    payback = en["cost"] / save
+    bill = en["use_mwh"] * 1000 * en["price"]
+
+    def k(v):  # $23K, $1.2M
+        return f"${v / 1e6:.1f}M" if v >= 1e6 else f"${v / 1e3:.0f}K"
+
+    def gal(v):
+        return f"{v / 1e6:.2f}".rstrip("0").rstrip(".") + "M" if v >= 1e6 else f"{v / 1e3:.0f}K"
+
+    tabs = [("energy", "Energy"), ("water", "Water"), ("carbon", "Carbon")]
+    radios = "".join(f'<input class="perf-radio" type="radio" name="perf" id="perf-{t}"{" checked" if i == 0 else ""}>'
+                     for i, (t, _) in enumerate(tabs))
+    labels = "".join(f'<label for="perf-{t}"><span>0{i + 1}</span>{n}</label>' for i, (t, n) in enumerate(tabs))
+
+    energy = (
+        f'<div class="perf-panel perf-energy">'
+        f'<div class="perf-ring" style="--p:{share:.1f}"><svg viewBox="0 0 120 120" aria-hidden="true">'
+        f'<circle class="perf-ring-track" cx="60" cy="60" r="52" pathLength="100"/>'
+        f'<circle class="perf-ring-bar" cx="60" cy="60" r="52" pathLength="100"/></svg>'
+        f'<div class="perf-ring-c"><strong data-count="{pv_kwh / 1000:.0f}">{pv_kwh / 1000:.0f}</strong><span>MWh of solar per year</span>'
+        f'<em>{share:.0f}% of the {en["use_mwh"]:,} MWh the building uses</em></div></div>'
+        f'<div class="perf-sim" data-pv="{pv_kwh}" data-cost="{en["cost"]}" data-use="{en["use_mwh"] * 1000}">'
+        f'<p class="perf-k">Try it: grid electricity price</p>'
+        f'<div class="perf-price"><output data-o="price">{en["price"] * 100:.1f}¢</output><span>per kWh</span></div>'
+        f'<input type="range" min="8" max="16" step="0.5" value="{en["price"] * 100:g}" aria-label="Grid electricity price in cents per kWh">'
+        f'<div class="perf-scale" aria-hidden="true"><span>8¢</span><span>12¢</span><span>16¢</span></div>'
+        f'<dl class="perf-live">'
+        f'<div><dt>PV saves</dt><dd data-o="save">{k(save)}</dd><small>per year</small></div>'
+        f'<div><dt>Payback</dt><dd><span data-o="payback">{payback:.1f}</span> yr</dd><small>on {k(en["cost"])} of PV</small></div>'
+        f'<div><dt>Electricity bill</dt><dd data-o="bill">{k(bill)}</dd><small>per year, before PV</small></div></dl>'
+        f'<div class="perf-meter" aria-hidden="true"><i data-o="meter" style="--w:{min(payback / 15, 1) * 100:.1f}%"></i></div>'
+        f'<p class="perf-foot">{en["pv_kw"]} kW rooftop and facade PV · {en["yield"]:,} kWh per kW per year</p></div></div>')
+
+    strat = [("Managed today", wa["managed"], wa["managed"])] + [tuple(x) for x in wa["strategies"]]
+    buttons = "".join(
+        f'<button type="button" data-lo="{lo / wa["total"] * 100:.1f}" data-hi="{hi / wa["total"] * 100:.1f}" '
+        f'data-text="{gal(lo) if lo == hi else gal(lo) + " to " + gal(hi)} gal" aria-pressed="{"true" if i == 0 else "false"}">{e(n)}</button>'
+        for i, (n, lo, hi) in enumerate(strat))
+    m = wa["managed"] / wa["total"] * 100
+    water = (
+        f'<div class="perf-panel perf-water">'
+        f'<div class="perf-big"><strong data-count="{wa["total"] / 1e6:.1f}" data-dec="1">{wa["total"] / 1e6:.1f}</strong><span>M gal</span>'
+        f'<p>Potable water used per year</p></div>'
+        f'<div class="perf-water-tool"><div class="perf-chips" role="group" aria-label="Water strategy">{buttons}</div>'
+        f'<div class="perf-bar" style="--lo:{m:.1f}%;--hi:{m:.1f}%"><i class="lo"></i><i class="hi"></i></div>'
+        f'<div class="perf-bar-read"><strong data-o="water">{gal(wa["managed"])} gal</strong><span>of {gal(wa["total"])} gal per year</span></div>'
+        f'<div class="perf-mini"><div><strong data-count="{m:.0f}">{m:.0f}</strong><span>%</span><p>managed sustainably</p></div>'
+        f'<div><strong>~{k(wa["saved_usd"])}</strong><p>water cost saved per year</p></div></div>'
+        f'<p class="perf-foot">Strategies overlap, so they are not added together. Hatched: the study’s range.</p></div></div>')
+
+    ratio = ca["stored"] / ca["emitted"]
+    cars = ca["stored"] / ca["per_car"]
+    dots = round(cars / 100)
+    carbon = (
+        f'<div class="perf-panel perf-carbon">'
+        f'<div class="perf-balance">'
+        f'<div class="perf-row"><p><strong data-count="{ca["stored"]}">{ca["stored"]:,}</strong> t CO<sub>2</sub></p>'
+        f'<div class="perf-row-bar store" style="--w:100%"></div><span>stored in the CLT structure</span></div>'
+        f'<div class="perf-row"><p><strong data-count="{ca["emitted"]}">{ca["emitted"]:,}</strong> t CO<sub>2</sub></p>'
+        f'<div class="perf-row-bar emit" style="--w:{ca["emitted"] / ca["stored"] * 100:.1f}%"></div><span>emitted by a concrete (RCC) structure</span></div>'
+        f'<div class="perf-ratio"><strong data-count="{ratio:.1f}" data-dec="1">{ratio:.1f}</strong><span>×</span><p>more carbon stored in timber than concrete would emit</p></div></div>'
+        f'<div class="perf-cars"><div class="perf-dots" aria-hidden="true" style="--n:{dots}">{"<i></i>" * dots}</div>'
+        f'<p><strong>~<span data-count="{round(cars, -2):.0f}">{round(cars, -2):,.0f}</span></strong> cars off the road for a year</p>'
+        f'<p class="perf-foot">Each dot is 100 cars ({ca["per_car"]} t CO<sub>2</sub> per car per year, EPA). '
+        f'Social cost of the stored carbon: ~{k(ca["value_usd"])}.</p></div></div>')
+
+    return (f'<div class="perf">{radios}<div class="perf-tabs" role="tablist">{labels}</div>'
+            f'<div class="perf-panels">{energy}{water}{carbon}</div></div>')
+
+
+def timber_panel(t):
+    """Mass timber carbon, in the Performance dashboard style: stored-carbon count-up plus a floor-area slider
+    (timber volume = area x ft3 per ft2; CO2 = volume x t per m3 / 35.3). Defaults reproduce the study's figure."""
+    per_ft3 = t["t_per_m3"] / 35.3
+    vol = t["area_ft2"] * t["ft3_per_ft2"]
+    co2 = vol * per_ft3
+    cars = co2 / t["per_car"]
+    return (
+        f'<div class="perf perf-solo"><div class="perf-panel perf-timber">'
+        f'<div class="perf-big"><p class="perf-k">Carbon stored in the CLT</p>'
+        f'<strong data-count="{round(co2, -3):.0f}">{round(co2, -3):,.0f}</strong><span>t CO<sub>2</sub></span>'
+        f'<p>metric tons, design-study estimate</p>'
+        f'<div class="perf-mini"><div><strong>{t["t_per_m3"]} t</strong><p>CO<sub>2</sub> stored per m³ of CLT</p></div>'
+        f'<div><strong>{t["ft3_per_ft2"]} ft³</strong><p>structural timber per ft² of floor</p></div></div></div>'
+        f'<div class="perf-sim perf-timber-sim" data-rate="{per_ft3:.6f}" data-ft3="{t["ft3_per_ft2"]}" data-car="{t["per_car"]}">'
+        f'<p class="perf-k">Try it: timber floor area</p>'
+        f'<div class="perf-price"><output data-o="area">{t["area_ft2"]:,}</output><span>ft² of floor</span></div>'
+        f'<input type="range" min="25000" max="300000" step="1000" value="{t["area_ft2"]}" aria-label="Timber floor area in square feet">'
+        f'<div class="perf-scale" aria-hidden="true"><span>25K</span><span>Bridge1400 ≈ 173K</span><span>300K</span></div>'
+        f'<dl class="perf-live">'
+        f'<div><dt>Timber</dt><dd data-o="vol">{vol / 1e6:.2f}M</dd><small>ft³ of CLT and glulam</small></div>'
+        f'<div><dt>CO<sub>2</sub> stored</dt><dd data-o="co2">{co2:,.0f}</dd><small>metric tons</small></div>'
+        f'<div><dt>Cars</dt><dd data-o="cars">{cars:,.0f}</dd><small>off the road for a year</small></div></dl>'
+        f'<div class="perf-meter" aria-hidden="true"><i data-o="meter" style="--w:{min(co2 / 60000, 1) * 100:.1f}%"></i></div>'
+        f'<p class="perf-foot">Rates from WoodWorks and the U.S. Forest Service; {t["per_car"]} t CO<sub>2</sub> per car per year (EPA).</p>'
+        f'</div></div></div>')
+
+
 def project(i, p):
     base = "../../"
     slug = p["slug"]
@@ -454,7 +562,11 @@ def project(i, p):
         if s.get("plans"):
             figs += plan_viewer(slug, s["plans"], base)
         text = f"<p>{e(s['text'])}</p>" if s["text"] else ""
-        if s.get("stats"):
+        if s.get("dashboard"):
+            figs += perf_dashboard(s["dashboard"])
+        if s.get("timber"):
+            figs += timber_panel(s["timber"])
+        if s.get("stats") and not (s.get("dashboard") or s.get("timber")):
             text += '<div class="facts">' + "".join(
                 f'<div class="fact"><span>{e(k)}</span><strong>{e(v)}</strong></div>' for v, k in s["stats"]) + "</div>"
         if s.get("note"):

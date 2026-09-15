@@ -70,6 +70,79 @@
     }).observe(video);
   });
 
+  // Performance dashboard: count-up numbers per tab, grid-price slider, water strategy buttons.
+  document.querySelectorAll(".perf").forEach(function (perf) {
+    var reduce = matchMedia("(prefers-reduced-motion: reduce)").matches;
+    var fmt = function (v, dec) { return dec ? v.toFixed(dec) : Math.round(v).toLocaleString("en-US"); };
+    function run(panel) {
+      if (!panel) return;
+      panel.classList.remove("perf-animate"); void panel.offsetWidth; panel.classList.add("perf-animate");
+      panel.querySelectorAll(".perf-dots i").forEach(function (d, i) { d.style.setProperty("--i", i); });
+      var ring = panel.querySelector(".perf-ring");
+      if (ring && !reduce) { var p = ring.style.getPropertyValue("--p"); ring.style.setProperty("--p", 0); requestAnimationFrame(function () { requestAnimationFrame(function () { ring.style.setProperty("--p", p); }); }); }
+      panel.querySelectorAll("[data-count]").forEach(function (el) {
+        var end = parseFloat(el.dataset.count), dec = parseInt(el.dataset.dec || "0", 10);
+        if (reduce) { el.textContent = fmt(end, dec); return; }
+        var t0 = null;
+        (function step(t) {
+          t0 = t0 || t; var k = Math.min((t - t0) / 1400, 1), ease = 1 - Math.pow(1 - k, 4);
+          el.textContent = fmt(end * ease, dec);
+          if (k < 1) requestAnimationFrame(step);
+        })(performance.now());
+      });
+    }
+    var current = function () {
+      var r = perf.querySelector(".perf-radio:checked");
+      return r ? perf.querySelector(".perf-" + r.id.slice(5)) : perf.querySelector(".perf-panel");  // no tabs: the only panel
+    };
+
+    var tsim = perf.querySelector(".perf-timber-sim");
+    if (tsim) {
+      var trange = tsim.querySelector("input[type=range]"), tout = function (n) { return tsim.querySelector('[data-o="' + n + '"]'); };
+      var tupdate = function () {
+        var area = +trange.value, vol = area * +tsim.dataset.ft3, co2 = vol * +tsim.dataset.rate;
+        trange.style.setProperty("--fill", ((area - trange.min) / (trange.max - trange.min) * 100) + "%");
+        tout("area").textContent = area.toLocaleString("en-US");
+        tout("vol").textContent = (vol / 1e6).toFixed(2) + "M";
+        tout("co2").textContent = Math.round(co2).toLocaleString("en-US");
+        tout("cars").textContent = Math.round(co2 / +tsim.dataset.car).toLocaleString("en-US");
+        tout("meter").style.setProperty("--w", Math.min(co2 / 60000, 1) * 100 + "%");
+      };
+      trange.addEventListener("input", tupdate); tupdate();
+    }
+    perf.querySelectorAll(".perf-radio").forEach(function (r) { r.addEventListener("change", function () { run(current()); }); });
+    if ("IntersectionObserver" in window) {
+      var seen = new IntersectionObserver(function (en) { if (en[0].isIntersecting) { run(current()); seen.disconnect(); } }, { threshold: 0.3 });
+      seen.observe(perf);
+    }
+
+    var sim = perf.querySelector(".perf-sim:not(.perf-timber-sim)");
+    if (sim) {
+      var range = sim.querySelector("input[type=range]"), out = function (n) { return sim.querySelector('[data-o="' + n + '"]'); };
+      var money = function (v) { return v >= 1e6 ? "$" + (v / 1e6).toFixed(1) + "M" : "$" + Math.round(v / 1e3) + "K"; };
+      var update = function () {
+        var c = parseFloat(range.value), pv = +sim.dataset.pv, save = pv * c / 100, pay = +sim.dataset.cost / save;
+        range.style.setProperty("--fill", ((c - range.min) / (range.max - range.min) * 100) + "%");
+        out("price").textContent = c.toFixed(1) + "¢";
+        out("save").textContent = money(save);
+        out("payback").textContent = pay.toFixed(1);
+        out("bill").textContent = money(+sim.dataset.use * c / 100);
+        out("meter").style.setProperty("--w", Math.min(pay / 15, 1) * 100 + "%");
+      };
+      range.addEventListener("input", update); update();
+    }
+
+    var water = perf.querySelector(".perf-water-tool");
+    if (water) water.querySelectorAll(".perf-chips button").forEach(function (b) {
+      b.addEventListener("click", function () {
+        water.querySelectorAll(".perf-chips button").forEach(function (x) { x.setAttribute("aria-pressed", String(x === b)); });
+        var bar = water.querySelector(".perf-bar");
+        bar.style.setProperty("--lo", b.dataset.lo + "%"); bar.style.setProperty("--hi", b.dataset.hi + "%");
+        water.querySelector('[data-o="water"]').textContent = b.dataset.text;
+      });
+    });
+  });
+
   var bar = document.querySelector(".bar");
   addEventListener("scroll", function () {
     bar.classList.toggle("scrolled", scrollY > 8);

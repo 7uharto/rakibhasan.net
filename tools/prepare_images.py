@@ -128,6 +128,20 @@ def decontaminate(im, radius=12):
     return Image.fromarray(np.clip(out, 0, 255).astype(np.uint8), "RGBA")
 
 
+def plan_to_alpha(im, green_opacity=0.55):
+    """Floor plan on white -> see-through: white becomes transparent and every other colour keeps its look over a
+    light page (colour-to-alpha against white). Green fills (planting) are made more see-through still."""
+    c = np.asarray(im, dtype=np.float32) / 255
+    a = np.clip((1 - c).max(axis=2), 0, 1)
+    safe = np.where(a > 0, a, 1)[..., None]
+    rgb = np.clip((c - (1 - a[..., None])) / safe, 0, 1)
+    r, g, b = c[..., 0], c[..., 1], c[..., 2]
+    green = (g > r + 0.02) & (g > b + 0.02)
+    a = np.where(green, a * green_opacity, a)
+    out = np.dstack([rgb, a[..., None]]) * 255
+    return Image.fromarray(np.round(out).astype(np.uint8), "RGBA")
+
+
 def load(src, doc):
     if src.startswith("pdf:"):
         page = doc[int(src[4:]) - 1]
@@ -155,6 +169,8 @@ def load(src, doc):
         im = Image.new("RGBA", gray.size, (22, 21, 19, 255))  # --ink colour; dark mode inverts it in CSS
         im.putalpha(alpha)
         return im.crop(alpha.getbbox())
+    if os.path.dirname(src) == PLANS:
+        return plan_to_alpha(Image.open(src).convert("RGB"))
     im = Image.open(src if os.path.isabs(src) else os.path.join(LINKS, src))  # absolute = file outside Links
     if im.mode in ("RGBA", "LA", "P"):
         im = im.convert("RGBA")
