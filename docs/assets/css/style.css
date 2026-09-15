@@ -306,6 +306,48 @@ figcaption { font-size: .85rem; color: var(--ink-2); margin-top: .6rem; }
   border-top: 1px solid var(--line); padding-top: .6rem; font-size: .78rem; letter-spacing: .08em; text-transform: uppercase; color: var(--ink-2); }
 .zone-axis strong { font-weight: 500; color: var(--ink); text-align: center; }
 
+/* Concept diagram (slide layout): clip | west cards + band | sketch with the accent stair | east cards + band | clip.
+   Each band sits at the height of its stair end (--y, % of the sketch row) and runs into that end's circle. */
+.concept { width: 100%; display: grid; gap: 1.5rem; }
+.concept video { display: block; width: 100%; height: auto; border-radius: 4px; background: var(--bg-2); }
+.concept-clip { width: min(220px, 60%); margin: 0 auto; }
+.concept-card .zone h3 { font-size: 1.2rem; }
+.concept-card .zone p { font-size: .9rem; line-height: 1.5; }
+.concept-band span { display: block; padding: .7rem 1.1rem; border-radius: 999px; text-align: center; font-size: .78rem; letter-spacing: .1em;
+  text-transform: uppercase; color: var(--ink-2); background: color-mix(in srgb, var(--ink) 12%, var(--bg)); }
+.concept-band strong { font-weight: 600; color: var(--ink); }
+.concept-art { position: relative; width: 100%; aspect-ratio: var(--ar); }
+.concept-art img { position: absolute; inset: 0; width: 100%; height: 100%; }
+.concept-stair { position: absolute; inset: 0; background: var(--accent);
+  -webkit-mask: var(--stair) center / 100% 100% no-repeat; mask: var(--stair) center / 100% 100% no-repeat; }
+.concept-end { position: absolute; width: 16px; height: 16px; margin: -8px 0 0 -8px; border-radius: 50%; background: var(--ink);
+  box-shadow: 0 0 0 3px var(--bg); z-index: 1; }
+.concept-end.west { left: var(--wx); top: var(--wy); }
+.concept-end.east { left: var(--ex); top: var(--ey); }
+.concept-label { margin: .75rem 0 0; text-align: center; font-size: .8rem; letter-spacing: .08em; text-transform: uppercase; color: var(--ink-2); }
+.concept figcaption { text-align: center; }
+@media (min-width: 1000px) {
+  .concept { grid-template-columns: minmax(0, 11fr) minmax(0, 21fr) minmax(0, 36fr) minmax(0, 21fr) minmax(0, 11fr);
+    grid-template-rows: auto auto auto auto; column-gap: 0; row-gap: 1.75rem; align-items: start; }
+  .concept-clip { width: 100%; grid-row: 1 / 4; align-self: center; }
+  .concept-clip.west { grid-column: 1; }
+  .concept-clip.east { grid-column: 5; }
+  .concept-card { padding: 0 1.5rem; }
+  .w-top, .e-top { grid-row: 1; align-self: end; }
+  .w-bottom, .e-bottom { grid-row: 3; }
+  .w-top, .w-bottom { grid-column: 2; text-align: right; }
+  .w-top .zone p, .w-bottom .zone p { margin-left: auto; }
+  .e-top, .e-bottom { grid-column: 4; }
+  .concept-band { grid-row: 2; position: relative; align-self: stretch; }
+  .concept-band.west { grid-column: 2; }
+  .concept-band.east { grid-column: 4; }
+  .concept-band span { position: absolute; top: var(--y); transform: translateY(-50%); left: .75rem; right: -2px; }
+  .concept-band.east span { left: -2px; right: .75rem; }
+  .concept-mid { grid-column: 3; grid-row: 2; position: relative; }
+  .concept-label { position: absolute; left: 0; right: 0; top: 100%; }
+  .concept figcaption { grid-column: 1 / -1; grid-row: 4; }
+}
+
 /* Massing steps: inline SVGs follow the text colour, pastel fills kept */
 .steps { width: 100%; list-style: none; padding: 0; margin: 0; display: grid; gap: 2.75rem 1.5rem; grid-template-columns: repeat(2, minmax(0, 1fr)); }
 @media (min-width: 900px) { .steps { grid-template-columns: repeat(4, minmax(0, 1fr)); } }

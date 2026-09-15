@@ -302,6 +302,8 @@ def zones_figure(project, z, base):
     def card(c):
         tag = f'<p class="zone-tag">{e(c["tag"])}</p>' if c.get("tag") else ""
         return f'<div class="zone">{tag}<h3>{e(c["title"])}</h3><p>{e(c["text"])}</p></div>'
+    if z.get("stair"):
+        return concept_figure(project, z, base, card)
     n, cap = z["image"]
     west, east = z["ends"]
     return (f'<figure class="zones"><div class="zone-row">{"".join(map(card, z["cards"][:2]))}</div>'
@@ -309,6 +311,43 @@ def zones_figure(project, z, base):
             f'<div class="zone-axis"><span>&larr; {e(west)}</span><strong>{e(z["middle"])}</strong><span>{e(east)} &rarr;</span></div>'
             f'<div class="zone-row">{"".join(map(card, z["cards"][2:]))}</div>'
             f"<figcaption>{e(cap)}</figcaption></figure>")
+
+
+def concept_figure(project, z, base, card):
+    """Slide-style concept diagram: looping clips at both edges, zone bands that meet the ends of the stepped stair
+    (the connector, drawn in --accent with an end circle each side), zone cards above and below each band.
+
+    z["stair"]: {"west": [x%, y%], "east": [x%, y%]} = stair end points on the sketch (tools/prepare_concept.py prints them).
+    """
+    (wx, wy), (ex, ey) = z["stair"]["west"], z["stair"]["east"]
+    s = sizes.get(f"{project}/concept-rest", {"w": 1550, "h": 638})
+    v = f"{base}assets/video/{project}"
+    c = z["cards"]  # waterfront culture, urban density, hotel spaces, retail spaces
+
+    def clip(side, alt):
+        return (f'<div class="concept-clip {side}"><video muted loop playsinline autoplay preload="metadata" '
+                f'poster="{v}-{side}-poster.jpg" aria-label="{e(alt)}"><source src="{v}-{side}.mp4" type="video/mp4"></video></div>')
+
+    def band(side, label, y):
+        name, kind = label
+        return f'<div class="concept-band {side}" style="--y:{y:.2f}%"><span><strong>{e(name)}</strong> | {e(kind)}</span></div>'
+
+    stage = (f'<div class="concept-art sketch" style="--ar:{s["w"]}/{s["h"]};--wx:{wx}%;--wy:{wy}%;--ex:{ex}%;--ey:{ey}%;'
+             f'--stair:url({base}assets/img/{project}/concept-stair-1200.webp)">'
+             f'{img(project, "concept-rest", z["image"][1], base, sizes_attr="(min-width: 1100px) 560px, 100vw")}'
+             f'<span class="concept-stair" aria-hidden="true"></span>'
+             f'<span class="concept-end west" aria-hidden="true"></span><span class="concept-end east" aria-hidden="true"></span></div>')
+    return (f'<figure class="concept">'
+            f'{clip("west", z["clips"][0])}'
+            f'<div class="concept-card w-top">{card(c[0])}</div>'
+            f'{band("west", z["bands"][0], wy)}'
+            f'<div class="concept-card w-bottom">{card(c[2])}</div>'
+            f'<div class="concept-mid">{stage}<p class="concept-label">{e(z["middle"])}</p></div>'
+            f'<div class="concept-card e-top">{card(c[1])}</div>'
+            f'{band("east", z["bands"][1], ey)}'
+            f'<div class="concept-card e-bottom">{card(c[3])}</div>'
+            f'{clip("east", z["clips"][1])}'
+            f'<figcaption>{e(z["image"][1])}</figcaption></figure>')
 
 
 def steps_list(project, items):

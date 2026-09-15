@@ -59,6 +59,17 @@
     }
   });
 
+  // Concept-diagram clips (BRIDGE1400): stills for reduced motion, otherwise play only while on screen.
+  document.querySelectorAll(".concept-clip video").forEach(function (video) {
+    if (matchMedia("(prefers-reduced-motion: reduce)").matches) { video.removeAttribute("autoplay"); video.pause(); return; }
+    if (!("IntersectionObserver" in window)) return;
+    new IntersectionObserver(function (entries) {
+      entries.forEach(function (en) {
+        if (en.isIntersecting) { var p = video.play(); if (p && p.catch) p.catch(function () {}); } else video.pause();
+      });
+    }).observe(video);
+  });
+
   var bar = document.querySelector(".bar");
   addEventListener("scroll", function () {
     bar.classList.toggle("scrolled", scrollY > 8);

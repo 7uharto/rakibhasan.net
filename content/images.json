@@ -262,5 +262,13 @@
  "bridge1400/lobby-blowup": {
   "w": 2381,
   "h": 1164
+ },
+ "bridge1400/concept-rest": {
+  "w": 1550,
+  "h": 638
+ },
+ "bridge1400/concept-stair": {
+  "w": 1550,
+  "h": 638
  }
 }

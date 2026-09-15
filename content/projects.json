@@ -38,6 +38,9 @@
           "image": ["concept-section", "Concept section: from the waterfront up to downtown"],
           "ends": ["Waterfront", "Downtown"],
           "middle": "Spatial and experiential continuity",
+          "stair": {"west": [0.13, 97.67], "east": [99.61, 60.49]},
+          "bands": [["Western edge", "Tourism"], ["Eastern zone", "Commercial"]],
+          "clips": ["Western edge: the waterfront promenade", "Eastern zone: downtown towers"],
           "cards": [
             {"tag": "Western edge · Tourism", "title": "Waterfront culture", "text": "Ferries, piers, seafood markets and public promenades give the waterfront a culture of openness and flow. The building's glass and timber echo its marine and industrial traditions."},
             {"tag": "Eastern zone · Commercial", "title": "Urban density", "text": "Downtown's verticality and program intensity shape the eastern edge: functions stack vertically, while back-of-house services and circulation stay discreet."},
