@@ -172,6 +172,10 @@
   document.querySelectorAll(".zoom img").forEach(function (im) {
     im.addEventListener("click", function () {
       big.src = (im.currentSrc || im.src).replace("-1200.webp", "-2400.webp");  // currentSrc is empty until a lazy image has loaded
+      // see-through drawings (plans, sketches, sections) zoom on the page colour with the same dark-mode filter as on the page
+      var drawing = !!im.closest(".plan-sheet, .sketch, .callout-map");
+      box.classList.toggle("drawing", drawing);
+      big.style.filter = drawing ? getComputedStyle(im).filter : "";
       big.alt = im.alt;
       box.hidden = false;
       document.body.style.overflow = "hidden";
