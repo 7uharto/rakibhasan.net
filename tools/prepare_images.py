@@ -19,14 +19,14 @@ OUT = os.path.join(ROOT, "docs", "assets", "img")
 MANIFEST = os.path.join(ROOT, "content", "images.json")
 WIDTHS = (1200, 2400)
 # transparent images to trim to their visible pixels (headshot circle has empty margins)
-CROP_TO_CONTENT = {"Headshot.psd"}
+CROP_TO_CONTENT = {"Headshot.psd", "site-transparent.png"}
 
 # project -> list of (output name, source). Source is a Links filename or "pdf:<page>".
 IMAGES = {
     "about": [("headshot", "Headshot.psd")],
     "bridge1400": [
         ("hero", "F2.jpg"),
-        ("site", "250729 Site Micro.png"),
+        ("site", os.path.join(ROOT, "docs", "assets", "img", "bridge1400", "Original", "Site", "site-transparent.png")),
         ("massing", "pdf:5"),
         ("plans", "pdf:6"),
         ("section-aa", "pdf:7"),
@@ -123,10 +123,10 @@ def load(src, doc):
         zoom = 3200 / page.rect.width
         pix = page.get_pixmap(matrix=pymupdf.Matrix(zoom, zoom))
         return Image.frombytes("RGB", (pix.width, pix.height), pix.samples)
-    im = Image.open(os.path.join(LINKS, src))
+    im = Image.open(src if os.path.isabs(src) else os.path.join(LINKS, src))  # absolute = file outside Links
     if im.mode in ("RGBA", "LA", "P"):
         im = im.convert("RGBA")
-        if src in CROP_TO_CONTENT:
+        if os.path.basename(src) in CROP_TO_CONTENT:
             im = decontaminate(im)
             return im.crop(im.split()[-1].getbbox())  # keep transparency, no white fill
         bg = Image.new("RGB", im.size, "white")

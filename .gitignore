@@ -4,6 +4,8 @@ Documents/
 videos-original/
 # compressed web copies are hosted in the pCloud Public Folder, not in the repo
 videos-web/
+# Rakib's original design files (Illustrator, SVG exports) placed next to the site images; never publish
+docs/assets/img/*/Original/
 .claude/settings.local.json
 __pycache__/
 *.pyc

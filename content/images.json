@@ -3,10 +3,6 @@
   "w": 5504,
   "h": 2752
  },
- "bridge1400/site": {
-  "w": 2086,
-  "h": 2174
- },
  "professional-work/wecon-northdale": {
   "w": 4000,
   "h": 6921
@@ -190,5 +186,9 @@
  "about/headshot": {
   "w": 1908,
   "h": 2167
+ },
+ "bridge1400/site": {
+  "w": 1623,
+  "h": 1689
  }
 }

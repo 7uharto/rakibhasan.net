@@ -24,5 +24,7 @@ for page in glob.glob(os.path.join(SITE, "**", "index.html"), recursive=True):
             missing += 1
             print("MISSING", os.path.relpath(page, SITE), url)
 
-size = sum(os.path.getsize(f) for f in glob.glob(os.path.join(SITE, "**", "*"), recursive=True) if os.path.isfile(f))
+published = [f for f in glob.glob(os.path.join(SITE, "**", "*"), recursive=True)
+             if os.path.isfile(f) and f"{os.sep}Original{os.sep}" not in f]  # Original/ design files are gitignored
+size = sum(os.path.getsize(f) for f in published)
 print(f"checked {checked} links, missing {missing}, site size {size / 1e6:.1f} MB")

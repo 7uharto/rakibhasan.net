@@ -114,7 +114,7 @@ em { font-family: var(--serif); font-style: italic; font-weight: 400; }
 .chapter-figs { display: grid; gap: 2rem; }
 figure { margin: 0; }
 figcaption { font-size: .85rem; color: var(--ink-2); margin-top: .6rem; }
-.zoom img { cursor: zoom-in; border-radius: 4px; background: #fff; }
+.zoom img { cursor: zoom-in; border-radius: 4px; }  /* no white backing: transparent drawings sit on the page colour */
 
 /* Reel hero: silent looping highlight video behind the headline (home + Films page) */
 .reel-hero { position: relative; overflow: hidden; background: #0e0e0d; color: #f4f2ee;
