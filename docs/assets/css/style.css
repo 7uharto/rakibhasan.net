@@ -205,6 +205,13 @@ figcaption { font-size: .85rem; color: var(--ink-2); margin-top: .6rem; }
     margin-right: .5rem; border-radius: 50%; background: var(--ink); color: var(--bg); font-size: .72rem; font-weight: 600; }
 }
 
+/* Worked calculations under a stats block (BRIDGE1400 Performance) */
+.calc { border-top: 1px solid var(--line); padding-top: .75rem; }
+.calc summary { cursor: pointer; font-size: .9rem; font-weight: 500; color: var(--ink); }
+.calc summary:hover { color: var(--accent); }
+.calc ul { margin: .75rem 0 0; padding-left: 1.1rem; display: grid; gap: .45rem; }
+.calc li { font-size: .88rem; line-height: 1.5; color: var(--ink-2); max-width: 70ch; }
+
 /* Two drawings side by side (BRIDGE1400 structural axons) */
 .fig-pair { width: 100%; display: grid; gap: 2rem; grid-template-columns: minmax(0, 1fr); }
 @media (min-width: 700px) { .fig-pair { grid-template-columns: repeat(2, minmax(0, 1fr)); } }

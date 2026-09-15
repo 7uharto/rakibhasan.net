@@ -209,15 +209,21 @@ def callout_figure(project, name, cap, base, items):
     items = items["items"] if isinstance(items, dict) else items
     s = sizes.get(f"{project}/{name}", {"w": 1600, "h": 1600})
     w, h = s["w"], s["h"]
-    band = round(w * 0.16)          # label band above the image, in image pixels
-    H = h + band                    # stage height
     items = sorted(items, key=lambda c: c["x"])  # labels left-to-right in target order
-    label_bottom = band * 0.55
+    n = len(items)
+    two_rows = n > 6                             # many labels: alternate two rows so each label can be wider
+    band = round(w * (0.24 if two_rows else 0.16))  # label band above the image, in image pixels
+    H = h + band                                 # stage height
+    rows = (0.42, 0.80) if two_rows else (0.55,)  # label bottom edges, as fractions of the band
+    label_w = min(23, (170 if two_rows else 92) / n)  # max label width, % of stage
     lines, dots, labels, legend = [], [], [], []
     for i, c in enumerate(items):
-        lx = (i + 0.5) / len(items) * 100        # evenly spaced label centres (% width)
+        # evenly spaced label centres (% width), pulled in at the ends so edge labels stay on the stage
+        lx = min(max((i + 0.5) / n * 100, label_w / 2 + 0.5), 100 - label_w / 2 - 0.5)
+        label_bottom = band * rows[i % len(rows)]
         tx, ty = c["x"] / 100 * w, band + c["y"] / 100 * h
-        jog = band * (0.68 + 0.08 * i)           # staggered horizontal runs
+        # staggered horizontal runs, all below the lowest label row and inside the band
+        jog = band * (rows[-1] + 0.04 + (0.93 - rows[-1] - 0.04) * i / max(n - 1, 1))
         lines.append(f'<path vector-effect="non-scaling-stroke" '
                      f'd="M{lx / 100 * w:.1f},{label_bottom:.1f} V{jog:.1f} H{tx:.1f} V{ty:.1f}"/>')
         dots.append(f'<span class="callout-dot" data-n="{i + 1}" style="left:{c["x"]:.2f}%;'
@@ -226,7 +232,7 @@ def callout_figure(project, name, cap, base, items):
                       f'<strong>{e(c["label"])}</strong><small>{e(c["note"])}</small></span>')
         legend.append(f'<li><strong>{e(c["label"])}</strong> {e(c["note"])}</li>')
     style = (f"--ar:{w}/{H};--ar-img:{w}/{h};--img-top:{band / H * 100:.2f}%;--img-h:{h / H * 100:.2f}%;"
-             f"--label-w:{min(23, 92 / len(items)):.1f}%")
+             f"--label-w:{min(23, (170 if two_rows else 92) / n):.1f}%")
     cls = "callout-map" + (" wide" if len(items) > 4 else "") + (" sheet" if sheet else "")
     return (f'<figure class="{cls}"><div class="callout-stage" style="{style}">'
             f'{img(project, name, cap, base, cls="callout-img", sizes_attr="(min-width: 960px) 900px, 100vw")}'
@@ -316,6 +322,9 @@ def project(i, p):
                 f'<div class="fact"><span>{e(k)}</span><strong>{e(v)}</strong></div>' for v, k in s["stats"]) + "</div>"
         if s.get("note"):
             text += f'<p class="small">{e(s["note"])}</p>'
+        if s.get("calc"):  # worked calculations behind the stats, collapsed by default
+            text += ('<details class="calc"><summary>How these were calculated</summary><ul>'
+                     + "".join(f"<li>{e(c)}</li>" for c in s["calc"]) + "</ul></details>")
         parts.append(f'<section class="chapter reveal"><div class="chapter-text"><h2>{e(s["heading"])}</h2>{text}</div>'
                      f'<div class="chapter-figs">{figs}</div></section>')
     if p.get("videos"):

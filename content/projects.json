@@ -70,6 +70,9 @@
         ]},
       {"heading": "Sections", "text": "Double-height retail glazing, a restaurant stair through a central void, and the pool-to-bar ramp are read together in section. Section BB runs from the waterfront up through the tower, with a blow-up of the lobby's stair and dining levels.", "images": [["section-aa", "Section AA"], ["section-bb", "Section BB, from the waterfront to the tower"], ["lobby-blowup", "Lobby blow-up"]],
         "callouts": {"section-aa": {"sheet": true, "items": [
+          {"label": "Hotel rooms", "note": "Framed toward views, daylight and quiet", "x": 25.0, "y": 20.5},
+          {"label": "Drinks bar", "note": "Social anchor with water and city views", "x": 59.2, "y": 20.6},
+          {"label": "Retail street edge", "note": "Double-height storefronts draw people in", "x": 92.0, "y": 69.6},
           {"label": "Retail glazing", "note": "Double-height, dual-glazed storefront", "x": 3.97, "y": 61.7},
           {"label": "Outdoor restaurant", "note": "Draws people in from Union St and Western Ave", "x": 8.25, "y": 50.8},
           {"label": "Fitness center", "note": "Daylight and open views", "x": 20.2, "y": 32.2},
@@ -82,8 +85,22 @@
           {"label": "Lobby blow-up", "note": "Shown in detail below", "x": 64.1, "y": 52.8}
         ]}}},
       {"heading": "Performance", "text": "The design study sizes renewable energy and water systems for the building. Rooftop and facade PV cover part of the annual electricity use, and low-flow fixtures, greywater reuse and rainwater harvesting cut potable water demand.", "images": [],
-        "stats": [["212 MWh (15%)", "Solar electricity per year, of 1,400 MWh used"], ["150 kW", "Rooftop and facade PV system"], ["740K gal (33%)", "Water managed sustainably per year, of 2.3M gal used"], ["~33,000 t", "CO2 stored in the CLT structure"], ["~4,500 t", "CO2 emitted by concrete (RCC)"]],
-        "note": "Estimates from the design study: PV yield about 1,410 kWh per installed kW in Seattle; rainfall 38 in per year."}
+        "stats": [["212 MWh (15%)", "Solar electricity per year, of 1,400 MWh used"], ["150 kW", "Rooftop and facade PV system"], ["~$23K per year", "Electricity cost saved by the PV"], ["$150K", "PV cost before incentives, about 6.5-year payback"], ["~$8K per year", "Water cost saved"], ["~$6.2M", "Social cost of the carbon stored in the CLT"], ["740K gal (33%)", "Water managed sustainably per year, of 2.3M gal used"], ["Up to 1.15M gal", "Saved by low-flow fixtures (30 to 50% of use)"], ["920K to 1.15M gal", "Recoverable greywater (40 to 50% of use)"], ["~237K gal", "Rainwater collected per year"], ["~33,000 t", "CO2 stored in the CLT structure"], ["~4,500 t", "CO2 emitted by a concrete (RCC) structure"], ["~7,200 cars", "Off the road for a year, equivalent carbon"]],
+        "note": "Estimates from the design study: PV yield about 1,410 kWh per installed kW; rainfall 38 in per year. Water strategies overlap, so their savings are not added together. CLT stores about 0.9 t CO2 per m3 (WoodWorks, U.S. Forest Service); car equivalent uses EPA's 4.6 t CO2 per car per year.",
+        "calc": [
+          "Solar output: 150 kW × 1,410 kWh per kW per year = 211,500 kWh ≈ 212 MWh. 212 ÷ 1,400 MWh = 15% of annual use.",
+          "Electricity bill: 1,400,000 kWh × $0.11 per kWh (middle of the 10 to 12¢ grid price) ≈ $154K per year. The study's $105K implies 7.5¢, below its own grid price, so the grid price is used here.",
+          "PV savings: 211,500 kWh × $0.11 ≈ $23K per year.",
+          "PV cost: 150,000 W × $1.00 per W = $150,000 before incentives. Simple payback: $150,000 ÷ $23,000 ≈ 6.5 years.",
+          "Water share: 740K ÷ 2.3M gal ≈ 32%, rounded to 33% in the study.",
+          "Low-flow fixtures: 30 to 50% of 2.3M gal = 690K to 1.15M gal. Greywater: 40 to 50% of 2.3M gal = 920K to 1.15M gal.",
+          "Water cost: the study's $8K saved on 740K gal implies about $10.80 per 1,000 gal, so the full 2.3M gal bill is about $25K per year.",
+          "Rainwater: 38 in of rain per year × 0.623 gal per ft² per inch × about 10,000 ft² of roof ≈ 236,740 gal.",
+          "CLT storage: 0.9 t CO2 per m³ ÷ 35.3 ft³ per m³ ≈ 25 kg per ft³. 33,000 t ÷ 0.0255 t per ft³ ≈ 1.3M ft³ of timber, about 173,000 ft² of floor at 7.5 ft³ per ft².",
+          "Timber vs concrete: 33,000 t stored ÷ 4,500 t emitted ≈ 7.3 times (745% in the study).",
+          "Cars: 33,000 t ÷ 4.6 t CO2 per car per year ≈ 7,200 cars.",
+          "Carbon value: $6.2M ÷ 33,000 t ≈ $188 per tonne, in line with EPA's social cost of carbon (about $190 per tonne)."
+        ]}
     ]
   },
   {
