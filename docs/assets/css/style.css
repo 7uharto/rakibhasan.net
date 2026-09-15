@@ -200,8 +200,20 @@ figcaption { font-size: .85rem; color: var(--ink-2); margin-top: .6rem; }
 .callout-map.wide .callout-label { padding: .3cqw .5cqw; }
 .callout-map.wide .callout-label strong { font-size: 1.07cqw; }
 .callout-map.wide .callout-label small { font-size: .9cqw; }
+/* left: label column beside the image (Site); labels right-aligned to the column, centred on their target's height */
+.callout-map.left { max-width: 770px; }
+.callout-map.left .callout-img { left: var(--img-left); top: 0; width: var(--img-w); height: 100%; }
+.callout-map.left .callout-dot { left: var(--tx); }
+.callout-map.left .callout-label { transform: translate(-100%, -50%); text-align: right; padding: .6cqw 1cqw; }
+.callout-map.left .callout-label strong { font-size: 1.68cqw; }
+.callout-map.left .callout-label small { font-size: 1.45cqw; }
+/* centre the map itself on the page (the label column hangs to its left); caption centred under the map */
+.callout-map.left figcaption { text-align: center; padding-left: 27.3%; }
+@media (min-width: 1100px) { .callout-map.left { transform: translateX(-13.6%); } }
 .callout-legend { display: none; }
 @media (max-width: 700px) {
+  .callout-map.left .callout-img { left: 0; width: 100%; }
+  .callout-map.left .callout-dot { left: var(--tx-img); }
   .callout-stage { aspect-ratio: var(--ar-img); }
   .callout-stage .callout-img { top: 0; height: 100%; }
   .callout-lines, .callout-label { display: none; }

@@ -198,6 +198,37 @@ def home():
     write("index.html", page(f"{site['name']} | {site['title']}", site["tagline"], "", body))
 
 
+def callout_left(project, name, cap, base, items, w, h, sheet):
+    """Labels stacked in a column left of the image, each vertically centred on its target, one horizontal leader."""
+    D_img, D_band = 560, 210                     # design widths in CSS px: image, label column
+    px = w / D_img
+    bw, gap, min_pitch = D_band * px, 12 * px, 74 * px
+    W = bw + w
+    items = sorted(items, key=lambda c: c["y"])  # numbered top-to-bottom
+    ys = []
+    for c in items:                              # keep labels apart; only crowded ones leave their target's height
+        y = c["y"] / 100 * h
+        ys.append(max(y, ys[-1] + min_pitch) if ys else y)
+    lines, dots, labels, legend = [], [], [], []
+    for i, (c, ly) in enumerate(zip(items, ys)):
+        tx, ty = bw + c["x"] / 100 * w, c["y"] / 100 * h
+        lines.append(f'<path vector-effect="non-scaling-stroke" d="M{bw - gap:.1f},{ly:.1f} L{tx:.1f},{ty:.1f}"/>')
+        dots.append(f'<span class="callout-dot" data-n="{i + 1}" style="--tx:{tx / W * 100:.2f}%;--tx-img:{c["x"]:.2f}%;'
+                    f'--ty:{ty / h * 100:.2f}%;--ty-img:{c["y"]:.2f}%"></span>')
+        labels.append(f'<span class="callout-label" style="left:{(bw - gap) / W * 100:.2f}%;top:{ly / h * 100:.2f}%">'
+                      f'<strong>{e(c["label"])}</strong><small>{e(c["note"])}</small></span>')
+        legend.append(f'<li><strong>{e(c["label"])}</strong> {e(c["note"])}</li>')
+    style = (f"--ar:{W:.0f}/{h};--ar-img:{w}/{h};--img-left:{bw / W * 100:.2f}%;--img-w:{w / W * 100:.2f}%;"
+             f"--label-w:{(D_band - 12) / (D_img + D_band) * 100:.1f}%")
+    cls = "callout-map left" + (" sheet" if sheet else "")
+    return (f'<figure class="{cls}"><div class="callout-stage" style="{style}">'
+            f'{img(project, name, cap, base, cls="callout-img", sizes_attr="(min-width: 800px) 560px, 100vw")}'
+            f'<svg class="callout-lines" viewBox="0 0 {W:.0f} {h}" preserveAspectRatio="none" aria-hidden="true">'
+            f'{"".join(lines)}</svg>{"".join(dots)}{"".join(labels)}</div>'
+            f'<ol class="callout-legend">{"".join(legend)}</ol>'
+            f"<figcaption>{e(cap)}</figcaption></figure>")
+
+
 def callout_figure(project, name, cap, base, items):
     """Map with coded callouts: label boxes in a band above the image, dotted elbow leaders, end dots.
 
@@ -206,9 +237,12 @@ def callout_figure(project, name, cap, base, items):
     """
     # items may be a list, or {"items": [...], "sheet": true} for opaque drawings: the stage gets a white sheet + light ink
     sheet = isinstance(items, dict) and items.get("sheet")
+    left = isinstance(items, dict) and items.get("left")  # labels in a column left of the image, horizontal leaders
     items = items["items"] if isinstance(items, dict) else items
     s = sizes.get(f"{project}/{name}", {"w": 1600, "h": 1600})
     w, h = s["w"], s["h"]
+    if left:
+        return callout_left(project, name, cap, base, items, w, h, sheet)
     items = sorted(items, key=lambda c: c["x"])  # numbered left-to-right in target order
     n = len(items)
     wide = n > 4

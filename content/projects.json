@@ -17,13 +17,13 @@
     ],
     "facts": [["Levels", "13"], ["Structure", "Glulam and CLT tower on a concrete podium"], ["Program", "Retail, hotel lobby, restaurants, pool, 9 guest-room levels"]],
     "sections": [
-      {"heading": "Site", "text": "Between Pike Place Market and the waterfront promenade, the site takes its cues from both: vertical density to the east, openness and movement to the west.", "images": [["site", "Site context: downtown Seattle and Elliott Bay"]], "side": true,
-        "callouts": {"site": [
+      {"heading": "Site", "text": "Between Pike Place Market and the waterfront promenade, the site takes its cues from both: vertical density to the east, openness and movement to the west.", "images": [["site", "Site context: downtown Seattle and Elliott Bay"]],
+        "callouts": {"site": {"left": true, "items": [
           {"label": "Overlook Walk", "note": "Market-to-waterfront link, opened 2024", "x": 28.1, "y": 28.9},
           {"label": "Pike Place Market", "note": "Public market since 1907", "x": 38.7, "y": 10.0},
           {"label": "Site", "note": "Western Ave and Union St", "x": 54.6, "y": 43.6},
           {"label": "Alaskan Way", "note": "Waterfront boulevard", "x": 70.0, "y": 75.5}
-        ]}},
+        ]}}},
       {"heading": "Sketches", "text": "Hand sketches in section, plan and elevation explored how the floor plates stack, shift and turn toward the water.", "images": [],
         "sketches": [
           ["sketch-section-1", "Section study"],
