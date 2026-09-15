@@ -17,7 +17,7 @@
     ],
     "facts": [["Levels", "13"], ["Structure", "Glulam and CLT tower on a concrete podium"], ["Program", "Retail, hotel lobby, restaurants, pool, 9 guest-room levels"]],
     "sections": [
-      {"heading": "Site", "text": "Between Pike Place Market and the waterfront promenade, the site takes its cues from both: vertical density to the east, openness and movement to the west.", "images": [["site", "Site context: downtown Seattle and Elliott Bay"]],
+      {"heading": "Site", "text": "Between Pike Place Market and the waterfront promenade, the site takes its cues from both: vertical density to the east, openness and movement to the west.", "images": [["site", "Site context: downtown Seattle and Elliott Bay"]], "side": true,
         "callouts": {"site": [
           {"label": "Overlook Walk", "note": "Market-to-waterfront link, opened 2024", "x": 28.1, "y": 28.9},
           {"label": "Pike Place Market", "note": "Public market since 1907", "x": 38.7, "y": 10.0},
@@ -68,8 +68,8 @@
           ["plan-level-10", "Level 10", ["Guest rooms", "Hotel service", "Green terrace BBQ"]],
           ["plan-level-12-13", "Levels 12 and 13", ["Guest rooms", "Hotel service", "Lounge"]]
         ]},
-      {"heading": "Sections", "text": "Double-height retail glazing, a restaurant stair through a central void, and the pool-to-bar ramp are read together in section. Section BB runs from the waterfront up through the tower, with a blow-up of the lobby's stair and dining levels.", "images": [["section-aa", "Section AA"], ["section-bb", "Section BB, from the waterfront to the tower"], ["lobby-blowup", "Lobby blow-up"]],
-        "callouts": {"section-aa": {"sheet": true, "items": [
+      {"heading": "Sections", "text": "Double-height retail glazing, a restaurant stair through a central void, and the pool-to-bar ramp are read together in section. Section BB runs from the waterfront up through the tower, with a blow-up of the lobby's stair and dining levels.", "images": [["section-aa", "Section AA"], ["section-bb", "Section BB, from the waterfront to the tower"], ["lobby-blowup", "Lobby blow-up"]], "pair": 1,
+        "callouts": {"section-aa": {"items": [
           {"label": "Hotel rooms", "note": "Framed toward views, daylight and quiet", "x": 25.0, "y": 20.5},
           {"label": "Drinks bar", "note": "Social anchor with water and city views", "x": 59.2, "y": 20.6},
           {"label": "Retail street edge", "note": "Double-height storefronts draw people in", "x": 92.0, "y": 69.6},
@@ -82,7 +82,7 @@
           {"label": "Cafe kitchen", "note": "Back-of-house beside the cafe", "x": 88.8, "y": 51.3}
         ]},
         "section-bb": {"sheet": true, "items": [
-          {"label": "Lobby blow-up", "note": "Shown in detail below", "x": 64.1, "y": 52.8}
+          {"label": "Lobby blow-up", "note": "Shown in the detail drawing", "x": 64.1, "y": 52.8}
         ]}}},
       {"heading": "Performance", "text": "The design study sizes renewable energy and water systems for the building. Rooftop and facade PV cover part of the annual electricity use, and low-flow fixtures, greywater reuse and rainwater harvesting cut potable water demand.", "images": [],
         "stats": [["212 MWh (15%)", "Solar electricity per year, of 1,400 MWh used"], ["150 kW", "Rooftop and facade PV system"], ["~$23K per year", "Electricity cost saved by the PV"], ["$150K", "PV cost before incentives, about 6.5-year payback"], ["~$8K per year", "Water cost saved"], ["~$6.2M", "Social cost of the carbon stored in the CLT"], ["740K gal (33%)", "Water managed sustainably per year, of 2.3M gal used"], ["Up to 1.15M gal", "Saved by low-flow fixtures (30 to 50% of use)"], ["920K to 1.15M gal", "Recoverable greywater (40 to 50% of use)"], ["~237K gal", "Rainwater collected per year"], ["~33,000 t", "CO2 stored in the CLT structure"], ["~4,500 t", "CO2 emitted by a concrete (RCC) structure"], ["~7,200 cars", "Off the road for a year, equivalent carbon"]],

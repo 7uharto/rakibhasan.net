@@ -209,31 +209,45 @@ def callout_figure(project, name, cap, base, items):
     items = items["items"] if isinstance(items, dict) else items
     s = sizes.get(f"{project}/{name}", {"w": 1600, "h": 1600})
     w, h = s["w"], s["h"]
-    items = sorted(items, key=lambda c: c["x"])  # labels left-to-right in target order
+    items = sorted(items, key=lambda c: c["x"])  # numbered left-to-right in target order
     n = len(items)
-    two_rows = n > 6                             # many labels: alternate two rows so each label can be wider
-    band = round(w * (0.24 if two_rows else 0.16))  # label band above the image, in image pixels
-    H = h + band                                 # stage height
-    rows = (0.42, 0.80) if two_rows else (0.55,)  # label bottom edges, as fractions of the band
-    label_w = min(23, (170 if two_rows else 92) / n)  # max label width, % of stage
+    wide = n > 4
+    D = 1200 if wide else 560                    # design width of the stage in CSS px (labels scale with it)
+    label_w = 15.0 if wide else 30.0             # fixed label width, % of stage
+    px = w / D                                   # image pixels per design px
+    gap, pitch = 14 * px, 78 * px                # space above the image, row spacing
+    # Leaders are single straight lines. Each label sits right above its target; rows are stacked so that
+    # no label overlaps another in its row or sits across the leader of a label in a higher row.
+    placed = []                                  # (row, left %, right %, target x %)
+    for c in items:
+        cx = min(max(c["x"], label_w / 2 + 0.5), 100 - label_w / 2 - 0.5)
+        l, r, row = cx - label_w / 2 - 0.6, cx + label_w / 2 + 0.6, 0
+        def blocked(row, strict):
+            return any((pr == row and pl < r and l < prr) or
+                       (strict and ((pr > row and l < pt < r) or (pr < row and pl < c["x"] < prr)))
+                       for pr, pl, prr, pt in placed)
+        # a lower label already covering this target can never be cleared by going up: then only avoid overlaps
+        strict = not any(pr >= 0 and pl < c["x"] < prr for pr, pl, prr, pt in placed)
+        while blocked(row, strict):
+            row += 1
+        placed.append((row, l, r, c["x"]))
+        c["_row"], c["_lx"] = row, cx
+    band = gap + (max(p[0] for p in placed) + 1) * pitch
+    H = h + band
     lines, dots, labels, legend = [], [], [], []
     for i, c in enumerate(items):
-        # evenly spaced label centres (% width), pulled in at the ends so edge labels stay on the stage
-        lx = min(max((i + 0.5) / n * 100, label_w / 2 + 0.5), 100 - label_w / 2 - 0.5)
-        label_bottom = band * rows[i % len(rows)]
+        label_bottom = band - gap - c["_row"] * pitch
         tx, ty = c["x"] / 100 * w, band + c["y"] / 100 * h
-        # staggered horizontal runs, all below the lowest label row and inside the band
-        jog = band * (rows[-1] + 0.04 + (0.93 - rows[-1] - 0.04) * i / max(n - 1, 1))
         lines.append(f'<path vector-effect="non-scaling-stroke" '
-                     f'd="M{lx / 100 * w:.1f},{label_bottom:.1f} V{jog:.1f} H{tx:.1f} V{ty:.1f}"/>')
+                     f'd="M{c["_lx"] / 100 * w:.1f},{label_bottom:.1f} L{tx:.1f},{ty:.1f}"/>')
         dots.append(f'<span class="callout-dot" data-n="{i + 1}" style="left:{c["x"]:.2f}%;'
                     f'--ty:{ty / H * 100:.2f}%;--ty-img:{c["y"]:.2f}%"></span>')
-        labels.append(f'<span class="callout-label" style="left:{lx:.2f}%;top:{label_bottom / H * 100:.2f}%">'
+        labels.append(f'<span class="callout-label" style="left:{c["_lx"]:.2f}%;top:{label_bottom / H * 100:.2f}%">'
                       f'<strong>{e(c["label"])}</strong><small>{e(c["note"])}</small></span>')
         legend.append(f'<li><strong>{e(c["label"])}</strong> {e(c["note"])}</li>')
     style = (f"--ar:{w}/{H};--ar-img:{w}/{h};--img-top:{band / H * 100:.2f}%;--img-h:{h / H * 100:.2f}%;"
-             f"--label-w:{min(23, (170 if two_rows else 92) / n):.1f}%")
-    cls = "callout-map" + (" wide" if len(items) > 4 else "") + (" sheet" if sheet else "")
+             f"--label-w:{label_w:.1f}%;--design-w:{D}")
+    cls = "callout-map" + (" wide" if wide else "") + (" sheet" if sheet else "")
     return (f'<figure class="{cls}"><div class="callout-stage" style="{style}">'
             f'{img(project, name, cap, base, cls="callout-img", sizes_attr="(min-width: 960px) 900px, 100vw")}'
             f'<svg class="callout-lines" viewBox="0 0 {w} {H}" preserveAspectRatio="none" aria-hidden="true">'
@@ -306,8 +320,10 @@ def project(i, p):
             callout_figure(slug, n, cap, base, callouts[n]) if n in callouts else
             f'<figure class="zoom">{img(slug, n, cap, base, sizes_attr="(min-width: 1400px) 1400px, 100vw")}'
             f"<figcaption>{e(cap)}</figcaption></figure>" for n, cap in s.get("images", []))
-        if s.get("pair"):  # two drawings side by side (one column on phones)
-            figs = f'<div class="fig-pair">{figs}</div>'
+        if s.get("pair"):  # drawings side by side (one column on phones); an int pairs from that image on
+            k = s["pair"] if type(s["pair"]) is int else 0
+            head = "".join(figs_list[:k]) if (figs_list := re.findall(r"<figure.*?</figure>", figs, re.S)) else ""
+            figs = f'{head}<div class="fig-pair">{"".join(figs_list[k:])}</div>'
         if s.get("sketches"):
             figs +=sketch_grid(slug, s["sketches"], base)
         if s.get("zones"):
@@ -325,7 +341,8 @@ def project(i, p):
         if s.get("calc"):  # worked calculations behind the stats, collapsed by default
             text += ('<details class="calc"><summary>How these were calculated</summary><ul>'
                      + "".join(f"<li>{e(c)}</li>" for c in s["calc"]) + "</ul></details>")
-        parts.append(f'<section class="chapter reveal"><div class="chapter-text"><h2>{e(s["heading"])}</h2>{text}</div>'
+        side = " side" if s.get("side") else ""  # text beside a small figure instead of above it
+        parts.append(f'<section class="chapter reveal{side}"><div class="chapter-text"><h2>{e(s["heading"])}</h2>{text}</div>'
                      f'<div class="chapter-figs">{figs}</div></section>')
     if p.get("videos"):
         # full players live on the Films page; here, a link card to it
