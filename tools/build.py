@@ -418,11 +418,19 @@ def plan_viewer(project, plans, base):
                      for i in range(len(plans)))
     tabs = "".join(f'<label for="{group}-{i}">{e(label.replace("Levels ", "").replace("Level ", "").replace(" to ", "–").replace(" and ", "–"))}</label>'
                    for i, (_, label, _) in enumerate(plans))
+    def arrow(i, step):  # previous / next level: a label for that level's radio, so it works without JS
+        j = i + step
+        if not 0 <= j < len(plans):
+            return ""
+        cls, glyph, word = ("plan-prev", "&larr;", "Previous") if step < 0 else ("plan-next", "&rarr;", "Next")  # not .next: the next-project link owns it
+        return (f'<label class="plan-arrow {cls}" for="{group}-{j}" aria-label="{word} level: {e(plans[j][1])}">'
+                f'<span aria-hidden="true">{glyph}</span></label>')
+
     panels = "".join(
-        f'<figure class="plan-panel"><div class="plan-sheet zoom">'
-        f'{img(project, n, f"{label} floor plan", base, sizes_attr="(min-width: 1100px) 1000px, 100vw")}</div>'
+        f'<figure class="plan-panel"><div class="plan-stage">{arrow(i, -1)}<div class="plan-sheet zoom">'
+        f'{img(project, n, f"{label} floor plan", base, sizes_attr="(min-width: 1100px) 1000px, 100vw")}</div>{arrow(i, 1)}</div>'
         f'<figcaption><strong>{e(label)}</strong><ul>{"".join(f"<li>{e(x)}</li>" for x in items)}</ul></figcaption></figure>'
-        for n, label, items in plans)
+        for i, (n, label, items) in enumerate(plans))
     return (f'<div class="plan-viewer">{inputs}<div class="plan-tabs"><span>Level</span>{tabs}</div>'
             f'<div class="plan-panels">{panels}</div></div>')
 
