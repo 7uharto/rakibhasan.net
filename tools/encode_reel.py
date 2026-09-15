@@ -1,7 +1,7 @@
 """Turn Rakib's hand-edited highlight reel into the website versions.
 
 Run:  python tools/encode_reel.py
-Input:  videos-original/Highlight Video/reel-master.mp4   (Premiere export, not published)
+Input:  newest videos-original/Highlight Video/reel-master*.mp4   (Premiere export, not published)
 Output: docs/assets/video/reel-1080.mp4   (desktop)
         docs/assets/video/reel-720.mp4    (phones)
         docs/assets/video/reel-poster.jpg (still before play / reduced motion)
@@ -15,7 +15,19 @@ import re
 import subprocess
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-MASTER = os.path.join(ROOT, "videos-original", "Highlight Video", "reel-master.mp4")
+REEL_DIR = os.path.join(ROOT, "videos-original", "Highlight Video")
+
+
+def latest_master():
+    """Newest reel-master*.mp4 (e.g. 'reel-master v1.2.mp4'), so new versions need no code change."""
+    masters = [os.path.join(REEL_DIR, f) for f in os.listdir(REEL_DIR)
+               if f.lower().startswith("reel-master") and f.lower().endswith(".mp4")]
+    if not masters:
+        raise SystemExit(f"no reel-master*.mp4 in {REEL_DIR}")
+    return max(masters, key=os.path.getmtime)
+
+
+MASTER = latest_master()
 OUT = os.path.join(ROOT, "docs", "assets", "video")
 POSTER_AT = 1.0  # seconds into the reel for the still image
 TAGS = ["-color_primaries", "bt709", "-color_trc", "bt709", "-colorspace", "bt709"]
