@@ -249,7 +249,7 @@ figcaption { font-size: .85rem; color: var(--ink-2); margin-top: .6rem; }
 /* Floor plans: level tabs (radio + label, no JS), one plan at a time on a white sheet, program list beside it */
 .plan-viewer { width: 100%; }
 .plan-radio { position: absolute; opacity: 0; pointer-events: none; }
-.plan-tabs { display: flex; flex-wrap: wrap; align-items: center; gap: .4rem; margin-bottom: 1.25rem; }
+.plan-tabs { display: flex; flex-wrap: wrap; justify-content: center; align-items: center; gap: .4rem; margin-bottom: 1.25rem; }
 .plan-tabs span { font-size: .75rem; letter-spacing: .12em; text-transform: uppercase; color: var(--ink-2); margin-right: .4rem; }
 .plan-tabs label { min-width: 2.75rem; padding: .45rem .8rem; border: 1px solid var(--line); border-radius: 999px; text-align: center;
   font-size: .9rem; cursor: pointer; transition: border-color .2s, background .2s, color .2s; }
@@ -261,12 +261,10 @@ figcaption { font-size: .85rem; color: var(--ink-2); margin-top: .6rem; }
 @media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) .plan-sheet img { filter: invert(1) hue-rotate(180deg); } }
 .plan-sheet img { display: block; width: 100%; height: auto; max-height: 65vh; object-fit: contain; }
 .plan-panel figcaption { margin-top: 1rem; }
-/* north sign, top-right of every plan (same orientation on all levels); light lines in dark mode like the plans */
-.plan-north { position: absolute; top: .5rem; right: .75rem; z-index: 2; width: clamp(2.5rem, 4.5vw, 3.75rem); height: auto; pointer-events: none; }
+/* north sign as the first character of the level title, sized to the letters; light lines in dark mode */
+.plan-north { display: inline-block; height: .95em; width: auto; margin-right: .3em; vertical-align: -.08em; }
 :root[data-theme="dark"] .plan-north { filter: invert(1); }
 @media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) .plan-north { filter: invert(1); } }
-/* phones: the plan fills the width, so the sign moves above it instead of covering a corner */
-@media (max-width: 700px) { .plan-north { position: static; display: block; margin: 0 .25rem .25rem auto; width: 2.25rem; } }
 /* previous / next arrows beside the plan */
 .plan-stage { position: relative; }
 .plan-arrow { position: absolute; top: 50%; z-index: 2; width: 3rem; height: 3rem; margin-top: -1.5rem; border-radius: 50%; cursor: pointer;
