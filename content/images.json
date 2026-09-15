@@ -180,8 +180,8 @@
   "h": 2280
  },
  "bridge1400/section-bb": {
-  "w": 3200,
-  "h": 1600
+  "w": 2840,
+  "h": 1880
  },
  "about/headshot": {
   "w": 1908,
@@ -258,5 +258,9 @@
  "bridge1400/structure-se": {
   "w": 2089,
   "h": 2633
+ },
+ "bridge1400/lobby-blowup": {
+  "w": 2381,
+  "h": 1164
  }
 }

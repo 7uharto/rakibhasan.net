@@ -68,7 +68,7 @@
           ["plan-level-10", "Level 10", ["Guest rooms", "Hotel service", "Green terrace BBQ"]],
           ["plan-level-12-13", "Levels 12 and 13", ["Guest rooms", "Hotel service", "Lounge"]]
         ]},
-      {"heading": "Sections", "text": "Double-height retail glazing, a restaurant stair through a central void, and the pool-to-bar ramp are read together in section. Rooftop and facade PV, greywater reuse and rainwater harvesting are sized in the performance study.", "images": [["section-aa", "Section AA"], ["section-bb", "Section BB with energy, water and carbon study"]],
+      {"heading": "Sections", "text": "Double-height retail glazing, a restaurant stair through a central void, and the pool-to-bar ramp are read together in section. Section BB runs from the waterfront up through the tower, with a blow-up of the lobby's stair and dining levels.", "images": [["section-aa", "Section AA"], ["section-bb", "Section BB, from the waterfront to the tower"], ["lobby-blowup", "Lobby blow-up"]],
         "callouts": {"section-aa": {"sheet": true, "items": [
           {"label": "Retail glazing", "note": "Double-height, dual-glazed storefront", "x": 3.97, "y": 61.7},
           {"label": "Outdoor restaurant", "note": "Draws people in from Union St and Western Ave", "x": 8.25, "y": 50.8},
@@ -77,7 +77,13 @@
           {"label": "Restaurant stair", "note": "Rises through a central void", "x": 70.4, "y": 44.5},
           {"label": "Pool-to-bar ramp", "note": "Links the Level 4 pool and Level 5 bar", "x": 73.4, "y": 32.5},
           {"label": "Cafe kitchen", "note": "Back-of-house beside the cafe", "x": 88.8, "y": 51.3}
-        ]}}}
+        ]},
+        "section-bb": {"sheet": true, "items": [
+          {"label": "Lobby blow-up", "note": "Shown in detail below", "x": 64.1, "y": 52.8}
+        ]}}},
+      {"heading": "Performance", "text": "The design study sizes renewable energy and water systems for the building. Rooftop and facade PV cover part of the annual electricity use, and low-flow fixtures, greywater reuse and rainwater harvesting cut potable water demand.", "images": [],
+        "stats": [["212 MWh (15%)", "Solar electricity per year, of 1,400 MWh used"], ["150 kW", "Rooftop and facade PV system"], ["7.9M gal (92%)", "Water managed sustainably per year, of 8.6M gal used"], ["4.3M gal", "Saved by low-flow fixtures"], ["3.4M gal", "Saved by greywater reuse"], ["236K gal", "Rainwater collected per year"]],
+        "note": "Estimates from the design study: PV yield about 1,410 kWh per installed kW in Seattle; rainfall 38 in per year."}
     ]
   },
   {

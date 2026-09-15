@@ -46,7 +46,8 @@ IMAGES = {
         ("structure-nw", os.path.join(ROOT, "docs", "assets", "img", "bridge1400", "Original", "Structural Axon", "Structural Axon NW.pdf")),
         ("structure-se", os.path.join(ROOT, "docs", "assets", "img", "bridge1400", "Original", "Structural Axon", "Structural Axon SE.pdf")),
         ("section-aa", os.path.join(ROOT, "docs", "assets", "img", "bridge1400", "Original", "Sections", "section-aa.png")),
-        ("section-bb", "pdf:8"),
+        ("section-bb", os.path.join(ROOT, "docs", "assets", "img", "bridge1400", "Original", "Sections", "section-bb.png")),
+        ("lobby-blowup", os.path.join(ROOT, "docs", "assets", "img", "bridge1400", "Original", "Sections", "lobby-blowup.png")),
     ],
     "professional-work": [
         ("wecon-northdale", "240120_WECON Northdale_Night_A.jpg"),
