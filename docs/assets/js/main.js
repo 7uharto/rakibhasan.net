@@ -2,7 +2,7 @@
 (function () {
   var root = document.documentElement;
   try {
-    var saved = localStorage.getItem("theme");
+    var saved = localStorage.getItem("theme");  // pages ship with data-theme="light"; a saved choice wins
     if (saved) root.setAttribute("data-theme", saved);
   } catch (e) {}
 

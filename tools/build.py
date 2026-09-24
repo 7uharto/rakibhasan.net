@@ -53,7 +53,7 @@ def page(title, desc, base, body, path="", image=None):
         f'<a href="{base}{href}">{label}</a>' for href, label in (("#work", "Work"), ("films/", "Films"), ("about/", "About"))
     ).replace(f'href="{base}#work"', f'href="{base}index.html#work"')
     return f"""<!doctype html>
-<html lang="en">
+<html lang="en" data-theme="light">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
